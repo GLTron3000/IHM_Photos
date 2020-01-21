@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Visionneuse</class>
+ <widget class="QMainWindow" name="Visionneuse">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -76,7 +76,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <addaction name="actionRogner"/>
    <addaction name="separator"/>
@@ -89,7 +89,7 @@
      <x>0</x>
      <y>0</y>
      <width>808</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">

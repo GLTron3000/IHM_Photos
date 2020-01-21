@@ -2,6 +2,7 @@
 #define EXPLORER_H
 
 #include <QMainWindow>
+#include <QStandardItemModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Explorer; }
@@ -14,8 +15,11 @@ class Explorer : public QMainWindow
 public:
     Explorer(QWidget *parent = nullptr);
     ~Explorer();
+    QStandardItemModel *model;
 
 private:
     Ui::Explorer *ui;
+    void loadFiles();
 };
+
 #endif // EXPLORER_H

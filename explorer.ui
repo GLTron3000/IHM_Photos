@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Explorer</class>
+ <widget class="QMainWindow" name="Explorer">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,14 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>SuperPhotoAlbum</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
+       <layout class="QVBoxLayout" name="verticalLayoutImages">
         <item>
          <widget class="QLabel" name="img_label">
           <property name="text">
@@ -37,12 +37,31 @@
              <x>0</x>
              <y>0</y>
              <width>409</width>
-             <height>426</height>
+             <height>420</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QListWidget" name="listWidget"/>
+             <widget class="QListView" name="listViewImages">
+              <property name="dragEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="dragDropMode">
+               <enum>QAbstractItemView::InternalMove</enum>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>100</width>
+                <height>100</height>
+               </size>
+              </property>
+              <property name="movement">
+               <enum>QListView::Static</enum>
+              </property>
+              <property name="viewMode">
+               <enum>QListView::IconMode</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -51,7 +70,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayoutAlbums">
         <item>
          <widget class="QLabel" name="alb_label">
           <property name="text">
@@ -70,16 +89,12 @@
              <x>0</x>
              <y>0</y>
              <width>408</width>
-             <height>426</height>
+             <height>420</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QListWidget" name="listWidget_2">
-              <property name="toolTip">
-               <string/>
-              </property>
-             </widget>
+             <widget class="QListView" name="listView_2"/>
             </item>
            </layout>
           </widget>
@@ -97,7 +112,7 @@
      <x>0</x>
      <y>0</y>
      <width>851</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">

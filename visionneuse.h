@@ -3,10 +3,20 @@
 
 #include <QMainWindow>
 
-class visionneuse
+QT_BEGIN_NAMESPACE
+namespace Ui { class Visionneuse; }
+QT_END_NAMESPACE
+
+class Visionneuse : public QMainWindow
 {
+    Q_OBJECT
+
 public:
-    visionneuse();
+    Visionneuse(QWidget *parent = nullptr);
+    ~Visionneuse();
+
+private:
+    Ui::Visionneuse *ui;
 };
 
 #endif // VISIONNEUSE_H
