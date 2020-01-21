@@ -11,15 +11,20 @@ QT_END_NAMESPACE
 class Explorer : public QMainWindow
 {
     Q_OBJECT
+public:
+    QStandardItemModel *imagesModel;
 
 public:
     Explorer(QWidget *parent = nullptr);
     ~Explorer();
-    QStandardItemModel *model;
+    void loadImages();
 
 private:
     Ui::Explorer *ui;
-    void loadFiles();
+
+private:
+    void loadPath(QString path);
+    void loadThumbs();
 };
 
 #endif // EXPLORER_H
