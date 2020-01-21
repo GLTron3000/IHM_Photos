@@ -2,5 +2,6 @@
     <qresource prefix="/ressources">
         <file>images/loader.gif</file>
         <file>images/splash.png</file>
+        <file>images/default.png</file>
     </qresource>
 </RCC>

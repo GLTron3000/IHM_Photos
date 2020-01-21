@@ -17,6 +17,8 @@ Explorer::Explorer(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(ui->actionRecharger, SIGNAL(triggered()), this, SLOT(reload()));
+    connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
 }
 
 Explorer::~Explorer()
@@ -30,6 +32,8 @@ void Explorer::loadImages(){
     loadPath("/home/thomsb/Images");
     loadPath("/mnt/DATA/Mes Images");
     ui->listViewImages->setModel(imagesModel);
+
+    QtConcurrent::run(this, &Explorer::loadThumbs);
 }
 
 void Explorer::loadPath(QString path){
@@ -38,11 +42,7 @@ void Explorer::loadPath(QString path){
         it.next();
 
         QString extension = it.fileInfo().suffix().toLower();
-        qDebug() << "PATH " << it.path();
-        qDebug() << "EXT " << extension;
-        ;
         if(extension == "png" || extension == "jpeg" || extension == "jpg"){
-            qDebug() << "ADDING";
             QStandardItem *item = new QStandardItem;
             QString fileName = it.fileName().remove("."+it.fileInfo().suffix());
             item->setText(fileName);
@@ -50,8 +50,6 @@ void Explorer::loadPath(QString path){
             imagesModel->appendRow(item);
         }
     }
-
-    QtConcurrent::run(this, &Explorer::loadThumbs);
 }
 
 void Explorer::loadThumbs(){
@@ -59,9 +57,20 @@ void Explorer::loadThumbs(){
         QStandardItem *item =imagesModel->item(i,0);
         QVariant path = item->data();
         QImage *image = new QImage(path.toString());
-        item->setIcon(QIcon(QPixmap::fromImage(*image).scaledToWidth(200)));
-
+        if(image->isNull()){
+            item->setIcon(QIcon(":/ressources/images/default.png"));
+        }else{
+            item->setIcon(QIcon(QPixmap::fromImage(*image).scaledToWidth(200)));
+        }
         delete image;
         image = nullptr;
     }
+}
+
+void Explorer::reload(){
+    loadImages();
+}
+
+void Explorer::quit(){
+    QApplication::quit();
 }

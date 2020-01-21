@@ -19,6 +19,10 @@ public:
     ~Explorer();
     void loadImages();
 
+private slots:
+    void reload();
+    void quit();
+
 private:
     Ui::Explorer *ui;
 
