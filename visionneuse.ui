@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>808</width>
+    <height>549</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
+      <item>
+       <widget class="QPushButton" name="imagePrec">
+        <property name="text">
+         <string>Précédent</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="Image">
+        <property name="text">
+         <string>Image</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="imageSuiv">
+        <property name="text">
+         <string>Suivant</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="actionRogner"/>
+   <addaction name="separator"/>
+   <addaction name="actionRedimensioner"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>808</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionChoisir_une_image"/>
+    <addaction name="separator"/>
+    <addaction name="actionEnregister"/>
+    <addaction name="separator"/>
+    <addaction name="actionEnregister_sous"/>
+   </widget>
+   <widget class="QMenu" name="menuEdition">
+    <property name="title">
+     <string>Edition</string>
+    </property>
+    <addaction name="actionRogner_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionRedimensionner"/>
+   </widget>
+   <widget class="QMenu" name="menuImage">
+    <property name="title">
+     <string>Fenêtre</string>
+    </property>
+    <addaction name="actionZoom"/>
+    <addaction name="separator"/>
+    <addaction name="actionPlein_cran"/>
+    <addaction name="separator"/>
+    <addaction name="actionFen_tr"/>
+   </widget>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="actionAide"/>
+    <addaction name="separator"/>
+    <addaction name="actionA_propos"/>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menuEdition"/>
+   <addaction name="menuImage"/>
+   <addaction name="menuAide"/>
+  </widget>
+  <action name="actionRogner">
+   <property name="text">
+    <string>Rogner</string>
+   </property>
+   <property name="toolTip">
+    <string>Rogner l'image</string>
+   </property>
+  </action>
+  <action name="actionRedimensioner">
+   <property name="text">
+    <string>Redimensioner</string>
+   </property>
+   <property name="toolTip">
+    <string>Redimensionner l'image</string>
+   </property>
+  </action>
+  <action name="actionChoisir_une_image">
+   <property name="text">
+    <string>Choisir une image</string>
+   </property>
+  </action>
+  <action name="actionEnregister">
+   <property name="text">
+    <string>Enregister</string>
+   </property>
+  </action>
+  <action name="actionEnregister_sous">
+   <property name="text">
+    <string>Enregister sous...</string>
+   </property>
+  </action>
+  <action name="actionRogner_2">
+   <property name="text">
+    <string>Rogner</string>
+   </property>
+  </action>
+  <action name="actionRedimensionner">
+   <property name="text">
+    <string>Redimensionner</string>
+   </property>
+  </action>
+  <action name="actionZoom">
+   <property name="text">
+    <string>Zoom</string>
+   </property>
+  </action>
+  <action name="actionPlein_cran">
+   <property name="text">
+    <string>Plein écran</string>
+   </property>
+  </action>
+  <action name="actionFen_tr">
+   <property name="text">
+    <string>Fenêtré</string>
+   </property>
+  </action>
+  <action name="actionA_propos">
+   <property name="text">
+    <string>A propos</string>
+   </property>
+  </action>
+  <action name="actionAide">
+   <property name="text">
+    <string>Aide</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
