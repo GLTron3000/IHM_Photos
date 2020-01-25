@@ -18,16 +18,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     explorer.cpp \
+    mainwindow.cpp \
     visionneuse.cpp
 
 HEADERS += \
     explorer.h \
     headers/explorer.h \
     headers/visionneuse.h \
+    mainwindow.h \
     visionneuse.h
 
 FORMS += \
     explorer.ui \
+    mainwindow.ui \
     visionneuse.ui
 
 # Default rules for deployment.

@@ -1,4 +1,4 @@
-#include "explorer.h"
+#include "mainwindow.h"
 
 #include <QApplication>
 #include <QSplashScreen>
@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Explorer w;
+    MainWindow mainWindow;
 
     QPixmap pixmap(":/ressources/images/splash.png");
     QSplashScreen splash(pixmap);
@@ -16,11 +16,9 @@ int main(int argc, char *argv[])
 
     a.processEvents();
 
-    w.loadImages();
+    mainWindow.showMaximized();
 
-    w.showMaximized();
-
-    splash.finish(&w);
+    splash.finish(&mainWindow);
 
     return a.exec();
 }

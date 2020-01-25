@@ -1,266 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Explorer</class>
- <widget class="QMainWindow" name="Explorer">
+ <widget class="QWidget" name="Explorer">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1074</width>
-    <height>663</height>
+    <width>917</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SuperPhotoAlbum</string>
+   <string>Form</string>
   </property>
-  <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayoutImages">
-        <item>
-         <widget class="QLabel" name="img_label">
-          <property name="text">
-           <string>Images</string>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayoutImages">
+       <item>
+        <widget class="QLabel" name="img_label">
+         <property name="text">
+          <string>Images</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QScrollArea" name="img_scroll">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>444</width>
+            <height>562</height>
+           </rect>
           </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QListView" name="listViewImages">
+             <property name="tabKeyNavigation">
+              <bool>true</bool>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="dragEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::DragOnly</enum>
+             </property>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>false</bool>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="textElideMode">
+              <enum>Qt::ElideRight</enum>
+             </property>
+             <property name="verticalScrollMode">
+              <enum>QAbstractItemView::ScrollPerPixel</enum>
+             </property>
+             <property name="movement">
+              <enum>QListView::Static</enum>
+             </property>
+             <property name="flow">
+              <enum>QListView::LeftToRight</enum>
+             </property>
+             <property name="isWrapping" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="resizeMode">
+              <enum>QListView::Adjust</enum>
+             </property>
+             <property name="layoutMode">
+              <enum>QListView::Batched</enum>
+             </property>
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="gridSize">
+              <size>
+               <width>110</width>
+               <height>150</height>
+              </size>
+             </property>
+             <property name="viewMode">
+              <enum>QListView::IconMode</enum>
+             </property>
+             <property name="uniformItemSizes">
+              <bool>false</bool>
+             </property>
+             <property name="batchSize">
+              <number>1</number>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+             <property name="itemAlignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item>
-         <widget class="QScrollArea" name="img_scroll">
-          <property name="widgetResizable">
-           <bool>true</bool>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayoutAlbums">
+       <item>
+        <widget class="QLabel" name="alb_label">
+         <property name="text">
+          <string>Albums</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QScrollArea" name="alb_scroll">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>443</width>
+            <height>562</height>
+           </rect>
           </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>520</width>
-             <height>560</height>
-            </rect>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QListView" name="listViewImages">
-              <property name="tabKeyNavigation">
-               <bool>true</bool>
-              </property>
-              <property name="showDropIndicator" stdset="0">
-               <bool>false</bool>
-              </property>
-              <property name="dragEnabled">
-               <bool>true</bool>
-              </property>
-              <property name="dragDropMode">
-               <enum>QAbstractItemView::DragOnly</enum>
-              </property>
-              <property name="defaultDropAction">
-               <enum>Qt::MoveAction</enum>
-              </property>
-              <property name="alternatingRowColors">
-               <bool>false</bool>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>100</width>
-                <height>100</height>
-               </size>
-              </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideRight</enum>
-              </property>
-              <property name="verticalScrollMode">
-               <enum>QAbstractItemView::ScrollPerPixel</enum>
-              </property>
-              <property name="movement">
-               <enum>QListView::Static</enum>
-              </property>
-              <property name="flow">
-               <enum>QListView::LeftToRight</enum>
-              </property>
-              <property name="isWrapping" stdset="0">
-               <bool>true</bool>
-              </property>
-              <property name="resizeMode">
-               <enum>QListView::Adjust</enum>
-              </property>
-              <property name="layoutMode">
-               <enum>QListView::Batched</enum>
-              </property>
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="gridSize">
-               <size>
-                <width>110</width>
-                <height>150</height>
-               </size>
-              </property>
-              <property name="viewMode">
-               <enum>QListView::IconMode</enum>
-              </property>
-              <property name="uniformItemSizes">
-               <bool>false</bool>
-              </property>
-              <property name="batchSize">
-               <number>1</number>
-              </property>
-              <property name="wordWrap">
-               <bool>true</bool>
-              </property>
-              <property name="itemAlignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QListView" name="listViewAlbum">
+             <property name="tabKeyNavigation">
+              <bool>true</bool>
+             </property>
+             <property name="dragEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="verticalScrollMode">
+              <enum>QAbstractItemView::ScrollPerPixel</enum>
+             </property>
+             <property name="movement">
+              <enum>QListView::Static</enum>
+             </property>
+             <property name="resizeMode">
+              <enum>QListView::Adjust</enum>
+             </property>
+             <property name="layoutMode">
+              <enum>QListView::Batched</enum>
+             </property>
+             <property name="gridSize">
+              <size>
+               <width>110</width>
+               <height>150</height>
+              </size>
+             </property>
+             <property name="viewMode">
+              <enum>QListView::IconMode</enum>
+             </property>
+             <property name="batchSize">
+              <number>1</number>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+             <property name="selectionRectVisible">
+              <bool>true</bool>
+             </property>
+             <property name="itemAlignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayoutAlbums">
-        <item>
-         <widget class="QLabel" name="alb_label">
-          <property name="text">
-           <string>Albums</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QScrollArea" name="alb_scroll">
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>520</width>
-             <height>560</height>
-            </rect>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QListView" name="listView_2"/>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1074</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuFichier">
-    <property name="title">
-     <string>Fichier</string>
-    </property>
-    <addaction name="actionNouvel_album"/>
-    <addaction name="actionQuitter"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edition</string>
-    </property>
-    <addaction name="actionPr_f_rences"/>
-   </widget>
-   <widget class="QMenu" name="menuView">
-    <property name="title">
-     <string>Afficher</string>
-    </property>
-    <addaction name="actionRecharger"/>
-   </widget>
-   <widget class="QMenu" name="menuTools">
-    <property name="title">
-     <string>Outils</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuAide">
-    <property name="title">
-     <string>Aide</string>
-    </property>
-    <addaction name="actionGuide_d_utilisation"/>
-    <addaction name="actionA_propos"/>
-   </widget>
-   <addaction name="menuFichier"/>
-   <addaction name="menuEdit"/>
-   <addaction name="menuView"/>
-   <addaction name="menuTools"/>
-   <addaction name="menuAide"/>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <action name="actionrecherche">
-   <property name="text">
-    <string>recherche</string>
-   </property>
-   <property name="toolTip">
-    <string>recherche</string>
-   </property>
-  </action>
-  <action name="actionQuitter">
-   <property name="text">
-    <string>Quitter</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Q</string>
-   </property>
-  </action>
-  <action name="actionA_propos">
-   <property name="text">
-    <string>A propos</string>
-   </property>
-  </action>
-  <action name="actionGuide_d_utilisation">
-   <property name="text">
-    <string>Guide d'utilisation</string>
-   </property>
-   <property name="shortcut">
-    <string>F1</string>
-   </property>
-  </action>
-  <action name="actionRecharger">
-   <property name="text">
-    <string>Recharger</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+R</string>
-   </property>
-  </action>
-  <action name="actionPr_f_rences">
-   <property name="text">
-    <string>Préférences...</string>
-   </property>
-  </action>
-  <action name="actionNouvel_album">
-   <property name="text">
-    <string>Nouvel album</string>
-   </property>
-  </action>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
- <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

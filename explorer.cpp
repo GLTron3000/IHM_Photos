@@ -1,24 +1,23 @@
 #include "explorer.h"
 #include "ui_explorer.h"
 
+#include <sstream>
+
 #include <QDebug>
 #include <QDirIterator>
 #include <QPixmap>
-#include <QJsonObject>
 #include <QStandardItem>
-#include <QBrush>
 #include <QIcon>
-#include <QMovie>
 #include <QtConcurrent/QtConcurrentRun>
+#include <QStatusTipEvent>
 
-Explorer::Explorer(QWidget *parent)
-    : QMainWindow(parent)
+Explorer::Explorer(QWidget *parent) :
+    QWidget(parent)
     , ui(new Ui::Explorer)
 {
     ui->setupUi(this);
 
-    connect(ui->actionRecharger, SIGNAL(triggered()), this, SLOT(reload()));
-    connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
+    connect(ui->listViewImages, SIGNAL(clicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
 }
 
 Explorer::~Explorer()
@@ -31,7 +30,7 @@ void Explorer::loadImages(){
     //loadPath("/home/thomsb/Documents");
     loadPath("/home/thomsb/Images");
     loadPath("/mnt/DATA/Mes Images");
-    ui->listViewImages->setModel(imagesModel);
+    ui->listViewImages->setModel(imagesModel);    
 
     QtConcurrent::run(this, &Explorer::loadThumbs);
 }
@@ -64,13 +63,17 @@ void Explorer::loadThumbs(){
         }
         delete image;
         image = nullptr;
+
+        std::ostringstream oss;
+        oss << i << "/" << imagesModel->rowCount();
+        //QCoreApplication::postEvent(this, new QStatusTipEvent(QString::fromStdString(oss.str())));
     }
 }
 
-void Explorer::reload(){
-    loadImages();
+void Explorer::onImageClick(QModelIndex item){
+    QStandardItem *image = imagesModel->itemFromIndex(item);
+    qDebug() << image->data().toString();
+    emit openImage(image->data().toString());
 }
 
-void Explorer::quit(){
-    QApplication::quit();
-}
+

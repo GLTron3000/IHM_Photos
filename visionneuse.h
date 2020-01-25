@@ -1,22 +1,25 @@
 #ifndef VISIONNEUSE_H
 #define VISIONNEUSE_H
 
-#include <QMainWindow>
+#include <QWidget>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class Visionneuse; }
-QT_END_NAMESPACE
+namespace Ui {
+class Visionneuse;
+}
 
-class Visionneuse : public QMainWindow
+class Visionneuse : public QWidget
 {
     Q_OBJECT
 
 public:
-    Visionneuse(QWidget *parent = nullptr);
+    explicit Visionneuse(QWidget *parent = nullptr);
     ~Visionneuse();
+    void afficherImage(QString fileName);
 
 private:
     Ui::Visionneuse *ui;
+    QImage image;
+    QPixmap *pixmap_img;    
 };
 
 #endif // VISIONNEUSE_H
