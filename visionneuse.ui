@@ -43,6 +43,11 @@
     </widget>
    </item>
   </layout>
+  <action name="actionTest">
+   <property name="text">
+    <string>Test</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

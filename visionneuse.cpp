@@ -7,6 +7,7 @@
 #include <QDir>
 #include <QStatusTipEvent>
 #include <QPixmap>
+#include <QToolBar>
 
 Visionneuse::Visionneuse(QWidget *parent) :
     QWidget(parent),
@@ -26,7 +27,7 @@ Visionneuse::~Visionneuse()
  * */
 void Visionneuse::afficherImage(QString fileName)
 {
-     QLabel  *label = ui->image;
+    QLabel  *label = ui->image;
 
     pixmap_img = new QPixmap(fileName);
 

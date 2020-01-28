@@ -17,6 +17,8 @@ public:
     void deleteAlbum(int id);
     QStandardItemModel* getAlbum();
     QStandardItemModel* getImage(int albumId);
+    void updateAlbum(int id, QString name, int index);
+    void updateImage(int id, int index, int idAlbum);
 
 public:
     QSqlDatabase m_db;
