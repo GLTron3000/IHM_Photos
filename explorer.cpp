@@ -13,6 +13,7 @@
 #include <QLayout>
 #include <QTabBar>
 #include <QToolBar>
+#include <QMenu>
 
 Explorer::Explorer(QWidget *parent) :
     QWidget(parent)
@@ -20,22 +21,12 @@ Explorer::Explorer(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    QToolBar* toolbar = new QToolBar(this);
+    QToolBar* toolbar = new QToolBar(ui->frame);
+    toolbar->addAction(QIcon(":/ressources/images/default.png"), "Salut");
 
-//    toolbar->addAction("Coucou");
-//    toolbar->addAction("Salut");
-//    QVBoxLayout* layout = new QVBoxLayout();
-//    layout->setMenuBar(toolbar);
-//    QTabBar *tabBar = new QTabBar(this);
-//    tabBar->addTab("Object Graph");
-//    tabBar->addTab("Snapshot #1");
-//    tabBar->setObjectName("another_tab");
-//    tabBar->setMinimumHeight(300);
-//    layout->addWidget(tabBar, 0, Qt::AlignTop);
-//    layout->setMargin(0);
-//    layout->setContentsMargins(0, 0,0,0);
-//    layout->setSpacing(0);
-//    setLayout(layout);
+    QVBoxLayout* layoutToolBar = new QVBoxLayout(this);
+    layoutToolBar->addWidget(toolbar);
+
     connect(ui->listViewImages, SIGNAL(clicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
 }
 
