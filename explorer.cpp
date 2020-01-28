@@ -10,6 +10,9 @@
 #include <QIcon>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QStatusTipEvent>
+#include <QLayout>
+#include <QTabBar>
+#include <QToolBar>
 
 Explorer::Explorer(QWidget *parent) :
     QWidget(parent)
@@ -35,6 +38,22 @@ Explorer::Explorer(QWidget *parent) :
     listViewAlbum->setDragEnabled(true);
     listViewAlbum->setAcceptDrops(true);
     listViewAlbum->setDropIndicatorShown(true);
+//    QToolBar* toolbar = new QToolBar(this);
+
+//    toolbar->addAction("Coucou");
+//    toolbar->addAction("Salut");
+//    QVBoxLayout* layout = new QVBoxLayout();
+//    layout->setMenuBar(toolbar);
+//    QTabBar *tabBar = new QTabBar(this);
+//    tabBar->addTab("Object Graph");
+//    tabBar->addTab("Snapshot #1");
+//    tabBar->setObjectName("another_tab");
+//    tabBar->setMinimumHeight(300);
+//    layout->addWidget(tabBar, 0, Qt::AlignTop);
+//    layout->setMargin(0);
+//    layout->setContentsMargins(0, 0,0,0);
+//    layout->setSpacing(0);
+//    setLayout(layout);
 }
 
 Explorer::~Explorer()
@@ -49,7 +68,9 @@ void Explorer::loadAlbums(){
 
 void Explorer::loadImages(){
     imagesModel = new QStandardItemModel;
-    loadPath("/amuhome/b16013237");
+    loadPath("/amuhome/f16016927");
+//    loadPath("/home/sim/Images");
+//    loadPath("/mnt/DATA/Mes Images");
     ui->listViewImages->setModel(imagesModel);    
     QtConcurrent::run(this, &Explorer::loadThumbs);
 }

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "explorer.h"
 #include "visionneuse.h"
+#include <QToolBar>
 
 namespace Ui {
 class MainWindow;
