@@ -16,8 +16,25 @@ Explorer::Explorer(QWidget *parent) :
     , ui(new Ui::Explorer)
 {
     ui->setupUi(this);
+    loadAlbums();
 
-    connect(ui->listViewImages, SIGNAL(clicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
+    connect(ui->listViewAlbum, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(onRefreshClick()));
+    connect(ui->albumAddButton, SIGNAL(clicked()), this, SLOT(onAlbumAddClick()));
+    connect(this->albumModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumModelChange(QStandardItem*)));
+
+    QListView *listViewImages = ui->listViewImages;
+    listViewImages->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    listViewImages->setDragEnabled(true);
+    listViewImages->setAcceptDrops(false);
+    listViewImages->setDropIndicatorShown(false);
+
+    QListView *listViewAlbum = ui->listViewAlbum;
+    listViewAlbum->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    listViewAlbum->setDragEnabled(true);
+    listViewAlbum->setAcceptDrops(true);
+    listViewAlbum->setDropIndicatorShown(true);
 }
 
 Explorer::~Explorer()
@@ -25,13 +42,15 @@ Explorer::~Explorer()
     delete ui;
 }
 
+void Explorer::loadAlbums(){
+    albumModel = new QStandardItemModel;
+    ui->listViewAlbum->setModel(albumModel);
+}
+
 void Explorer::loadImages(){
     imagesModel = new QStandardItemModel;
-    //loadPath("/home/thomsb/Documents");
-    loadPath("/home/sim/Images");
-    loadPath("/mnt/DATA/Mes Images");
+    loadPath("/amuhome/b16013237");
     ui->listViewImages->setModel(imagesModel);    
-
     QtConcurrent::run(this, &Explorer::loadThumbs);
 }
 
@@ -76,4 +95,26 @@ void Explorer::onImageClick(QModelIndex item){
     emit openImage(image->data().toString());
 }
 
+void Explorer::onAlbumClick(QModelIndex item){
 
+}
+
+void Explorer::onRefreshClick(){
+    loadImages();
+}
+void Explorer::onAlbumAddClick(){
+    //get last index
+    //add to db
+    //get from db
+    QStandardItem *item = new QStandardItem;
+    item->setIcon(QIcon(":/ressources/images/default.png"));
+    item->setText("Album");
+    item->setData("id");
+    albumModel->appendRow(item);
+}
+
+void Explorer::onAlbumModelChange(QStandardItem *item){
+    int id = item->data().toInt();
+    //db update item.text() with id
+    qDebug() << "ALBUM MODEL CHANGE" <<id << " | " << item->text();
+}
