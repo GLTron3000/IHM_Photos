@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.11.0, 2020-01-28T19:44:06. -->
+=======
+<!-- Written by QtCreator 4.9.1, 2020-01-28T13:02:34. -->
+>>>>>>> ea0213cf779ce58127128f820b6bbe9e95eca5cf
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -297,7 +301,19 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
+<<<<<<< HEAD
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/thomsb/QT/build-IHM2000-Desktop-Debug</value>
+=======
+<<<<<<< HEAD
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/amuhome/f16016927/build-IHM2000-Desktop_Qt_5_13_0_GCC_64bit-Debug</value>
+=======
+<<<<<<< HEAD
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/amuhome/b16013237/build-IHM2000-Desktop_Qt_5_13_0_GCC_64bit-Debug</value>
+=======
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
+>>>>>>> db3ff15172c9bdaf99d3d93859e053dfc1cae63e
+>>>>>>> 232e4d956124047100584701c54ff50fa615f9aa
+>>>>>>> ea0213cf779ce58127128f820b6bbe9e95eca5cf
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

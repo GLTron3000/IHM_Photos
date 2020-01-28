@@ -13,6 +13,7 @@
 #include <QLayout>
 #include <QTabBar>
 #include <QToolBar>
+#include <QMenu>
 
 Explorer::Explorer(QWidget *parent) :
     QWidget(parent)
@@ -26,6 +27,13 @@ Explorer::Explorer(QWidget *parent) :
 
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
     connect(ui->listViewAlbum, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
+    QToolBar* toolbar = new QToolBar(ui->frame);
+    toolbar->addAction(QIcon(":/ressources/images/default.png"), "Salut");
+
+    QVBoxLayout* layoutToolBar = new QVBoxLayout(this);
+    layoutToolBar->addWidget(toolbar);
+
+    connect(ui->listViewAlbum, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
     connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(onRefreshClick()));
     connect(ui->albumAddButton, SIGNAL(clicked()), this, SLOT(onAlbumAddClick()));
     connect(this->albumModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumModelChange(QStandardItem*)));
