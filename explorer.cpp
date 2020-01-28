@@ -19,10 +19,13 @@ Explorer::Explorer(QWidget *parent) :
     , ui(new Ui::Explorer)
 {
     ui->setupUi(this);
+
+    db = new DataBase();
+
     loadAlbums();
 
-    connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
-    connect(ui->listViewAlbum, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    connect(ui->listViewAlbum, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
     connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(onRefreshClick()));
     connect(ui->albumAddButton, SIGNAL(clicked()), this, SLOT(onAlbumAddClick()));
     connect(this->albumModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumModelChange(QStandardItem*)));
@@ -38,22 +41,6 @@ Explorer::Explorer(QWidget *parent) :
     listViewAlbum->setDragEnabled(true);
     listViewAlbum->setAcceptDrops(true);
     listViewAlbum->setDropIndicatorShown(true);
-//    QToolBar* toolbar = new QToolBar(this);
-
-//    toolbar->addAction("Coucou");
-//    toolbar->addAction("Salut");
-//    QVBoxLayout* layout = new QVBoxLayout();
-//    layout->setMenuBar(toolbar);
-//    QTabBar *tabBar = new QTabBar(this);
-//    tabBar->addTab("Object Graph");
-//    tabBar->addTab("Snapshot #1");
-//    tabBar->setObjectName("another_tab");
-//    tabBar->setMinimumHeight(300);
-//    layout->addWidget(tabBar, 0, Qt::AlignTop);
-//    layout->setMargin(0);
-//    layout->setContentsMargins(0, 0,0,0);
-//    layout->setSpacing(0);
-//    setLayout(layout);
 }
 
 Explorer::~Explorer()
@@ -62,15 +49,16 @@ Explorer::~Explorer()
 }
 
 void Explorer::loadAlbums(){
-    albumModel = new QStandardItemModel;
+    albumModel = db->getAlbum();
+
     ui->listViewAlbum->setModel(albumModel);
 }
 
 void Explorer::loadImages(){
     imagesModel = new QStandardItemModel;
-    loadPath("/amuhome/f16016927");
-//    loadPath("/home/sim/Images");
-//    loadPath("/mnt/DATA/Mes Images");
+    //loadPath("/amuhome/f16016927");
+    loadPath("/home/thomsb/Images");
+    //loadPath("/mnt/DATA/Mes Images");
     ui->listViewImages->setModel(imagesModel);    
     QtConcurrent::run(this, &Explorer::loadThumbs);
 }
@@ -93,7 +81,7 @@ void Explorer::loadPath(QString path){
 
 void Explorer::loadThumbs(){
     for(int i=0; i < imagesModel->rowCount(); i++){
-        QStandardItem *item =imagesModel->item(i,0);
+        QStandardItem *item = imagesModel->item(i);
         QVariant path = item->data();
         QImage *image = new QImage(path.toString());
         if(image->isNull()){
@@ -112,30 +100,40 @@ void Explorer::loadThumbs(){
 
 void Explorer::onImageClick(QModelIndex item){
     QStandardItem *image = imagesModel->itemFromIndex(item);
-    qDebug() << image->data().toString();
+    qDebug() << "OPEN " <<image->data().toString();
     emit openImage(image->data().toString());
 }
 
 void Explorer::onAlbumClick(QModelIndex item){
-
+    qDebug() << "Open album" << item.data();
+    return;
 }
 
 void Explorer::onRefreshClick(){
     loadImages();
 }
 void Explorer::onAlbumAddClick(){
+    db->addAlbum("Album", albumModel->rowCount()+1);
+    QStandardItemModel *albumDb = db->getAlbum();
+    qDebug() << "DB " << albumDb->rowCount();
+    int id=0;
+    for(int i=0; i < albumDb->rowCount(); i++){
+        QStandardItem *item = albumDb->item(i);
+        if(item->text() == "Album") id = item->data().toInt();
+    }
+
     //get last index
     //add to db
     //get from db
     QStandardItem *item = new QStandardItem;
     item->setIcon(QIcon(":/ressources/images/default.png"));
     item->setText("Album");
-    item->setData("id");
+    item->setData(id);
     albumModel->appendRow(item);
 }
 
 void Explorer::onAlbumModelChange(QStandardItem *item){
     int id = item->data().toInt();
     //db update item.text() with id
-    qDebug() << "ALBUM MODEL CHANGE" <<id << " | " << item->text();
+    qDebug() << "ALBUM MODEL CHANGE " <<id << " | " << item;
 }

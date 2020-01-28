@@ -3,5 +3,15 @@
         <file>images/loader.gif</file>
         <file>images/splash.png</file>
         <file>images/default.png</file>
+        <file>images/BACK-01.png</file>
+        <file>images/DELETE-01.png</file>
+        <file>images/EDIT-01.png</file>
+        <file>images/HELP-01.png</file>
+        <file>images/INFO-01.png</file>
+        <file>images/NEWALBUM-01.png</file>
+        <file>images/NEWALBUM-02.png</file>
+        <file>images/RESIZE-01.png</file>
+        <file>images/SAVE-01.png</file>
+        <file>images/TRIM-01.png</file>
     </qresource>
 </RCC>

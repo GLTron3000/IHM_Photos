@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QFuture>
 #include <QStandardItemModel>
+#include "database.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Explorer; }
@@ -16,6 +17,7 @@ class Explorer : public QWidget
 public:
     QStandardItemModel *imagesModel;
     QStandardItemModel *albumModel;
+    DataBase *db;
 
 public:
     explicit Explorer(QWidget *parent = nullptr);

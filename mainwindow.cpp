@@ -2,11 +2,13 @@
 #include "ui_mainwindow.h"
 
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 
     explorer = new Explorer();
     explorer->loadImages();
@@ -17,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRecharger, SIGNAL(triggered()), this, SLOT(reload()));
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
-
     showExplorer();
 }
 

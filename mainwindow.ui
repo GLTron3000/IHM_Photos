@@ -20,12 +20,12 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
     <property name="title">
-     <string>Fichier</string>
+     <string>&amp;Fichier</string>
     </property>
     <addaction name="actionNouvel_album"/>
     <addaction name="separator"/>
@@ -33,7 +33,7 @@
    </widget>
    <widget class="QMenu" name="menuEditition">
     <property name="title">
-     <string>Édition</string>
+     <string>É&amp;dition</string>
     </property>
     <addaction name="actionAnnuler"/>
     <addaction name="actionR_tablir"/>
@@ -42,14 +42,14 @@
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
-     <string>Aide</string>
+     <string>&amp;Aide</string>
     </property>
     <addaction name="actionAide_en_ligne"/>
     <addaction name="actionA_propos"/>
    </widget>
    <widget class="QMenu" name="menuAffichage">
     <property name="title">
-     <string>Affichage</string>
+     <string>Aff&amp;ichage</string>
     </property>
     <addaction name="actionPlein_cran"/>
     <addaction name="actionRecharger"/>
@@ -61,6 +61,10 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAide_en_ligne">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/HELP-01.png</normaloff>:/ressources/images/HELP-01.png</iconset>
+   </property>
    <property name="text">
     <string>Aide</string>
    </property>
@@ -69,6 +73,10 @@
    </property>
   </action>
   <action name="actionA_propos">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/INFO-01.png</normaloff>:/ressources/images/INFO-01.png</iconset>
+   </property>
    <property name="text">
     <string>À propos</string>
    </property>
@@ -79,6 +87,10 @@
    </property>
   </action>
   <action name="actionNouvel_album">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/NEWALBUM-01.png</normaloff>:/ressources/images/NEWALBUM-01.png</iconset>
+   </property>
    <property name="text">
     <string>Nouvel album...</string>
    </property>
@@ -120,13 +132,15 @@
   </action>
   <action name="actionQuitter">
    <property name="text">
-    <string>Quitter</string>
+    <string>&amp;Quitter</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>
