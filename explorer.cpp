@@ -28,7 +28,7 @@ Explorer::~Explorer()
 void Explorer::loadImages(){
     imagesModel = new QStandardItemModel;
     //loadPath("/home/thomsb/Documents");
-    loadPath("/home/thomsb/Images");
+    loadPath("/home/sim/Images");
     loadPath("/mnt/DATA/Mes Images");
     ui->listViewImages->setModel(imagesModel);    
 

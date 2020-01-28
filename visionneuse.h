@@ -19,7 +19,8 @@ public:
 private:
     Ui::Visionneuse *ui;
     QImage image;
-    QPixmap *pixmap_img;    
+    QPixmap *pixmap_img;
+    QPixmap pixmap_imgV;
 };
 
 #endif // VISIONNEUSE_H
