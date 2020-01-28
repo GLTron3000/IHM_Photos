@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item>
     <widget class="QFrame" name="frame">
      <property name="enabled">
@@ -136,6 +136,13 @@
          </widget>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="refreshButton">
+         <property name="text">
+          <string>Recharger</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -225,6 +232,13 @@
            </item>
           </layout>
          </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="albumAddButton">
+         <property name="text">
+          <string>Nouvel album</string>
+         </property>
         </widget>
        </item>
       </layout>

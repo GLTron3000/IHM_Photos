@@ -20,6 +20,7 @@ Explorer::Explorer(QWidget *parent) :
     , ui(new Ui::Explorer)
 {
     ui->setupUi(this);
+    loadAlbums();
 
     QToolBar* toolbar = new QToolBar(ui->frame);
     toolbar->addAction(QIcon(":/ressources/images/default.png"), "Salut");
@@ -28,11 +29,49 @@ Explorer::Explorer(QWidget *parent) :
     layoutToolBar->addWidget(toolbar);
 
     connect(ui->listViewImages, SIGNAL(clicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
+    connect(ui->listViewAlbum, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(onRefreshClick()));
+    connect(ui->albumAddButton, SIGNAL(clicked()), this, SLOT(onAlbumAddClick()));
+    connect(this->albumModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumModelChange(QStandardItem*)));
+
+    QListView *listViewImages = ui->listViewImages;
+    listViewImages->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    listViewImages->setDragEnabled(true);
+    listViewImages->setAcceptDrops(false);
+    listViewImages->setDropIndicatorShown(false);
+
+    QListView *listViewAlbum = ui->listViewAlbum;
+    listViewAlbum->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    listViewAlbum->setDragEnabled(true);
+    listViewAlbum->setAcceptDrops(true);
+    listViewAlbum->setDropIndicatorShown(true);
+//    QToolBar* toolbar = new QToolBar(this);
+
+//    toolbar->addAction("Coucou");
+//    toolbar->addAction("Salut");
+//    QVBoxLayout* layout = new QVBoxLayout();
+//    layout->setMenuBar(toolbar);
+//    QTabBar *tabBar = new QTabBar(this);
+//    tabBar->addTab("Object Graph");
+//    tabBar->addTab("Snapshot #1");
+//    tabBar->setObjectName("another_tab");
+//    tabBar->setMinimumHeight(300);
+//    layout->addWidget(tabBar, 0, Qt::AlignTop);
+//    layout->setMargin(0);
+//    layout->setContentsMargins(0, 0,0,0);
+//    layout->setSpacing(0);
+//    setLayout(layout);
 }
 
 Explorer::~Explorer()
 {
     delete ui;
+}
+
+void Explorer::loadAlbums(){
+    albumModel = new QStandardItemModel;
+    ui->listViewAlbum->setModel(albumModel);
 }
 
 void Explorer::loadImages(){
@@ -41,7 +80,6 @@ void Explorer::loadImages(){
 //    loadPath("/home/sim/Images");
 //    loadPath("/mnt/DATA/Mes Images");
     ui->listViewImages->setModel(imagesModel);    
-
     QtConcurrent::run(this, &Explorer::loadThumbs);
 }
 
@@ -86,4 +124,26 @@ void Explorer::onImageClick(QModelIndex item){
     emit openImage(image->data().toString());
 }
 
+void Explorer::onAlbumClick(QModelIndex item){
 
+}
+
+void Explorer::onRefreshClick(){
+    loadImages();
+}
+void Explorer::onAlbumAddClick(){
+    //get last index
+    //add to db
+    //get from db
+    QStandardItem *item = new QStandardItem;
+    item->setIcon(QIcon(":/ressources/images/default.png"));
+    item->setText("Album");
+    item->setData("id");
+    albumModel->appendRow(item);
+}
+
+void Explorer::onAlbumModelChange(QStandardItem *item){
+    int id = item->data().toInt();
+    //db update item.text() with id
+    qDebug() << "ALBUM MODEL CHANGE" <<id << " | " << item->text();
+}

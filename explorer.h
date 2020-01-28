@@ -15,17 +15,23 @@ class Explorer : public QWidget
 
 public:
     QStandardItemModel *imagesModel;
+    QStandardItemModel *albumModel;
 
 public:
     explicit Explorer(QWidget *parent = nullptr);
     ~Explorer();
     void loadImages();
+    void loadAlbums();
 
 signals:
     void openImage(QString path);
 
 private slots:
     void onImageClick(QModelIndex);
+    void onAlbumClick(QModelIndex);
+    void onRefreshClick();
+    void onAlbumAddClick();
+    void onAlbumModelChange(QStandardItem*);
 
 private:
     Ui::Explorer *ui;
