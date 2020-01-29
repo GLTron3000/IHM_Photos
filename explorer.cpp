@@ -121,21 +121,24 @@ void Explorer::onRefreshClick(){
     loadImages();
 }
 void Explorer::onAlbumAddClick(){
-    db->addAlbum("Album", albumModel->rowCount()+1);
+    qDebug() << "Local DB " << albumModel->rowCount();
+    QString albumName = QString("Album%1").arg(albumModel->rowCount());
+
+    db->addAlbum(albumName, albumModel->rowCount());
+
     QStandardItemModel *albumDb = db->getAlbum();
     qDebug() << "DB " << albumDb->rowCount();
+
     int id=0;
     for(int i=0; i < albumDb->rowCount(); i++){
         QStandardItem *item = albumDb->item(i);
-        if(item->text() == "Album") id = item->data().toInt();
+        if(QString::compare(item->text(), albumName, Qt::CaseInsensitive))
+            id = item->data().toInt();
     }
 
-    //get last index
-    //add to db
-    //get from db
     QStandardItem *item = new QStandardItem;
-    item->setIcon(QIcon(":/ressources/images/default.png"));
-    item->setText("Album");
+    item->setIcon(QIcon(":/ressources/images/defaultA.png"));
+    item->setText(albumName);
     item->setData(id);
     albumModel->appendRow(item);
 }

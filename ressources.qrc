@@ -13,5 +13,6 @@
         <file>images/RESIZE-01.png</file>
         <file>images/SAVE-01.png</file>
         <file>images/TRIM-01.png</file>
+        <file>images/defaultA.png</file>
     </qresource>
 </RCC>
