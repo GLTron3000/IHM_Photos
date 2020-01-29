@@ -16,24 +16,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    database.cpp \
     main.cpp \
-    explorer.cpp \
+    database.cpp \
     mainwindow.cpp \
-    visionneuse.cpp
+    widgets/explorer.cpp \
+    widgets/visionneuse.cpp
 
 HEADERS += \
     database.h \
-    explorer.h \
-    headers/explorer.h \
-    headers/visionneuse.h \
     mainwindow.h \
-    visionneuse.h
+    widgets/explorer.h \
+    widgets/visionneuse.h
 
 FORMS += \
-    explorer.ui \
     mainwindow.ui \
-    visionneuse.ui
+    widgets/explorer.ui \
+    widgets/visionneuse.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

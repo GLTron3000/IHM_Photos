@@ -17,6 +17,7 @@ class Explorer : public QWidget
 public:
     QStandardItemModel *imagesModel;
     QStandardItemModel *albumModel;
+    QStandardItemModel *albumImageModel;
     DataBase *db;
 
 public:
@@ -33,14 +34,19 @@ private slots:
     void onAlbumClick(QModelIndex);
     void onRefreshClick();
     void onAlbumAddClick();
+    void onAlbumBackClick();
     void onAlbumModelChange(QStandardItem*);
+    void onAlbumImageModelChange(QStandardItem*);
+    void onAlbumEditModeClick();
 
 private:
     Ui::Explorer *ui;
+    int currentAlbum;
+    bool editMode;
 
 private:
     void loadPath(QString path);
-    void loadThumbs();
+    void loadThumbs(QStandardItemModel *model);
 };
 
 #endif // EXPLORER_H

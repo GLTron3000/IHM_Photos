@@ -12,12 +12,12 @@ class DataBase
 {
 public:
     DataBase();
-    void addImg(QString path, int idAlbum);
-    void deleteImg(int id);
+    void addImage(QString path, int position, int idAlbum);
+    void deleteImage(int id);
     void addAlbum(QString name, int index);
     void deleteAlbum(int id);
-    QStandardItemModel* getAlbum();
-    QStandardItemModel* getImage(int albumId);
+    QStandardItemModel* getAlbums();
+    QStandardItemModel* getImages(int albumId);
     void updateAlbum(int id, QString name, int index);
     void updateImage(int id, int index, int idAlbum);
 

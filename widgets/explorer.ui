@@ -54,8 +54,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>528</width>
-            <height>619</height>
+            <width>508</width>
+            <height>630</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -74,7 +74,7 @@
               <enum>QAbstractItemView::NoDragDrop</enum>
              </property>
              <property name="defaultDropAction">
-              <enum>Qt::MoveAction</enum>
+              <enum>Qt::CopyAction</enum>
              </property>
              <property name="alternatingRowColors">
               <bool>false</bool>
@@ -167,8 +167,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>528</width>
-            <height>619</height>
+            <width>507</width>
+            <height>570</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -185,6 +185,9 @@
              </property>
              <property name="dragEnabled">
               <bool>true</bool>
+             </property>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::NoDragDrop</enum>
              </property>
              <property name="defaultDropAction">
               <enum>Qt::MoveAction</enum>
@@ -238,6 +241,29 @@
         <widget class="QPushButton" name="albumAddButton">
          <property name="text">
           <string>Nouvel album</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="albumBackButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Retour</string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="albumEditTitle">
+         <property name="text">
+          <string>Mode edition titre</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
