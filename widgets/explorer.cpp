@@ -41,6 +41,7 @@ Explorer::Explorer(QWidget *parent) :
     db = new DataBase();
     currentAlbum = -1;
     editMode = false;
+    moveMode = false;
     loadAlbums();
 
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
@@ -51,6 +52,7 @@ Explorer::Explorer(QWidget *parent) :
     connect(ui->albumEditTitle, SIGNAL(clicked()), this, SLOT(onAlbumEditModeClick()));
     connect(this->albumModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumModelChange(QStandardItem*)));
     //connect(this->albumImageModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumImageModelChange(QStandardItem*)));
+    connect(ui->listViewAlbum, SIGNAL(indexesMoved(const QModelIndexList)), this, SLOT(onAlbumMoved(QModelIndexList)));
 }
 
 Explorer::~Explorer()
@@ -139,6 +141,7 @@ void Explorer::onAlbumBackClick(){
     ui->listViewAlbum->setModel(albumModel);
     ui->listViewAlbum->setAcceptDrops(false);
     ui->listViewAlbum->setDropIndicatorShown(false);
+    ui->listViewAlbum->setDragDropMode(QAbstractItemView::InternalMove);
 }
 
 void Explorer::onAlbumClick(QModelIndex item){
@@ -155,6 +158,7 @@ void Explorer::onAlbumClick(QModelIndex item){
     ui->listViewAlbum->setModel(albumImageModel);
     ui->listViewAlbum->setAcceptDrops(true);
     ui->listViewAlbum->setDropIndicatorShown(true);
+    ui->listViewAlbum->setDragDropMode(QAbstractItemView::DragDrop);
 
     connect(this->albumImageModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumImageModelChange(QStandardItem*)));
 
@@ -183,9 +187,16 @@ void Explorer::onAlbumEditModeClick(){
     editMode = editMode ? false : true;
     qDebug() << "EDIT MODE " << editMode;
     ui->listViewAlbum->blockSignals(editMode);
+    ui->listViewImages->blockSignals(editMode);
 }
 
-
+void Explorer::onAlbumMoved(QModelIndexList indexes){
+    qDebug() << "ALBUMS MOVED";
+    for(int i=0; i < indexes.count(); i++){
+        qDebug() << indexes.at(i).column();
+        qDebug() << albumModel->itemFromIndex(indexes.at(i))->row();
+    }
+}
 
 
 

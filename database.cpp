@@ -95,6 +95,7 @@ QStandardItemModel* DataBase::getAlbums(){
     QStandardItemModel *albumModel = new QStandardItemModel;
 
     int idName = query.record().indexOf("name");
+    int idPosition = query.record().indexOf("position");
     int idId = query.record().indexOf("id");
 
     while (query.next()) {
@@ -102,9 +103,11 @@ QStandardItemModel* DataBase::getAlbums(){
         item->setIcon(QIcon(":/ressources/images/defaultA.png"));
         item->setText(query.value(idName).toString());
         item->setData(query.value(idId).toInt());
-        albumModel->appendRow(item);
+
+        albumModel->setItem(query.value(idPosition).toInt(), item);
         qDebug() << " +get album id:" << item->data() << " | " << item->text();
     }
+
 
     qDebug() << "Get Album: " << albumModel->rowCount();
     return albumModel;
@@ -173,6 +176,7 @@ QStandardItemModel* DataBase::getImagesFromAlbum(int albumId){
     query.exec();
 
     int idIdImage = query.record().indexOf("idImage");
+    int idPosition = query.record().indexOf("position");
 
     while (query.next()) {        
         int idImage = query.value(idIdImage).toInt();
@@ -185,17 +189,14 @@ QStandardItemModel* DataBase::getImagesFromAlbum(int albumId){
         item->setText(filename);
         item->setData(QVariant::fromValue(*image));
 
-        albumImgModel->appendRow(item);
-        qDebug() << " +get image " << item->text() << " | " << item->data();
+        albumImgModel->setItem(query.value(idPosition).toInt(), item);
+        qDebug() << " +get image " << item->text() << " | " << item->data() << " at pos: "<< item->row();
     }
 
     qDebug() << "Get Image: " << albumImgModel->rowCount() << " | idA:" << albumId;
     return albumImgModel;
 }
 
-
-
-// TO UPDATE
 void DataBase::updateAlbum(int id, QString name, int position){
     qDebug() << "UPDATE ALBUM id:" << id << " | n:" << name << " | pos:" << position;
     QSqlQuery query;
@@ -211,7 +212,7 @@ void DataBase::updateAlbum(int id, QString name, int position){
 
 void DataBase::updateImage(int id, int position, int idAlbum){
     QSqlQuery query;
-    query.prepare("UPDATE images set position = ?, idAlbum = ? WHERE id = ?");
+    query.prepare("UPDATE albumImages set position = ?, idAlbum = ? WHERE id = ?");
     query.addBindValue(position);
     query.addBindValue(idAlbum);
     query.addBindValue(id);

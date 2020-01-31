@@ -38,11 +38,13 @@ private slots:
     void onAlbumModelChange(QStandardItem*);
     void onAlbumImageModelChange(QStandardItem*);
     void onAlbumEditModeClick();
+    void onAlbumMoved(QModelIndexList);
 
 private:
     Ui::Explorer *ui;
     int currentAlbum;
     bool editMode;
+    bool moveMode;
 
 private:
     void loadPath(QString path);
