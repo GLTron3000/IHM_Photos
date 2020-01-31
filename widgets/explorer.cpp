@@ -123,17 +123,7 @@ void Explorer::onImageClick(QModelIndex item){
 void Explorer::onAlbumAddClick(){
     QString albumName = QString("Album%1").arg(albumModel->rowCount());
 
-    db->addAlbum(albumName, albumModel->rowCount());
-
-    QStandardItemModel *albumDb = db->getAlbums();
-
-    int id=0;
-    for(int i=0; i < albumDb->rowCount(); i++){
-        QStandardItem *item = albumDb->item(i);
-        if(QString::compare(item->text(), albumName, Qt::CaseSensitive) == 0){
-            id = item->data().toInt();
-        }
-    }
+    int id = db->addAlbum(albumName, albumModel->rowCount());
 
     QStandardItem *item = new QStandardItem;
     item->setIcon(QIcon(":/ressources/images/defaultA.png"));

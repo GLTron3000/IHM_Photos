@@ -13,9 +13,9 @@ class DataBase
 {
 public:
     DataBase();
-    void addImage(QString path, int position, int idAlbum);
+    int addImage(QString path, int position, int idAlbum);
     void deleteImage(int id);
-    void addAlbum(QString name, int index);
+    int addAlbum(QString name, int index);
     void deleteAlbum(int id);
     QStandardItemModel* getAlbums();
     QStandardItemModel* getImagesFromAlbum(int albumId);
@@ -27,6 +27,8 @@ public:
 public:
     QSqlDatabase m_db;
 
+private:
+    int getLastInsert();
 };
 
 #endif // DATABASE_H
