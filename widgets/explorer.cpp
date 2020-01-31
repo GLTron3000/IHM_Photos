@@ -14,6 +14,7 @@
 #include <QTabBar>
 #include <QToolBar>
 #include <QMenu>
+#include "models/image.h"
 
 Explorer::Explorer(QWidget *parent) :
     QWidget(parent)
@@ -82,8 +83,10 @@ void Explorer::loadPath(QString path){
         if(extension == "png" || extension == "jpeg" || extension == "jpg"){
             QStandardItem *item = new QStandardItem;
             QString fileName = it.fileName().remove("."+it.fileInfo().suffix());
+
+            Image *image = new Image(-1, it.filePath(), "", "", 0);
             item->setText(fileName);
-            item->setData(it.filePath());
+            item->setData(QVariant::fromValue(*image));
             imagesModel->appendRow(item);
         }
     }
@@ -92,7 +95,7 @@ void Explorer::loadPath(QString path){
 void Explorer::loadThumbs(QStandardItemModel *model){
     for(int i=0; i < model->rowCount(); i++){
         QStandardItem *item = model->item(i);
-        QVariant path = item->data();
+        QVariant path = item->data().value<Image>().path;
         QImage *image = new QImage(path.toString());
         if(image->isNull()){
             item->setIcon(QIcon(":/ressources/images/default.png"));
@@ -113,8 +116,8 @@ void Explorer::onRefreshClick(){
 
 void Explorer::onImageClick(QModelIndex item){
     QStandardItem *image = imagesModel->itemFromIndex(item);
-    qDebug() << "Open Image " <<image->data().toString();
-    emit openImage(image->data().toString());
+    qDebug() << "Open Image " <<image->data().value<Image>().path;
+    emit openImage(image->data().value<Image>().path);
 }
 
 void Explorer::onAlbumAddClick(){
@@ -154,7 +157,7 @@ void Explorer::onAlbumClick(QModelIndex item){
     qDebug() << "Open Album " << albumID;
 
     currentAlbum = albumID;
-    albumImageModel = db->getImages(albumID);
+    albumImageModel = db->getImagesFromAlbum(albumID);
 
     ui->albumAddButton->setEnabled(false);
     ui->albumBackButton->setEnabled(true);
@@ -176,13 +179,14 @@ void Explorer::onAlbumModelChange(QStandardItem *item){
 }
 
 void Explorer::onAlbumImageModelChange(QStandardItem *item){
+    qDebug() << "ALBUM IMAGE MODEL CHANGE";
     qDebug() << "ALBUM IMAGE MODEL CHANGE " << item->text() << " | " << item->data();
     if(currentAlbum == -1) return;
-    QStandardItemModel *imageDb = db->getImages(currentAlbum);
+    QStandardItemModel *imageDb = db->getImagesFromAlbum(currentAlbum);
     for(int i=0; i < imageDb->rowCount(); i++){
-        if(imageDb->item(i)->data().toString() == item->data().toString()) return;
+        if(imageDb->item(i)->data().value<Image>().path == item->data().value<Image>().path) return;
     }
-    db->addImage(item->data().toString(), 0, currentAlbum);
+    db->addImage(item->data().value<Image>().path, 0, currentAlbum);
 }
 
 void Explorer::onAlbumEditModeClick(){

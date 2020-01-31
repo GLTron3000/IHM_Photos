@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "explorer.h"
-#include "visionneuse.h"
+#include "widgets/explorer.h"
+#include "widgets/visionneuse.h"
 #include <QToolBar>
 
 namespace Ui {

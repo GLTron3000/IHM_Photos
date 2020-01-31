@@ -1,21 +1,23 @@
 #include "database.h"
 
-
 DataBase::DataBase()
 {
     const QString DRIVER("QSQLITE");
     if(!QSqlDatabase::isDriverAvailable(DRIVER)) qDebug() << "Driver not Available";
 
     m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName("/home/thomsb/Projets/qt/IHM_Photos/testoDB.sqlite");
+    m_db.setDatabaseName("/home/thomsb/testoDB.sqlite");
     if(!m_db.open()) qDebug() << "ERROR: " << m_db.lastError();
     else qDebug() << "Database ok";
 
     QSqlQuery query;
-    bool ok = query.exec("CREATE TABLE IF NOT EXISTS album (id INTERGER PRIMARY KEY, name TEXT UNIQUE NOT NULL, position INTEGER UNIQUE NOT NULL)");
-    if(!ok) qDebug() << "ERROR create album ";
-    ok = query.exec("CREATE TABLE IF NOT EXISTS image (id INTERGER PRIMARY KEY, path TEXT NOT NULL, position INTEGER NOT NULL, albumId INTEGER NOT NULL)");
-    if(!ok) qDebug() << "ERROR create photo ";
+    bool ok = query.exec("CREATE TABLE IF NOT EXISTS albums (id INTERGER PRIMARY KEY, name TEXT UNIQUE NOT NULL, position INTEGER UNIQUE NOT NULL)");
+    if(!ok) qDebug() << "ERROR create albums ";
+    ok = query.exec("CREATE TABLE IF NOT EXISTS images (id INTERGER PRIMARY KEY, path TEXT NOT NULL, score INTEGER NOT NULL, description TEXT, keyword TEXT)");
+    if(!ok) qDebug() << "ERROR create images ";
+    ok = query.exec("CREATE TABLE IF NOT EXISTS albumImages (id INTERGER PRIMARY KEY, idImage INTEGER NOT NULL, idAlbum INTEGER NOT NULL, position INTEGER NOT NULL)");
+    if(!ok) qDebug() << "ERROR create albumImages ";
+
     ok = query.exec("CREATE TABLE IF NOT EXISTS source (id INTERGER PRIMARY KEY, path TEXT NOT NULL)");
     if(!ok) qDebug() << "ERROR create source ";
 
@@ -26,12 +28,26 @@ DataBase::DataBase()
 void DataBase::addImage(QString path, int position, int idAlbum){
     qDebug() << "Add image :" << path << " | i:" << position << " | idA:" << idAlbum;
     QSqlQuery query;
-    query.prepare("INSERT INTO image(path, position, albumId) VALUES(?,?,?)");
+
+    query.prepare("INSERT INTO images (path, score, description, keyword) VALUES(?,?,?,?)");
     query.addBindValue(path);
-    query.addBindValue(position);
-    query.addBindValue(idAlbum);
+    query.addBindValue(0);
+    query.addBindValue("");
+    query.addBindValue("");
     if(!query.exec()){
         qDebug() << "ERROR add image: " << query.lastError();
+    }
+
+    QStandardItemModel *albumImages = getImagesFromAlbum(idAlbum);
+    Image *image = getImageByPath(path);
+    int albumPosition = albumImages->rowCount();
+
+    query.prepare("INSERT INTO albumImages (idImage, idAlbum, position) VALUES(?,?,?)");
+    query.addBindValue(image->id);
+    query.addBindValue(idAlbum);
+    query.addBindValue(albumPosition);
+    if(!query.exec()){
+        qDebug() << "ERROR add image to album: " << query.lastError();
     }
 }
 
@@ -84,24 +100,79 @@ QStandardItemModel* DataBase::getAlbums(){
     return albumModel;
 }
 
-QStandardItemModel* DataBase::getImages(int albumId){
+Image* DataBase::getImageByPath(QString path){
+    qDebug() << "GET IMAGE BY PATH: " << path;
+    QSqlQuery query;
+    query.prepare("SELECT * FROM images WHERE path = ?");
+    query.addBindValue(path);
+    query.exec();
+
+    int idId = query.record().indexOf("id");
+    int idPath = query.record().indexOf("path");
+    int idDescription = query.record().indexOf("description");
+    int idTags = query.record().indexOf("keyword");
+    int idScore = query.record().indexOf("score");
+
+    query.first();
+    return new Image(
+                query.value(idId).toInt(),
+                query.value(idPath).toString(),
+                query.value(idDescription).toString(),
+                query.value(idTags).toString(),
+                query.value(idScore).toInt()
+                );
+
+    return new Image();
+}
+
+Image* DataBase::getImageById(int id){
+    QSqlQuery query;
+    query.prepare("SELECT * FROM images WHERE id = ?");
+    query.addBindValue(id);
+    query.exec();
+
+    int idId = query.record().indexOf("id");
+    int idPath = query.record().indexOf("path");
+    int idDescription = query.record().indexOf("description");
+    int idTags = query.record().indexOf("keyword");
+    int idScore = query.record().indexOf("score");
+
+    query.first();
+    return new Image(
+                query.value(idId).toInt(),
+                query.value(idPath).toString(),
+                query.value(idDescription).toString(),
+                query.value(idTags).toString(),
+                query.value(idScore).toInt()
+                );
+
+    return new Image();
+}
+
+QStandardItemModel* DataBase::getImagesFromAlbum(int albumId){
     QSqlQuery query;
     QStandardItemModel *albumImgModel = new QStandardItemModel;
 
-    query.prepare("SELECT * FROM image WHERE albumId = ?");
+    query.prepare("SELECT * FROM albumImages WHERE idAlbum = ?");
     query.addBindValue(albumId);
     query.exec();
 
-    int idPath = query.record().indexOf("path");
-    //int idPosition = query.record().indexOf("position");
+    //int idId = query.record().indexOf("id");
+    //int idIdAlbum = query.record().indexOf("idAlbum");
+    int idIdImage = query.record().indexOf("idImage");
+
 
     while (query.next()) {        
-        QStringList parts = query.value(idPath).toString().split("/");
+        int idImage = query.value(idIdImage).toInt();
+
+        Image *image = getImageById(idImage);
+        QStringList parts = image->path.split("/");
         QString filename = parts.at(parts.size()-1);
 
         QStandardItem *item = new QStandardItem;
         item->setText(filename);
-        item->setData(query.value(idPath).toString());
+        item->setData(QVariant::fromValue(*image));
+
         albumImgModel->appendRow(item);
         qDebug() << " +get image " << item->text() << " | " << item->data();
     }

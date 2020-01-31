@@ -19,12 +19,14 @@ SOURCES += \
     main.cpp \
     database.cpp \
     mainwindow.cpp \
+    models/image.cpp \
     widgets/explorer.cpp \
     widgets/visionneuse.cpp
 
 HEADERS += \
     database.h \
     mainwindow.h \
+    models/image.h \
     widgets/explorer.h \
     widgets/visionneuse.h
 

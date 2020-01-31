@@ -7,6 +7,7 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include <QStandardItem>
+#include "models/image.h"
 
 class DataBase
 {
@@ -17,7 +18,9 @@ public:
     void addAlbum(QString name, int index);
     void deleteAlbum(int id);
     QStandardItemModel* getAlbums();
-    QStandardItemModel* getImages(int albumId);
+    QStandardItemModel* getImagesFromAlbum(int albumId);
+    Image* getImageByPath(QString path);
+    Image* getImageById(int id);
     void updateAlbum(int id, QString name, int index);
     void updateImage(int id, int index, int idAlbum);
 
