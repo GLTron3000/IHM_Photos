@@ -20,6 +20,8 @@ SOURCES += \
     database.cpp \
     mainwindow.cpp \
     models/image.cpp \
+    widgets/clipscene.cpp \
+    widgets/editeur.cpp \
     widgets/explorer.cpp \
     widgets/visionneuse.cpp
 
@@ -27,11 +29,14 @@ HEADERS += \
     database.h \
     mainwindow.h \
     models/image.h \
+    widgets/clipscene.h \
+    widgets/editeur.h \
     widgets/explorer.h \
     widgets/visionneuse.h
 
 FORMS += \
     mainwindow.ui \
+    widgets/editeur.ui \
     widgets/explorer.ui \
     widgets/visionneuse.ui
 
