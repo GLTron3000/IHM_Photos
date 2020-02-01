@@ -8,6 +8,7 @@
 #include <QStatusTipEvent>
 #include <QPixmap>
 #include <QToolBar>
+#include <QScrollArea>
 
 Visionneuse::Visionneuse(QWidget *parent) :
     QWidget(parent),
@@ -28,7 +29,6 @@ Visionneuse::~Visionneuse()
 void Visionneuse::afficherImage(QString fileName)
 {
     label = ui->image;
-
     pixmap_img = new QPixmap(fileName);
 
     /*rotation____________
@@ -42,6 +42,7 @@ void Visionneuse::afficherImage(QString fileName)
        */
 
     // set a scaled pixmap to a w x h window keeping its aspect ratio
+    defaultSize = this->size();
     label->setPixmap(pixmap_img->scaled(this->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
 
@@ -62,6 +63,16 @@ void Visionneuse::zoomOut(){
     qDebug() << __FUNCTION__;
     m_scaleFactor = 1;
     scaleImg(0.75);
+}
+
+void Visionneuse::restaurerTailleImg(){
+    qDebug() << __FUNCTION__;
+    setDefaultSize();
+}
+
+void Visionneuse::setDefaultSize(){
+    qDebug() << __FUNCTION__;
+    label->setPixmap(pixmap_img->scaled(defaultSize, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void Visionneuse::scaleImg(double scaleFact)

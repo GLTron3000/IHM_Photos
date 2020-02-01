@@ -20,15 +20,18 @@ public:
 private:
     Ui::Visionneuse *ui;
     QImage image;
-    QPixmap* pixmap_img, scaleLabel;
+    QPixmap* pixmap_img;
     QPixmap pixmap_imgV;
     void scaleImg(double scaleFact);
     double m_scaleFactor = 1;
     QLabel *label;
+    QSize defaultSize;
+    void setDefaultSize();
 
 public slots:
     void zoomIn();
     void zoomOut();
+    void restaurerTailleImg();
 };
 
 #endif // VISIONNEUSE_H

@@ -56,6 +56,7 @@
     <addaction name="separator"/>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
+    <addaction name="actionRestaurer"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEditition"/>
@@ -149,6 +150,11 @@
   <action name="actionZoomOut">
    <property name="text">
     <string>Zoom-</string>
+   </property>
+  </action>
+  <action name="actionRestaurer">
+   <property name="text">
+    <string>Restaurer</string>
    </property>
   </action>
  </widget>
