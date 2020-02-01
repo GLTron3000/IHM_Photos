@@ -54,22 +54,21 @@ void Visionneuse::afficherImage(QString fileName)
 
 void Visionneuse::zoomIn(){
     qDebug() << __FUNCTION__;
+    m_scaleFactor = 1;
     scaleImg(1.25);
 }
 
 void Visionneuse::zoomOut(){
     qDebug() << __FUNCTION__;
+    m_scaleFactor = 1;
     scaleImg(0.75);
 }
 
-void Visionneuse::scaleImg(double scaleFact){
-
-//    label->setPixmap(pixmap_img->scaled(w,h, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+void Visionneuse::scaleImg(double scaleFact)
+{
     m_scaleFactor *= scaleFact;
     QSize newsize = label->pixmap()->size()*m_scaleFactor;
-
-    label->resize(newsize);
-
+    label->setPixmap(pixmap_img->scaled(newsize, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     const QString message = tr("Opened \"%1\", %2x%3, Depth: %4")
         .arg(QDir::toNativeSeparators("fileName")).arg(pixmap_img->width()).arg(pixmap_img->height()).arg(pixmap_img->depth());
 
