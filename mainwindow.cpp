@@ -9,15 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
-    //DECOMMENTER ICI POUR ENLEVER LA BLAGUE !!!
-
-    QCursor ok_hand = QCursor(QPixmap(":/ressources/images/ok.png"));
-    this->setCursor(ok_hand);
-
-
-
-
     explorer = new Explorer();
     explorer->loadImages();
 

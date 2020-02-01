@@ -3,12 +3,13 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QMainWindow>
 
 namespace Ui {
 class Visionneuse;
 }
 
-class Visionneuse : public QWidget
+class Visionneuse : public QMainWindow
 {
     Q_OBJECT
 

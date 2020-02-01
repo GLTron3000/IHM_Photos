@@ -11,10 +11,16 @@
 #include <QScrollArea>
 
 Visionneuse::Visionneuse(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::Visionneuse)
 {
     ui->setupUi(this);
+    setCentralWidget(ui->scrollAreaWidgetContents);
+
+    QToolBar* toolbar = new QToolBar(this);
+    toolbar->setMovable(false);
+    toolbar->addAction(QIcon(":/ressources/images/default.png"), "Salut");
+    toolbar->addAction(QIcon(":/ressources/images/INFO-01.png"), "reSalut");
 }
 
 Visionneuse::~Visionneuse()
