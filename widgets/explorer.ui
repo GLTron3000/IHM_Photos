@@ -15,23 +15,47 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item>
-    <widget class="QFrame" name="frame">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>35</width>
-       <height>35</height>
-      </size>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-    </widget>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>2</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="gridSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::ListMode</enum>
+       </property>
+       <property name="modelColumn">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayoutImages">
        <item>
@@ -54,8 +78,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>508</width>
-            <height>630</height>
+            <width>510</width>
+            <height>635</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -167,8 +191,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>507</width>
-            <height>570</height>
+            <width>510</width>
+            <height>579</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">

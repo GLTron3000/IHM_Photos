@@ -14,5 +14,6 @@
         <file>images/SAVE-01.png</file>
         <file>images/TRIM-01.png</file>
         <file>images/defaultA.png</file>
+        <file>images/ok.png</file>
     </qresource>
 </RCC>

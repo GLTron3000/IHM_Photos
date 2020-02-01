@@ -21,9 +21,12 @@ Explorer::Explorer(QWidget *parent) :
     , ui(new Ui::Explorer)
 {
     ui->setupUi(this);
+//    qDebug() << ui->frame->frameWidth() << "Taille de la frame";
+//    ui->frame->setFrameShape(QFrame::HLine);
 
-    QToolBar* toolbar = new QToolBar(ui->frame);
+    QToolBar* toolbar = new QToolBar(ui->listWidget);
     toolbar->addAction(QIcon(":/ressources/images/default.png"), "Salut");
+    toolbar->addAction(QIcon(":/ressources/images/INFO-01.png"), "reSalut");
 
     QVBoxLayout* layoutToolBar = new QVBoxLayout(this);
     layoutToolBar->addWidget(toolbar);
@@ -37,7 +40,7 @@ Explorer::Explorer(QWidget *parent) :
     QListView *listViewAlbum = ui->listViewAlbum;
     listViewAlbum->setSelectionMode(QAbstractItemView::ExtendedSelection);
     listViewAlbum->setDragEnabled(true);
-
+//    qDebug() << ui->frame->frameWidth() << "Taille de la frame";
     db = new DataBase();
     currentAlbum = -1;
     editMode = false;
