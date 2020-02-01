@@ -27,7 +27,7 @@ Visionneuse::~Visionneuse()
  * */
 void Visionneuse::afficherImage(QString fileName)
 {
-    QLabel  *label = ui->image;
+    label = ui->image;
 
     pixmap_img = new QPixmap(fileName);
 
@@ -47,6 +47,31 @@ void Visionneuse::afficherImage(QString fileName)
 
     const QString message = tr("Opened \"%1\", %2x%3, Depth: %4")
         .arg(QDir::toNativeSeparators(fileName)).arg(pixmap_img->width()).arg(pixmap_img->height()).arg(pixmap_img->depth());
+
+
+    QCoreApplication::postEvent(this, new QStatusTipEvent(message));
+}
+
+void Visionneuse::zoomIn(){
+    qDebug() << __FUNCTION__;
+    scaleImg(1.25);
+}
+
+void Visionneuse::zoomOut(){
+    qDebug() << __FUNCTION__;
+    scaleImg(0.75);
+}
+
+void Visionneuse::scaleImg(double scaleFact){
+
+//    label->setPixmap(pixmap_img->scaled(w,h, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    m_scaleFactor *= scaleFact;
+    QSize newsize = label->pixmap()->size()*m_scaleFactor;
+
+    label->resize(newsize);
+
+    const QString message = tr("Opened \"%1\", %2x%3, Depth: %4")
+        .arg(QDir::toNativeSeparators("fileName")).arg(pixmap_img->width()).arg(pixmap_img->height()).arg(pixmap_img->depth());
 
 
     QCoreApplication::postEvent(this, new QStatusTipEvent(message));

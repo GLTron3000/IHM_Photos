@@ -70,7 +70,8 @@ void Explorer::loadAlbums(){
 void Explorer::loadImages(){
     imagesModel = new QStandardItemModel;
     //loadPath("/amuhome/f16016927");
-    loadPath("/home/thomsb/Images");
+    //loadPath("/home/thomsb/Images");
+    loadPath(":/ressources");
     //loadPath("/mnt/DATA/Mes Images");
     ui->listViewImages->setModel(imagesModel);    
     QtConcurrent::run(this, &Explorer::loadThumbs, imagesModel);

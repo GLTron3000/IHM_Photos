@@ -15,10 +15,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     visionneuse = new Visionneuse();
 
+    ui->actionZoomIn->setEnabled(false);
+    ui->actionZoomOut->setEnabled(false);
+
     connect(explorer, SIGNAL(openImage(QString)), this, SLOT(showVisio(QString)));
     connect(ui->actionRecharger, SIGNAL(triggered()), this, SLOT(reload()));
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
+    connect(ui->actionZoomIn, SIGNAL(triggered()), visionneuse, SLOT(zoomIn()));
+    connect(ui->actionZoomOut, SIGNAL(triggered()), visionneuse, SLOT(zoomOut()));
     showExplorer();
 }
 
@@ -29,6 +34,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::showVisio(QString path){
     this->setCentralWidget(visionneuse);
+    ui->actionZoomIn->setEnabled(true);
+    ui->actionZoomOut->setEnabled(true);
     visionneuse->afficherImage(path);
 }
 
