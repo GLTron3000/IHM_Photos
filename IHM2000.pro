@@ -21,7 +21,7 @@ SOURCES += \
     mainwindow.cpp \
     models/image.cpp \
     widgets/clipscene.cpp \
-    widgets/editeur.cpp \
+    widgets/editeurimage.cpp \
     widgets/explorer.cpp \
     widgets/visionneuse.cpp
 
@@ -30,13 +30,13 @@ HEADERS += \
     mainwindow.h \
     models/image.h \
     widgets/clipscene.h \
-    widgets/editeur.h \
+    widgets/editeurimage.h \
     widgets/explorer.h \
     widgets/visionneuse.h
 
 FORMS += \
     mainwindow.ui \
-    widgets/editeur.ui \
+    widgets/editeurimage.ui \
     widgets/explorer.ui \
     widgets/visionneuse.ui
 
