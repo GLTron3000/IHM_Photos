@@ -35,7 +35,6 @@
     <property name="title">
      <string>É&amp;dition</string>
     </property>
-    <addaction name="actionEditer"/>
     <addaction name="actionRedimensionner"/>
     <addaction name="actionRogner"/>
     <addaction name="separator"/>
@@ -156,10 +155,16 @@
    <property name="text">
     <string>Zoom+</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
   </action>
   <action name="actionZoomOut">
    <property name="text">
-    <string>Zoom-</string>
+    <string>Zoom -</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
    </property>
   </action>
   <action name="actionRestaurer">

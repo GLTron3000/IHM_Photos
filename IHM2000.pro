@@ -15,13 +15,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
+SOURCES += \ 
     main.cpp \
     database.cpp \
     mainwindow.cpp \
     models/image.cpp \
-    widgets/clipscene.cpp \
-    widgets/editeurimage.cpp \
+    customObjects/graphicsviewzoom.cpp \
+    customObjects/clipscene.cpp \
     widgets/explorer.cpp \
     widgets/visionneuse.cpp
 
@@ -29,14 +29,13 @@ HEADERS += \
     database.h \
     mainwindow.h \
     models/image.h \
-    widgets/clipscene.h \
-    widgets/editeurimage.h \
+    customObjects/graphicsviewzoom.h \
+    customObjects/clipscene.h \
     widgets/explorer.h \
     widgets/visionneuse.h
 
 FORMS += \
     mainwindow.ui \
-    widgets/editeurimage.ui \
     widgets/explorer.ui \
     widgets/visionneuse.ui
 
