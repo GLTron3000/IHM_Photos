@@ -11,6 +11,12 @@ namespace Ui {
 class Visionneuse;
 }
 
+enum EditMode{
+   none,
+   crop,
+   resize
+};
+
 class Visionneuse : public QMainWindow
 {
     Q_OBJECT
@@ -26,12 +32,15 @@ private:
 
     ClipScene* clipScene;
     GraphicsViewZoom *graphicsViewZoom;
+    EditMode editMode = none;
 
 
 public slots:
     void zoomIn();
     void zoomOut();
     void restaurerTailleImg();
+    void crop();
+    void resize();
 };
 
 #endif // VISIONNEUSE_H

@@ -29,6 +29,8 @@ public:
     QSize getCurrentImageSize();
 
     void setRect();
+    void crop();
+    void resize();
 
 signals:
     void previousPositionChanged(const QPointF previousPosition);
@@ -50,6 +52,8 @@ private:
     bool m_leftMouseButtonPressed           {false};
     QSize windowSize;
     QSize imageSize; //taille de l'image à cropp.
+    bool cropMode;
+    bool resizeMode;
 };
 
 

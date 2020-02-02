@@ -20,6 +20,7 @@ void ClipScene::setRect(){
 
 void ClipScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
+
     if(m_leftMouseButtonPressed == false){
         delete selectArea;
     }
@@ -43,6 +44,7 @@ void ClipScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void ClipScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
+
     if (m_leftMouseButtonPressed)
     {
         // Form the selection area when moving with the mouse while pressing the LMB
@@ -63,6 +65,7 @@ void ClipScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 
 void ClipScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
+
     if (event->button() & Qt::LeftButton)
     {
         m_leftMouseButtonPressed = false;

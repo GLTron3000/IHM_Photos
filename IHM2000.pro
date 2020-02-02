@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \ 
+SOURCES += \
+    customObjects/resizablerubberband.cpp \
     main.cpp \
     database.cpp \
     mainwindow.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     widgets/visionneuse.cpp
 
 HEADERS += \
+    customObjects/resizablerubberband.h \
     database.h \
     mainwindow.h \
     models/image.h \

@@ -44,6 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionZoomIn, SIGNAL(triggered()), visionneuse, SLOT(zoomIn()));
     connect(ui->actionZoomOut, SIGNAL(triggered()), visionneuse, SLOT(zoomOut()));
     connect(ui->actionRestaurer, SIGNAL(triggered()), visionneuse, SLOT(restaurerTailleImg()));
+    connect(ui->actionRedimensionner, SIGNAL(triggered()), visionneuse, SLOT(resize()));
+    connect(ui->actionRogner, SIGNAL(triggered()), visionneuse, SLOT(crop()));
+
     showExplorer();
 }
 

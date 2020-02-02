@@ -6,7 +6,7 @@ DataBase::DataBase()
     if(!QSqlDatabase::isDriverAvailable(DRIVER)) qDebug() << "Driver not Available";
 
     m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName("/home/thomsb/testoDB.sqlite");
+    m_db.setDatabaseName("ultraphoto2000DB.sqlite");
     if(!m_db.open()) qDebug() << "ERROR: " << m_db.lastError();
     else qDebug() << "Database ok";
 
@@ -22,7 +22,6 @@ DataBase::DataBase()
         qDebug() << "ERROR create sources " << query.lastError();
     if(!query.exec("CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT UNIQUE NOT NULL, path TEXT NOT NULL)"))
         qDebug() << "ERROR create settings " << query.lastError();
-
 }
 
 int DataBase::getLastInsert(){

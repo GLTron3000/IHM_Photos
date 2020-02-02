@@ -197,6 +197,9 @@
    </property>
   </action>
   <action name="actionRogner">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/TRIM-01.png</normaloff>:/ressources/images/TRIM-01.png</iconset>
@@ -206,6 +209,9 @@
    </property>
   </action>
   <action name="actionRedimensionner">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/RESIZE-01.png</normaloff>:/ressources/images/RESIZE-01.png</iconset>

@@ -9,6 +9,7 @@
 #include <QPixmap>
 #include <QToolBar>
 #include <QScrollArea>
+#include <QGraphicsView>
 
 Visionneuse::Visionneuse(QWidget *parent) :
     QMainWindow(parent),
@@ -17,19 +18,17 @@ Visionneuse::Visionneuse(QWidget *parent) :
     ui->setupUi(this);
 
     clipScene = new ClipScene(this, this->size());
-    //clipScene->setRect();
+    //clipScene->setRect(); // <----------- !! crash instant !!
 
     graphicsViewZoom = new GraphicsViewZoom();
     graphicsViewZoom->setScene(clipScene);
+    graphicsViewZoom->setDragMode(QGraphicsView::ScrollHandDrag);
     setCentralWidget(graphicsViewZoom);
 }
 
 Visionneuse::~Visionneuse()
 {
-    qDebug() << "DESTRUCTOR 1";
     delete ui;
-    qDebug() << "DESTRUCTOR 2";
-    qDebug() << "DESTRUCTOR 3";
 }
 
 void Visionneuse::afficherImage(QString path)
@@ -51,6 +50,21 @@ void Visionneuse::zoomOut(){
 
 void Visionneuse::restaurerTailleImg(){
     qDebug() << __FUNCTION__;
+
+}
+
+void Visionneuse::crop(){
+    if(editMode == EditMode::crop){
+        editMode = EditMode::none;
+        graphicsViewZoom->setDragMode(QGraphicsView::ScrollHandDrag);
+    }else{
+        editMode = EditMode::crop;
+        graphicsViewZoom->setDragMode(QGraphicsView::RubberBandDrag);
+        graphicsViewZoom->setRubberBandSelectionMode(Qt::ContainsItemBoundingRect);
+    }
+}
+
+void Visionneuse::resize(){
 
 }
 
