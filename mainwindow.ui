@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -35,10 +35,12 @@
     <property name="title">
      <string>É&amp;dition</string>
     </property>
+    <addaction name="actionEditer"/>
     <addaction name="actionAnnuler"/>
     <addaction name="actionR_tablir"/>
     <addaction name="separator"/>
     <addaction name="actionPr_f_rences"/>
+    <addaction name="actionInfos"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -155,6 +157,30 @@
   <action name="actionRestaurer">
    <property name="text">
     <string>Restaurer</string>
+   </property>
+  </action>
+  <action name="actionEditer">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/EDIT-01.png</normaloff>:/ressources/images/EDIT-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Editer ...</string>
+   </property>
+   <property name="toolTip">
+    <string>Editer l'image ...</string>
+   </property>
+  </action>
+  <action name="actionInfos">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/INFO-01.png</normaloff>:/ressources/images/INFO-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Infos...</string>
+   </property>
+   <property name="toolTip">
+    <string>Infos, tags...</string>
    </property>
   </action>
  </widget>
