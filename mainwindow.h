@@ -21,10 +21,10 @@ public:
 
 private slots:
     void showVisio(QString path);
+    void showVisio();
     void showExplorer();
     void showEditeur();
     void fullscreen();
-    void reload();
     void quit();
 
 private:
@@ -32,6 +32,15 @@ private:
     Explorer *explorer;
     Visionneuse *visionneuse;
     EditeurImage *editeur;
+
+    void createExplorerToolBar();
+    void createVisioToolBar();
+    void createEditeurToolBar();
+
+    QToolBar *explorerToolBar;
+    QToolBar *visioToolBar;
+    QToolBar *editeurToolBar;
+
 };
 
 #endif // MAINWINDOW_H

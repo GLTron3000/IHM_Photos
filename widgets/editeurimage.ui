@@ -34,7 +34,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton_2">
+          <widget class="QToolButton" name="editeurCrop">
            <property name="text">
             <string>...</string>
            </property>
@@ -110,7 +110,17 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QGraphicsView" name="gView"/>
+        <widget class="QGraphicsView" name="gView">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -130,7 +140,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="editeurAbort">
          <property name="text">
           <string>Annuler</string>
          </property>
@@ -157,7 +167,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="editeurSave">
          <property name="text">
           <string>Sauvegarder une copie</string>
          </property>

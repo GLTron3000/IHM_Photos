@@ -20,15 +20,19 @@ public:
     QSize getSize();
     void setImage(QString path);
 
+signals:
+    void closeEditor();
+
 private slots:
     void onClippedImage(const QPixmap& pixmap);
     void cropImageAndSave();
+    void onSave();
+    void onAbort();
 
 
 private:
     Ui::EditeurImage *ui;
-    QImage *monImage;
-
+    QImage *monImage;   
     QGraphicsView* m_graphicsView;
     QLabel* m_clippedLabel;         // A label in which the cropped image will be placed
     ClipScene* m_clipScene;         // The graphical scene in which the image trimming functionality is implemented

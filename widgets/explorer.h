@@ -23,21 +23,22 @@ public:
 public:
     explicit Explorer(QWidget *parent = nullptr);
     ~Explorer();
-    void loadImages();
-    void loadAlbums();
 
 signals:
     void openImage(QString path);
 
+public slots:
+    void addAlbum();
+    void loadAlbums();
+    void loadImages();
+    void editTitle();
+    void returnAlbum();
+
 private slots:
     void onImageClick(QModelIndex);
     void onAlbumClick(QModelIndex);
-    void onRefreshClick();
-    void onAlbumAddClick();
-    void onAlbumBackClick();
     void onAlbumModelChange(QStandardItem*);
     void onAlbumImageModelChange(QStandardItem*);
-    void onAlbumEditModeClick();
     void onAlbumMoved(QModelIndexList);
 
 private:

@@ -16,11 +16,6 @@ Visionneuse::Visionneuse(QWidget *parent) :
 {
     ui->setupUi(this);
     setCentralWidget(ui->scrollAreaWidgetContents);
-
-    QToolBar* toolbar = new QToolBar(this);
-    toolbar->setMovable(false);
-    toolbar->addAction(QIcon(":/ressources/images/default.png"), "Salut");
-    toolbar->addAction(QIcon(":/ressources/images/INFO-01.png"), "reSalut");
 }
 
 Visionneuse::~Visionneuse()

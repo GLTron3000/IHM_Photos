@@ -36,11 +36,19 @@
      <string>É&amp;dition</string>
     </property>
     <addaction name="actionEditer"/>
+    <addaction name="actionRedimensionner"/>
+    <addaction name="actionRogner"/>
+    <addaction name="separator"/>
     <addaction name="actionAnnuler"/>
-    <addaction name="actionR_tablir"/>
+    <addaction name="actionRetablir"/>
     <addaction name="separator"/>
     <addaction name="actionPr_f_rences"/>
     <addaction name="actionInfos"/>
+    <addaction name="separator"/>
+    <addaction name="actionEditer_titres"/>
+    <addaction name="actionRetour_Album"/>
+    <addaction name="actionRetour"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -98,7 +106,7 @@
      <normaloff>:/ressources/images/NEWALBUM-01.png</normaloff>:/ressources/images/NEWALBUM-01.png</iconset>
    </property>
    <property name="text">
-    <string>Nouvel album...</string>
+    <string>Nouvel album</string>
    </property>
   </action>
   <action name="actionRecharger">
@@ -128,7 +136,7 @@
     <string>Ctrl+Z</string>
    </property>
   </action>
-  <action name="actionR_tablir">
+  <action name="actionRetablir">
    <property name="text">
     <string>Rétablir</string>
    </property>
@@ -181,6 +189,54 @@
    </property>
    <property name="toolTip">
     <string>Infos, tags...</string>
+   </property>
+  </action>
+  <action name="actionRogner">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/TRIM-01.png</normaloff>:/ressources/images/TRIM-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rogner</string>
+   </property>
+  </action>
+  <action name="actionRedimensionner">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/RESIZE-01.png</normaloff>:/ressources/images/RESIZE-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redimensionner</string>
+   </property>
+  </action>
+  <action name="actionEditer_titres">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Editer titres</string>
+   </property>
+  </action>
+  <action name="actionRetour">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/BACK-01.png</normaloff>:/ressources/images/BACK-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Retour</string>
+   </property>
+  </action>
+  <action name="actionActualiser">
+   <property name="text">
+    <string>Actualiser</string>
+   </property>
+  </action>
+  <action name="actionRetour_Album">
+   <property name="text">
+    <string>Retour Album</string>
    </property>
   </action>
  </widget>

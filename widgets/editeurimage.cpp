@@ -28,7 +28,10 @@ EditeurImage::EditeurImage(QWidget *parent) :
 
     connect(m_clipScene, &ClipScene::clippedImage, this, &EditeurImage::onClippedImage);
 
-    //connect(ui->valider, &QPushButton::pressed, this, &MainWindow::cropImageAndSave);
+    connect(ui->editeurSave, &QPushButton::pressed, this, &EditeurImage::cropImageAndSave);
+    connect(ui->editeurAbort, SIGNAL(clicked()), this, SLOT(onAbort()));
+    connect(ui->editeurSave, SIGNAL(clicked()), this, SLOT(onSave()));
+
 }
 
 EditeurImage::~EditeurImage()
@@ -42,16 +45,22 @@ QSize EditeurImage::getSize(){
 }
 
 void EditeurImage::cropImageAndSave(){
-
     QImage *image = new QImage();
     *image = m_clippedLabel->pixmap()->toImage();
     image->save("/home/sim/Images/wouatropbo.jpg");
 
 }
 
-void EditeurImage::onClippedImage(const QPixmap& pixmap)
-{
+void EditeurImage::onClippedImage(const QPixmap& pixmap){
     m_clippedLabel->setPixmap(pixmap);
+}
+
+void EditeurImage::onSave(){
+    emit closeEditor();
+}
+
+void EditeurImage::onAbort(){
+    emit closeEditor();
 }
 
 void EditeurImage::setImage(QString path){

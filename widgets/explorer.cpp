@@ -21,15 +21,6 @@ Explorer::Explorer(QWidget *parent) :
     , ui(new Ui::Explorer)
 {
     ui->setupUi(this);
-//    qDebug() << ui->frame->frameWidth() << "Taille de la frame";
-//    ui->frame->setFrameShape(QFrame::HLine);
-
-    QToolBar* toolbar = new QToolBar(ui->listWidget);
-    toolbar->addAction(QIcon(":/ressources/images/default.png"), "Salut");
-    toolbar->addAction(QIcon(":/ressources/images/INFO-01.png"), "reSalut");
-
-    QVBoxLayout* layoutToolBar = new QVBoxLayout(this);
-    layoutToolBar->addWidget(toolbar);
 
     QListView *listViewImages = ui->listViewImages;
     listViewImages->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -40,7 +31,7 @@ Explorer::Explorer(QWidget *parent) :
     QListView *listViewAlbum = ui->listViewAlbum;
     listViewAlbum->setSelectionMode(QAbstractItemView::ExtendedSelection);
     listViewAlbum->setDragEnabled(true);
-//    qDebug() << ui->frame->frameWidth() << "Taille de la frame";
+
     db = new DataBase();
     currentAlbum = -1;
     editMode = false;
@@ -49,10 +40,6 @@ Explorer::Explorer(QWidget *parent) :
 
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
     connect(ui->listViewAlbum, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
-    connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(onRefreshClick()));
-    connect(ui->albumAddButton, SIGNAL(clicked()), this, SLOT(onAlbumAddClick()));
-    connect(ui->albumBackButton, SIGNAL(clicked()), this, SLOT(onAlbumBackClick()));
-    connect(ui->albumEditTitle, SIGNAL(clicked()), this, SLOT(onAlbumEditModeClick()));
     connect(this->albumModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumModelChange(QStandardItem*)));
     //connect(this->albumImageModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumImageModelChange(QStandardItem*)));
     connect(ui->listViewAlbum, SIGNAL(indexesMoved(const QModelIndexList)), this, SLOT(onAlbumMoved(QModelIndexList)));
@@ -61,23 +48,6 @@ Explorer::Explorer(QWidget *parent) :
 Explorer::~Explorer()
 {
     delete ui;
-}
-
-void Explorer::loadAlbums(){
-    albumModel = db->getAlbums();
-    albumImageModel = new QStandardItemModel;
-
-    ui->listViewAlbum->setModel(albumModel);
-}
-
-void Explorer::loadImages(){
-    imagesModel = new QStandardItemModel;
-    //loadPath("/amuhome/f16016927");
-    //loadPath("/home/thomsb/Images");
-    loadPath(":/ressources");
-    //loadPath("/mnt/DATA/Mes Images");
-    ui->listViewImages->setModel(imagesModel);    
-    QtConcurrent::run(this, &Explorer::loadThumbs, imagesModel);
 }
 
 void Explorer::loadPath(QString path){
@@ -116,36 +86,14 @@ void Explorer::loadThumbs(QStandardItemModel *model){
     }
 }
 
-void Explorer::onRefreshClick(){
-    loadImages();
-}
 
+
+
+//PRIVATE SLOTS
 void Explorer::onImageClick(QModelIndex item){
     QStandardItem *image = imagesModel->itemFromIndex(item);
     qDebug() << "Open Image " <<image->data().value<Image>().path;
     emit openImage(image->data().value<Image>().path);
-}
-
-void Explorer::onAlbumAddClick(){
-    QString albumName = QString("Album%1").arg(albumModel->rowCount());
-
-    int id = db->addAlbum(albumName, albumModel->rowCount());
-
-    QStandardItem *item = new QStandardItem;
-    item->setIcon(QIcon(":/ressources/images/defaultA.png"));
-    item->setText(albumName);
-    item->setData(id);
-    albumModel->appendRow(item);
-}
-
-void Explorer::onAlbumBackClick(){
-    currentAlbum = -1;
-    ui->albumAddButton->setEnabled(true);
-    ui->albumBackButton->setEnabled(false);
-    ui->listViewAlbum->setModel(albumModel);
-    ui->listViewAlbum->setAcceptDrops(false);
-    ui->listViewAlbum->setDropIndicatorShown(false);
-    ui->listViewAlbum->setDragDropMode(QAbstractItemView::InternalMove);
 }
 
 void Explorer::onAlbumClick(QModelIndex item){
@@ -155,9 +103,6 @@ void Explorer::onAlbumClick(QModelIndex item){
 
     currentAlbum = albumID;
     albumImageModel = db->getImagesFromAlbum(albumID);
-
-    ui->albumAddButton->setEnabled(false);
-    ui->albumBackButton->setEnabled(true);
 
     ui->listViewAlbum->setModel(albumImageModel);
     ui->listViewAlbum->setAcceptDrops(true);
@@ -187,13 +132,6 @@ void Explorer::onAlbumImageModelChange(QStandardItem *item){
     db->addImage(item->data().value<Image>().path, 0, currentAlbum);
 }
 
-void Explorer::onAlbumEditModeClick(){
-    editMode = editMode ? false : true;
-    qDebug() << "EDIT MODE " << editMode;
-    ui->listViewAlbum->blockSignals(editMode);
-    ui->listViewImages->blockSignals(editMode);
-}
-
 void Explorer::onAlbumMoved(QModelIndexList indexes){
     qDebug() << "ALBUMS MOVED";
     for(int i=0; i < indexes.count(); i++){
@@ -203,6 +141,52 @@ void Explorer::onAlbumMoved(QModelIndexList indexes){
 }
 
 
+
+
+//PUBLIC SLOTS
+void Explorer::loadAlbums(){
+    albumModel = db->getAlbums();
+    albumImageModel = new QStandardItemModel;
+
+    ui->listViewAlbum->setModel(albumModel);
+}
+
+void Explorer::loadImages(){
+    imagesModel = new QStandardItemModel;
+    //loadPath("/amuhome/f16016927");
+    //loadPath("/home/thomsb/Images");
+    loadPath(":/ressources");
+    //loadPath("/mnt/DATA/Mes Images");
+    ui->listViewImages->setModel(imagesModel);
+    QtConcurrent::run(this, &Explorer::loadThumbs, imagesModel);
+}
+
+void Explorer::editTitle(){
+    editMode = editMode ? false : true;
+    qDebug() << "EDIT MODE " << editMode;
+    ui->listViewAlbum->blockSignals(editMode);
+    ui->listViewImages->blockSignals(editMode);
+}
+
+void Explorer::addAlbum(){
+    QString albumName = QString("Album%1").arg(albumModel->rowCount());
+
+    int id = db->addAlbum(albumName, albumModel->rowCount());
+
+    QStandardItem *item = new QStandardItem;
+    item->setIcon(QIcon(":/ressources/images/defaultA.png"));
+    item->setText(albumName);
+    item->setData(id);
+    albumModel->appendRow(item);
+}
+
+void Explorer::returnAlbum(){
+    currentAlbum = -1;
+    ui->listViewAlbum->setModel(albumModel);
+    ui->listViewAlbum->setAcceptDrops(false);
+    ui->listViewAlbum->setDropIndicatorShown(false);
+    ui->listViewAlbum->setDragDropMode(QAbstractItemView::InternalMove);
+}
 
 
 
