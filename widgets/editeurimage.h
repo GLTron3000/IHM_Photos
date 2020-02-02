@@ -18,6 +18,7 @@ public:
     explicit EditeurImage(QWidget *parent = nullptr);
     ~EditeurImage();
     QSize getSize();
+    void setImage(QString path);
 
 private slots:
     void onClippedImage(const QPixmap& pixmap);

@@ -34,6 +34,7 @@ Visionneuse::~Visionneuse()
  * */
 void Visionneuse::afficherImage(QString fileName)
 {
+    imagePath = fileName;
     label = ui->image;
     pixmap_img = new QPixmap(fileName);
 

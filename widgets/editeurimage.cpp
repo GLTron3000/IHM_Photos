@@ -53,3 +53,7 @@ void EditeurImage::onClippedImage(const QPixmap& pixmap)
 {
     m_clippedLabel->setPixmap(pixmap);
 }
+
+void EditeurImage::setImage(QString path){
+    m_clipScene->setImage(path);
+}

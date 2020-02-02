@@ -17,9 +17,10 @@ public:
     explicit Visionneuse(QWidget *parent = nullptr);
     ~Visionneuse();
     void afficherImage(QString fileName);
+    QString imagePath;
 
 private:
-    Ui::Visionneuse *ui;
+    Ui::Visionneuse *ui; 
     QImage image;
     QPixmap* pixmap_img;
     QPixmap pixmap_imgV;
