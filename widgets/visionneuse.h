@@ -6,6 +6,14 @@
 #include <QMainWindow>
 #include "customObjects/graphicsviewzoom.h"
 #include "customObjects/clipscene.h"
+#include "QListWidget"
+#include <QtWidgets>
+#if defined(QT_PRINTSUPPORT_LIB)
+#include <QtPrintSupport/qtprintsupportglobal.h>
+#if QT_CONFIG(printdialog)
+#include <QtPrintSupport>
+#endif
+#endif
 
 namespace Ui {
 class Visionneuse;
@@ -33,6 +41,12 @@ private:
     ClipScene* clipScene;
     GraphicsViewZoom *graphicsViewZoom;
     EditMode editMode = none;
+    QListWidget *labelList;
+    QListWidget *buttonList;
+    QMenu *viewMenu; ///////////
+
+
+    void createDockWindows();
 
 
 public slots:

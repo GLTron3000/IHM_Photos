@@ -1,6 +1,7 @@
 #include "visionneuse.h"
 #include "ui_visionneuse.h"
 #include "mainwindow.h"
+#include "QInputDialog"
 
 #include <QLabel>
 #include <QGridLayout>
@@ -10,6 +11,7 @@
 #include <QToolBar>
 #include <QScrollArea>
 #include <QGraphicsView>
+#include <QDockWidget>
 
 Visionneuse::Visionneuse(QWidget *parent) :
     QMainWindow(parent),
@@ -18,17 +20,41 @@ Visionneuse::Visionneuse(QWidget *parent) :
     ui->setupUi(this);
 
     clipScene = new ClipScene(this, this->size());
-    //clipScene->setRect(); // <----------- !! crash instant !!
+    //clipScene->setRect(); // <----------- !! crash instant !! effectivement
 
     graphicsViewZoom = new GraphicsViewZoom();
     graphicsViewZoom->setScene(clipScene);
     graphicsViewZoom->setDragMode(QGraphicsView::ScrollHandDrag);
     setCentralWidget(graphicsViewZoom);
+    createDockWindows();
 }
 
 Visionneuse::~Visionneuse()
 {
     delete ui;
+}
+
+void Visionneuse::createDockWindows(){
+    QDockWidget *dock = new QDockWidget(tr("Informations"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea);
+
+    QStringList infos = {"Nom :","", "Dimensions :"};
+    QPushButton *modifierTags = new QPushButton("Modifier tags", this);
+    QPushButton *modifierFeelings = new QPushButton("Modifier feelings", this);
+
+    QHBoxLayout * layout = new QHBoxLayout;
+    layout->addWidget(modifierTags);
+    //layout->addWidget(modifierFeelings);
+
+    labelList = new QListWidget(dock);
+    labelList->addItems(infos);
+    //buttonList->addItems();
+    dock->setWidget(labelList);
+    dock->setLayout(layout);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+        /*viewMenu->addAction(dock->toggleViewAction());*/
+
+
 }
 
 void Visionneuse::afficherImage(QString path)

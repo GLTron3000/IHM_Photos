@@ -24,6 +24,7 @@ SOURCES += \
     customObjects/graphicsviewzoom.cpp \
     customObjects/clipscene.cpp \
     widgets/explorer.cpp \
+    widgets/info.cpp \
     widgets/visionneuse.cpp
 
 HEADERS += \
@@ -34,11 +35,13 @@ HEADERS += \
     customObjects/graphicsviewzoom.h \
     customObjects/clipscene.h \
     widgets/explorer.h \
+    widgets/info.h \
     widgets/visionneuse.h
 
 FORMS += \
     mainwindow.ui \
     widgets/explorer.ui \
+    widgets/info.ui \
     widgets/visionneuse.ui
 
 # Default rules for deployment.
