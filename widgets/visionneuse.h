@@ -8,6 +8,7 @@
 #include "customObjects/clipscene.h"
 #include "QListWidget"
 #include <QtWidgets>
+#include "info.h"
 #if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
 #if QT_CONFIG(printdialog)
@@ -41,9 +42,12 @@ private:
     ClipScene* clipScene;
     GraphicsViewZoom *graphicsViewZoom;
     EditMode editMode = none;
+
     QListWidget *labelList;
     QListWidget *buttonList;
     QMenu *viewMenu; ///////////
+
+    Info *info;
 
 
     void createDockWindows();
@@ -55,6 +59,7 @@ public slots:
     void restaurerTailleImg();
     void crop();
     void resize();
+    void informations();
 };
 
 #endif // VISIONNEUSE_H

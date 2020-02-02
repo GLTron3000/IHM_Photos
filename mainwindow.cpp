@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     visionneuse = new Visionneuse();
 
+
     createExplorerToolBar();
     createVisioToolBar();
 
@@ -46,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRestaurer, SIGNAL(triggered()), visionneuse, SLOT(restaurerTailleImg()));
     connect(ui->actionRedimensionner, SIGNAL(triggered()), visionneuse, SLOT(resize()));
     connect(ui->actionRogner, SIGNAL(triggered()), visionneuse, SLOT(crop()));
+    connect(ui->actionInfos, SIGNAL(triggered()), visionneuse, SLOT(informations()));
 
     showExplorer();
 }

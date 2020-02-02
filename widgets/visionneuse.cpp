@@ -11,6 +11,7 @@
 #include <QToolBar>
 #include <QScrollArea>
 #include <QGraphicsView>
+#include <QDebug>
 #include <QDockWidget>
 
 Visionneuse::Visionneuse(QWidget *parent) :
@@ -26,7 +27,11 @@ Visionneuse::Visionneuse(QWidget *parent) :
     graphicsViewZoom->setScene(clipScene);
     graphicsViewZoom->setDragMode(QGraphicsView::ScrollHandDrag);
     setCentralWidget(graphicsViewZoom);
+
+    //infos= new Info();
+
     createDockWindows();
+
 }
 
 Visionneuse::~Visionneuse()
@@ -40,19 +45,17 @@ void Visionneuse::createDockWindows(){
 
     QStringList infos = {"Nom :","", "Dimensions :"};
     QPushButton *modifierTags = new QPushButton("Modifier tags", this);
-    QPushButton *modifierFeelings = new QPushButton("Modifier feelings", this);
 
     QHBoxLayout * layout = new QHBoxLayout;
     layout->addWidget(modifierTags);
-    //layout->addWidget(modifierFeelings);
 
     labelList = new QListWidget(dock);
     labelList->addItems(infos);
     //buttonList->addItems();
     dock->setWidget(labelList);
-    dock->setLayout(layout);
+    //dock->setLayout(layout);
     addDockWidget(Qt::RightDockWidgetArea, dock);
-        /*viewMenu->addAction(dock->toggleViewAction());*/
+    //viewMenu->addAction(dock->toggleViewAction());
 
 
 }
@@ -92,5 +95,10 @@ void Visionneuse::crop(){
 
 void Visionneuse::resize(){
 
+}
+
+void Visionneuse::informations(){
+    info = new Info();
+    this->setCentralWidget(info);
 }
 
