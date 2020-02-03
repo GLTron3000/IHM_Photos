@@ -71,6 +71,17 @@ int DataBase::addAlbum(QString name, int position){
    return getLastInsert();
 }
 
+void DataBase::addSource(QString path){
+    qDebug() << "Add source :" << path;
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO sources (path) VALUES(?)");
+    query.addBindValue(path);
+    if(!query.exec()){
+        qDebug() << "ERROR add source: " << query.lastError();
+    }
+}
+
 void DataBase::deleteImage(int id){
     QSqlQuery query;
     query.prepare("DELETE FROM images where id = ?");
@@ -110,6 +121,19 @@ QStandardItemModel* DataBase::getAlbums(){
 
     qDebug() << "Get Album: " << albumModel->rowCount();
     return albumModel;
+}
+
+QStringList* DataBase::getSources(){
+    QSqlQuery query("SELECT * FROM sources");
+    QStringList *pathList = new QStringList();
+
+    int idPath = query.record().indexOf("path");
+
+    while (query.next()) {
+        pathList->append(query.value(idPath).toString());
+    }
+
+    return pathList;
 }
 
 Image* DataBase::getImageByPath(QString path){

@@ -21,6 +21,7 @@ public:
 private slots:
     void showVisio(QString path);
     void showExplorer();
+    void showSettings();
     void fullscreen();
     void quit();
 

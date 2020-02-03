@@ -35,7 +35,7 @@
      <item>
       <widget class="QPushButton" name="pbRep">
        <property name="text">
-        <string>Ajouter un dossier</string>
+        <string>Ajouter un dossier...</string>
        </property>
       </widget>
      </item>

@@ -11,12 +11,18 @@ Settings::Settings(QWidget *parent) :
     ui(new Ui::Settings)
 {
     ui->setupUi(this);
-    QStringList list;
+    this->setWindowFlag(Qt::Dialog);
+    this->setWindowTitle("Préférences");
+
+    database = new DataBase();
+    pathList = database->getSources();
+
+    QStringListModel* model = new QStringListModel(this);
+    model->setStringList(*pathList);
+    ui->listRep->setModel(model);
 
     connect(ui->pbRep, &QPushButton::pressed, this, &Settings::addRepository);
-    connect(ui->pbEnd, &QPushButton::pressed, this, &Settings::end);
-
-
+    connect(ui->pbEnd, &QPushButton::pressed, this, &Settings::end);    
 }
 
 Settings::~Settings()
@@ -25,15 +31,20 @@ Settings::~Settings()
 }
 
 void Settings::addRepository(){
-
     QStringListModel* model = new QStringListModel(this);
     QFileDialog dialog(this);
     dialog.setFileMode(QFileDialog::Directory);
-    QString outputFolder = QFileDialog::getExistingDirectory(0, ("Select Output Folder"), QDir::currentPath());
+
+    QString outputFolder = QFileDialog::getExistingDirectory(0, ("Ajouter une nouvelle source"), QDir::currentPath());
+
+    qDebug() << "NOUVELLE SOURCE";
     if(outputFolder != nullptr){
-        list.append((outputFolder));
-        model->setStringList(list);
+        pathList->append((outputFolder));
+        model->setStringList(*pathList);
         ui->listRep->setModel(model);
+
+        qDebug() << "   +" << outputFolder;
+        database->addSource(outputFolder);
     }
 }
 

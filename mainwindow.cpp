@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
+#include "widgets/settings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(explorer, SIGNAL(openImage(QString)), this, SLOT(showVisio(QString)));
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(showExplorer()));
+    connect(ui->actionPr_f_rences, SIGNAL(triggered()), this, SLOT(showSettings()));
 
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
@@ -97,6 +98,12 @@ void MainWindow::showExplorer(){
     ui->actionRogner->setEnabled(false);
     ui->actionRedimensionner->setEnabled(false);
     ui->actionRetour->setEnabled(false);
+}
+
+void MainWindow::showSettings(){
+    Settings *settings = new Settings(this);
+    settings->setWindowFlag(Qt::Dialog);
+    settings->show();
 }
 
 void MainWindow::quit(){

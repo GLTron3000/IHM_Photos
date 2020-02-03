@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QStringList>
+#include "database.h"
 
 namespace Ui {
 class Settings;
@@ -11,7 +12,7 @@ class Settings;
 class Settings : public QWidget
 {
     Q_OBJECT
-    QStringList list;
+
 
 public:
     explicit Settings(QWidget *parent = nullptr);
@@ -19,6 +20,8 @@ public:
 
 private:
     Ui::Settings *ui;
+    DataBase *database;
+    QStringList *pathList;
 
 
 private slots:

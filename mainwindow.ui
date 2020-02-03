@@ -35,19 +35,19 @@
     <property name="title">
      <string>É&amp;dition</string>
     </property>
+    <addaction name="actionInfos"/>
     <addaction name="actionRedimensionner"/>
     <addaction name="actionRogner"/>
     <addaction name="separator"/>
     <addaction name="actionAnnuler"/>
     <addaction name="actionRetablir"/>
     <addaction name="separator"/>
-    <addaction name="actionPr_f_rences"/>
-    <addaction name="actionInfos"/>
     <addaction name="separator"/>
     <addaction name="actionEditer_titres"/>
     <addaction name="actionRetour_Album"/>
     <addaction name="actionRetour"/>
     <addaction name="separator"/>
+    <addaction name="actionPr_f_rences"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -96,7 +96,7 @@
   </action>
   <action name="actionPr_f_rences">
    <property name="text">
-    <string>Préférences</string>
+    <string>Préférences...</string>
    </property>
   </action>
   <action name="actionNouvel_album">
