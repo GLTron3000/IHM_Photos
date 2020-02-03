@@ -4,7 +4,6 @@
 #include "QInputDialog"
 
 #include <QLabel>
-#include <QGridLayout>
 #include <QDir>
 #include <QStatusTipEvent>
 #include <QPixmap>
@@ -28,9 +27,10 @@ Visionneuse::Visionneuse(QWidget *parent) :
     graphicsViewZoom->setDragMode(QGraphicsView::ScrollHandDrag);
     setCentralWidget(graphicsViewZoom);
 
-    //infos= new Info();
-
-    createDockWindows();
+    dock = new QDockWidget(this, Qt::Widget);
+    this->addDockWidget(Qt::RightDockWidgetArea, dock);
+    dock->createWinId();
+    dock->setAllowedAreas(Qt::RightDockWidgetArea|Qt::LeftDockWidgetArea);
 
 }
 
@@ -39,25 +39,18 @@ Visionneuse::~Visionneuse()
     delete ui;
 }
 
-void Visionneuse::createDockWindows(){
-    QDockWidget *dock = new QDockWidget(tr("Informations"), this);
-    dock->setAllowedAreas(Qt::LeftDockWidgetArea);
-
-    QStringList infos = {"Nom :","", "Dimensions :"};
-    QPushButton *modifierTags = new QPushButton("Modifier tags", this);
-
-    QHBoxLayout * layout = new QHBoxLayout;
-    layout->addWidget(modifierTags);
-
-    labelList = new QListWidget(dock);
-    labelList->addItems(infos);
-    //buttonList->addItems();
-    dock->setWidget(labelList);
-    //dock->setLayout(layout);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    //viewMenu->addAction(dock->toggleViewAction());
-
-
+void Visionneuse::afficherInformations(){
+    if(!visibleInfo){
+        info = new Info();
+        info->setImgPath(imagePath);
+        dock->setWidget(info);
+        dock->setVisible(true);
+        visibleInfo = true;
+    }else{
+        visibleInfo = false;
+        dock->setVisible(false);
+        info = nullptr;
+    }
 }
 
 void Visionneuse::afficherImage(QString path)
@@ -97,7 +90,7 @@ void Visionneuse::resize(){
 
 }
 
-void Visionneuse::informations(){
+void Visionneuse::createDockWindows(){
     info = new Info();
     this->setCentralWidget(info);
 }

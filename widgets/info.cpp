@@ -1,13 +1,20 @@
 #include "info.h"
 #include "ui_info.h"
 #include <QInputDialog>
+#include <QtDebug>
+#include <QDockWidget>
 
 Info::Info(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Info)
 {
     ui->setupUi(this);
-    //on_keyWordsButton_clicked();
+    ui->textElements->setReadOnly(true);
+    ui->textFeelings->setReadOnly(true);
+    ui->textKeyWords->setReadOnly(true);
+
+    //ui->
+
 }
 
 Info::~Info()
@@ -15,8 +22,16 @@ Info::~Info()
     delete ui;
 }
 
-void Info::on_keyWordsButton_clicked()
+void Info::setImgPath(QString imgpath){
+    imgPath = imgpath;
+}
+
+void Info::on_ButtonEdit_clicked()
 {
-    QString Kwords = QInputDialog::getText(this, "#Tags", "Entrer le(s) mot(s)-clé(s):");
-    ui->valueKeyWordsLabel->setText(Kwords);
+
+}
+
+void Info::on_ButtonValider_clicked()
+{
+
 }

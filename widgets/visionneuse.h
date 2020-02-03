@@ -1,6 +1,8 @@
 #ifndef VISIONNEUSE_H
 #define VISIONNEUSE_H
 
+#include "widgets/info.h"
+
 #include <QWidget>
 #include <QLabel>
 #include <QMainWindow>
@@ -8,13 +10,12 @@
 #include "customObjects/clipscene.h"
 #include "QListWidget"
 #include <QtWidgets>
-#include "info.h"
-#if defined(QT_PRINTSUPPORT_LIB)
+/*#if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
 #if QT_CONFIG(printdialog)
 #include <QtPrintSupport>
 #endif
-#endif
+#endif*/
 
 namespace Ui {
 class Visionneuse;
@@ -39,6 +40,7 @@ public:
 private:
     Ui::Visionneuse *ui; 
 
+    Info* info;
     ClipScene* clipScene;
     GraphicsViewZoom *graphicsViewZoom;
     EditMode editMode = none;
@@ -47,7 +49,9 @@ private:
     QListWidget *buttonList;
     QMenu *viewMenu; ///////////
 
-    Info *info;
+
+    QDockWidget *dock;
+    bool visibleInfo=false;
 
 
     void createDockWindows();
@@ -59,7 +63,7 @@ public slots:
     void restaurerTailleImg();
     void crop();
     void resize();
-    void informations();
+    void afficherInformations();
 };
 
 #endif // VISIONNEUSE_H

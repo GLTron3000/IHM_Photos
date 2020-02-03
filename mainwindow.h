@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "widgets/explorer.h"
 #include "widgets/visionneuse.h"
+#include "widgets/info.h"
 #include <QToolBar>
 
 namespace Ui {
@@ -34,6 +35,8 @@ private:
 
     QToolBar *explorerToolBar;
     QToolBar *visioToolBar;
+
+    Info *info;
 
 };
 
