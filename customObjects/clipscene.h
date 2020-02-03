@@ -2,7 +2,8 @@
 #define CLIPSCENE_H
 
 #include <QtWidgets/QGraphicsScene>
-
+#include "customObjects/resizablerubberband.h"
+#include <QRubberBand>
 
 class QGraphicsSceneMouseEvent;
 class QGraphicsPixmapItem;
@@ -21,6 +22,9 @@ class ClipScene : public QGraphicsScene
 
 public:
     ClipScene(QObject* parent, QSize size);
+    QGraphicsPixmapItem* currentImageItem {nullptr};
+    ResizableRubberBand *rubber;
+    QRubberBand* trueRubber;
     QPointF previousPosition() const;
     // Method for replacing an image in QGraphicsScene
     void setImage(const QString& filePath);
@@ -47,7 +51,6 @@ protected:
 
 private:
     QGraphicsRectItem* selectArea          {nullptr};
-    QGraphicsPixmapItem* currentImageItem {nullptr};
     QPointF m_previousPosition;
     bool m_leftMouseButtonPressed           {false};
     QSize windowSize;

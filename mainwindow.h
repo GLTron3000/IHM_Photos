@@ -33,6 +33,8 @@ private:
     void createExplorerToolBar();
     void createVisioToolBar();
 
+    void setToolBar(bool isExplorer);
+
     QToolBar *explorerToolBar;
     QToolBar *visioToolBar;
 

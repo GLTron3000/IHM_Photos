@@ -3,6 +3,8 @@
 #include <QtWidgets/QGraphicsPixmapItem>
 #include <QtWidgets/QGraphicsRectItem>
 #include <QDebug>
+#include <QRubberBand>
+#include "customObjects/resizablerubberband.h"
 
 ClipScene::ClipScene(QObject* parent, QSize size) : QGraphicsScene(parent)
 {
@@ -16,6 +18,20 @@ void ClipScene::setRect(){
     selectArea->setPen(QPen(QColor(158,182,255,200),1));
     addItem(selectArea);
     selectArea->setRect(getCurrentImageItemX(), getCurrentImageItemY(), getCurrentImageSize().rwidth(), getCurrentImageSize().rheight());
+
+    /*rubber = new ResizableRubberBand();
+    addWidget(rubber);
+    rubber->setGeometry(getCurrentImageItemX(), getCurrentImageItemY(), getCurrentImageSize().rwidth(), getCurrentImageSize().rheight());
+    rubber->show();
+    */
+
+    trueRubber = new QRubberBand(QRubberBand::Rectangle);
+    addWidget(trueRubber);
+    trueRubber->setGeometry(getCurrentImageItemX(), getCurrentImageItemY(), getCurrentImageSize().rwidth(), getCurrentImageSize().rheight());
+    trueRubber->show();
+
+    //QRubberBand *ogrubber = new QRubberBand();
+
 }
 
 void ClipScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -25,7 +41,7 @@ void ClipScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
         delete selectArea;
     }
 
-    if (event->button() & Qt::LeftButton)
+    if (event->button() == Qt::LeftButton)
     {
         // With the left mouse button pressed, remember the position
         m_leftMouseButtonPressed = true;
@@ -66,7 +82,7 @@ void ClipScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 void ClipScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 
-    if (event->button() & Qt::LeftButton)
+    if (event->button() == Qt::LeftButton)
     {
         m_leftMouseButtonPressed = false;
         QRect selectionRect = selectArea->boundingRect().toRect();
@@ -96,7 +112,7 @@ void ClipScene::setImage(const QString& filePath)
         this->removeItem(currentImageItem);
     }
 
-    currentImageItem = new QGraphicsPixmapItem(QPixmap(filePath).scaled(windowSize, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    currentImageItem = new QGraphicsPixmapItem(QPixmap(filePath));//.scaled(windowSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)); // <------ sinon c'est moche
     addItem(currentImageItem);
 }
 

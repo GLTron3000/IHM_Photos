@@ -46,6 +46,7 @@ private:
     int currentAlbum;
     bool editMode;
     bool moveMode;
+    QFuture<void> thumbsLoader;
 
 private:
     void loadPath(QString path);

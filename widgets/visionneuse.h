@@ -35,10 +35,12 @@ public:
     ~Visionneuse();
     void afficherImage(QString path);
     QString imagePath;
+    QGraphicsPixmapItem *imagePixmap;
 
 private:
     Ui::Visionneuse *ui; 
 
+    QGraphicsScene *scene;
     ClipScene* clipScene;
     GraphicsViewZoom *graphicsViewZoom;
     EditMode editMode = none;
@@ -59,7 +61,11 @@ public slots:
     void restaurerTailleImg();
     void crop();
     void resize();
+    void rotationPlus();
+    void rotationMinus();
     void informations();
+    void save();
+    void saveAs();
 };
 
 #endif // VISIONNEUSE_H

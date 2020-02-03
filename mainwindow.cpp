@@ -9,12 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    explorer = new Explorer();
-    explorer->loadImages();
-
-    visionneuse = new Visionneuse();
-
-
     createExplorerToolBar();
     createVisioToolBar();
 
@@ -31,24 +25,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionRedimensionner->setEnabled(false);
     ui->actionRetour->setEnabled(false);
 
-    connect(explorer, SIGNAL(openImage(QString)), this, SLOT(showVisio(QString)));
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(showExplorer()));
     connect(ui->actionPr_f_rences, SIGNAL(triggered()), this, SLOT(showSettings()));
 
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
-
-    connect(ui->actionNouvel_album, SIGNAL(triggered()), explorer, SLOT(addAlbum()));
-    connect(ui->actionRecharger, SIGNAL(triggered()), explorer, SLOT(loadImages()));
-    connect(ui->actionEditer_titres, SIGNAL(triggered()), explorer, SLOT(editTitle()));
-    connect(ui->actionRetour_Album, SIGNAL(triggered()), explorer, SLOT(returnAlbum()));
-
-    connect(ui->actionZoomIn, SIGNAL(triggered()), visionneuse, SLOT(zoomIn()));
-    connect(ui->actionZoomOut, SIGNAL(triggered()), visionneuse, SLOT(zoomOut()));
-    connect(ui->actionRestaurer, SIGNAL(triggered()), visionneuse, SLOT(restaurerTailleImg()));
-    connect(ui->actionRedimensionner, SIGNAL(triggered()), visionneuse, SLOT(resize()));
-    connect(ui->actionRogner, SIGNAL(triggered()), visionneuse, SLOT(crop()));
-    connect(ui->actionInfos, SIGNAL(triggered()), visionneuse, SLOT(informations()));
 
     showExplorer();
 }
@@ -59,51 +40,68 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::showVisio(QString path){
+    qDebug() << "SHOW VISIO";
+    visionneuse = new Visionneuse();
     visionneuse->afficherImage(path);
 
     explorerToolBar->hide();
     visioToolBar->show();
 
-    this->setCentralWidget(visionneuse);
-    ui->actionEditer_titres->setEnabled(false);
-    ui->actionRetour->setEnabled(false);
-    ui->actionRecharger->setEnabled(false);
-    ui->actionNouvel_album->setEnabled(false);
+    connect(ui->actionZoomIn, SIGNAL(triggered()), visionneuse, SLOT(zoomIn()));
+    connect(ui->actionZoomOut, SIGNAL(triggered()), visionneuse, SLOT(zoomOut()));
+    connect(ui->actionRestaurer, SIGNAL(triggered()), visionneuse, SLOT(restaurerTailleImg()));
+    connect(ui->actionRedimensionner, SIGNAL(triggered()), visionneuse, SLOT(resize()));
+    connect(ui->actionRogner, SIGNAL(triggered()), visionneuse, SLOT(crop()));
+    connect(ui->actionRotationM, SIGNAL(triggered()), visionneuse, SLOT(rotationPlus()));
+    connect(ui->actionRotationP, SIGNAL(triggered()), visionneuse, SLOT(rotationMinus()));
+    connect(ui->actionEnregistrer, SIGNAL(triggered()), visionneuse, SLOT(save()));
+    connect(ui->actionEnregistrer_sous, SIGNAL(triggered()), visionneuse, SLOT(saveAs()));
+    connect(ui->actionInfos, SIGNAL(triggered()), visionneuse, SLOT(informations()));
 
-    ui->actionZoomIn->setEnabled(true);
-    ui->actionZoomOut->setEnabled(true);
-    ui->actionRestaurer->setEnabled(true);
-    ui->actionInfos->setEnabled(true);
-    ui->actionRogner->setEnabled(true);
-    ui->actionRedimensionner->setEnabled(true);
-    ui->actionRetour->setEnabled(true);
+    this->setCentralWidget(visionneuse);
+    setToolBar(false);
 }
 
 void MainWindow::showExplorer(){
     qDebug() << "SHOW EXPLORER";
+    explorer = new Explorer();
+    explorer->loadImages();
 
-    explorerToolBar->show();
     visioToolBar->hide();
+    explorerToolBar->show();
+
+    connect(explorer, SIGNAL(openImage(QString)), this, SLOT(showVisio(QString)));
+    connect(ui->actionNouvel_album, SIGNAL(triggered()), explorer, SLOT(addAlbum()));
+    connect(ui->actionRecharger, SIGNAL(triggered()), explorer, SLOT(loadImages()));
+    connect(ui->actionEditer_titres, SIGNAL(triggered()), explorer, SLOT(editTitle()));
+    connect(ui->actionRetour_Album, SIGNAL(triggered()), explorer, SLOT(returnAlbum()));
 
     this->setCentralWidget(explorer);
-    ui->actionEditer_titres->setEnabled(true);
-    ui->actionRetour->setEnabled(true);
-    ui->actionRecharger->setEnabled(true);
-    ui->actionNouvel_album->setEnabled(true);
-
-    ui->actionZoomIn->setEnabled(false);
-    ui->actionZoomOut->setEnabled(false);
-    ui->actionRestaurer->setEnabled(false);
-    ui->actionInfos->setEnabled(false);
-    ui->actionRogner->setEnabled(false);
-    ui->actionRedimensionner->setEnabled(false);
-    ui->actionRetour->setEnabled(false);
+    setToolBar(true);
 }
 
 void MainWindow::showSettings(){
+    qDebug() << "SHOW SETTINGS";
     Settings *settings = new Settings(this);
     settings->setWindowFlag(Qt::Dialog);
     settings->show();
+}
+
+void MainWindow::setToolBar(bool isExplorer){
+    ui->actionEditer_titres->setEnabled(isExplorer);
+    ui->actionRetour->setEnabled(isExplorer);
+    ui->actionRecharger->setEnabled(isExplorer);
+    ui->actionNouvel_album->setEnabled(isExplorer);
+
+    ui->actionZoomIn->setEnabled(!isExplorer);
+    ui->actionZoomOut->setEnabled(!isExplorer);
+    ui->actionRestaurer->setEnabled(!isExplorer);
+    ui->actionInfos->setEnabled(!isExplorer);
+    ui->actionRogner->setEnabled(!isExplorer);
+    ui->actionRedimensionner->setEnabled(!isExplorer);
+    ui->actionRetour->setEnabled(!isExplorer);
+    ui->actionEnregistrer->setEnabled(!isExplorer);
+    ui->actionEnregistrer_sous->setEnabled(!isExplorer);
 }
 
 void MainWindow::quit(){
@@ -139,4 +137,10 @@ void MainWindow::createVisioToolBar(){
     visioToolBar->addSeparator();
     visioToolBar->addAction(ui->actionRogner);
     visioToolBar->addAction(ui->actionRedimensionner);
+    visioToolBar->addAction(ui->actionRotationM);
+    visioToolBar->addAction(ui->actionRotationP);
+
+    visioToolBar->addSeparator();
+    visioToolBar->addAction(ui->actionEnregistrer);
+    visioToolBar->addAction(ui->actionEnregistrer_sous);
 }

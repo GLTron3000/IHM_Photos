@@ -48,6 +48,7 @@ Explorer::Explorer(QWidget *parent) :
 Explorer::~Explorer()
 {
     delete ui;
+    thumbsLoader.cancel();
 }
 
 void Explorer::loadPath(QString path){
@@ -161,7 +162,8 @@ void Explorer::loadImages(){
     }
     //loadPath(":/ressources");
     ui->listViewImages->setModel(imagesModel);
-    QtConcurrent::run(this, &Explorer::loadThumbs, imagesModel);
+    if(thumbsLoader.isRunning()) thumbsLoader.cancel();
+    thumbsLoader = QtConcurrent::run(this, &Explorer::loadThumbs, imagesModel);
 }
 
 void Explorer::editTitle(){
