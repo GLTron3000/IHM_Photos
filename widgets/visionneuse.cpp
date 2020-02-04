@@ -106,13 +106,13 @@ void Visionneuse::rotationMinus(){
 
 void Visionneuse::save(){
     qDebug() << "SAVE MODS";
-    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubber->geometry());
+    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubberR->geometry());
     cropPixmap.save(imagePath);
 }
 
 void Visionneuse::saveAs(){
     qDebug() << "SAVE AS MODS";
-    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubber->geometry());
+    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubberR->geometry());
 
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Sauvegarder image"), "",
