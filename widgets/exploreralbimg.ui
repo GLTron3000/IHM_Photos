@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>explorerAlbImg</class>
- <widget class="QWidget" name="explorerAlbImg">
+ <class>ExplorerAlbImg</class>
+ <widget class="QWidget" name="ExplorerAlbImg">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -20,6 +20,13 @@
       <layout class="QVBoxLayout" name="verticalLayoutImages">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QToolButton" name="toolButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">

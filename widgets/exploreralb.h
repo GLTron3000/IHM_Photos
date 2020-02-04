@@ -4,19 +4,19 @@
 #include <QWidget>
 
 namespace Ui {
-class explorerAlb;
+class ExplorerAlb;
 }
 
-class explorerAlb : public QWidget
+class ExplorerAlb : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit explorerAlb(QWidget *parent = nullptr);
-    ~explorerAlb();
+    explicit ExplorerAlb(QWidget *parent = nullptr);
+    ~ExplorerAlb();
 
 private:
-    Ui::explorerAlb *ui;
+    Ui::ExplorerAlb *ui;
 };
 
 #endif // EXPLORERALB_H

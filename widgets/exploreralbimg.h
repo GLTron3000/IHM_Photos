@@ -2,21 +2,27 @@
 #define EXPLORERALBIMG_H
 
 #include <QWidget>
+#include <QDockWidget>
+#include "explorerimg.h"
 
 namespace Ui {
-class explorerAlbImg;
+class ExplorerAlbImg;
 }
 
-class explorerAlbImg : public QWidget
+class ExplorerAlbImg : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit explorerAlbImg(QWidget *parent = nullptr);
-    ~explorerAlbImg();
+    explicit ExplorerAlbImg(QWidget *parent = nullptr);
+    ~ExplorerAlbImg();
+    void afficherImg();
+    bool isImgVisible;
+    QDockWidget *imgDock;
+    ExplorerImg *explImg;
 
 private:
-    Ui::explorerAlbImg *ui;
+    Ui::ExplorerAlbImg *ui;
 };
 
 #endif // EXPLORERALBIMG_H

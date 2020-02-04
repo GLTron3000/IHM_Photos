@@ -1,14 +1,14 @@
 #include "exploreralb.h"
 #include "ui_exploreralb.h"
 
-explorerAlb::explorerAlb(QWidget *parent) :
+ExplorerAlb::ExplorerAlb(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::explorerAlb)
+    ui(new Ui::ExplorerAlb)
 {
     ui->setupUi(this);
 }
 
-explorerAlb::~explorerAlb()
+ExplorerAlb::~ExplorerAlb()
 {
     delete ui;
 }
