@@ -24,6 +24,9 @@ SOURCES += \
     customObjects/graphicsviewzoom.cpp \
     customObjects/clipscene.cpp \
     widgets/explorer.cpp \
+    widgets/exploreralb.cpp \
+    widgets/exploreralbimg.cpp \
+    widgets/explorerimg.cpp \
     widgets/info.cpp \
     widgets/settings.cpp \
     widgets/visionneuse.cpp
@@ -36,6 +39,9 @@ HEADERS += \
     customObjects/graphicsviewzoom.h \
     customObjects/clipscene.h \
     widgets/explorer.h \
+    widgets/exploreralb.h \
+    widgets/exploreralbimg.h \
+    widgets/explorerimg.h \
     widgets/info.h \
     widgets/settings.h \
     widgets/visionneuse.h
@@ -43,6 +49,9 @@ HEADERS += \
 FORMS += \
     mainwindow.ui \
     widgets/explorer.ui \
+    widgets/exploreralb.ui \
+    widgets/exploreralbimg.ui \
+    widgets/explorerimg.ui \
     widgets/info.ui \
     widgets/settings.ui \
     widgets/visionneuse.ui
