@@ -68,7 +68,6 @@ public slots:
     void afficherInformations();
     void rotationPlus();
     void rotationMinus();
-    void informations();
     void save();
     void saveAs();
 };

@@ -31,6 +31,7 @@ Visionneuse::Visionneuse(QWidget *parent) :
     this->addDockWidget(Qt::RightDockWidgetArea, dock);
     dock->createWinId();
     dock->setAllowedAreas(Qt::RightDockWidgetArea|Qt::LeftDockWidgetArea);
+    dock->setVisible(false);
 
 }
 
@@ -44,9 +45,9 @@ void Visionneuse::afficherInformations(){
         info = new Info();
 
         info->setImgPath(imagePath);
-        info->setH(clipScene->height());
-        info->setW(clipScene->width());
-        //info->setInfos(); /////////////////////::buguer la fenetre info
+        info->setH(imagePixmap->pixmap().height());
+        info->setW(imagePixmap->pixmap().width());
+        info->setInfos(); /////////////////////::buguer la fenetre info
 
         dock->setWidget(info);
         dock->setVisible(true);
@@ -54,6 +55,7 @@ void Visionneuse::afficherInformations(){
     }else{
         visibleInfo = false;
         dock->setVisible(false);
+        delete info;
         info = nullptr;
     }
 }

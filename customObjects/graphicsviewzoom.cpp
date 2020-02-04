@@ -1,6 +1,7 @@
 #include "graphicsviewzoom.h"
 #include <QWheelEvent>
 #include <QTimeLine>
+#include <QDebug>
 
 GraphicsViewZoom::GraphicsViewZoom(QWidget *parent) : QGraphicsView(parent){
     setTransformationAnchor(QGraphicsView::NoAnchor);
@@ -31,9 +32,15 @@ void GraphicsViewZoom::scalingTime(qreal x){
     qreal factor = 1.0+ qreal(_numScheduledScalings) / 300.0;
     scale(factor, factor);
 
+    qDebug() << "SCALE " << factor;
+    QSize rubberSize = rubberR->size();
+    rubberSize.scale(factor, factor, Qt::KeepAspectRatio);
+    rubberR->resize(rubberSize);
+
     QPointF newPos = mapToScene(wheelEventMousePos);
     QPointF delta = newPos - oldPos;
     this->translate(delta.x(), delta.y());
+
 }
 
 void GraphicsViewZoom::animFinished()
@@ -48,29 +55,29 @@ void GraphicsViewZoom::animFinished()
 
 void GraphicsViewZoom::initCrop(){
     cropActive = false;
-    rubber = new QRubberBand(QRubberBand::Rectangle);
-    this->scene()->addWidget(rubber);
-    rubber->setGeometry(QRect(-1, -1, 2, 2));
+    rubberR = new ResizableRubberBand(this);
+    //this->scene()->addWidget(rubber);
+    rubberR->setGeometry(QRect(-1, -1, 2, 2));
 }
 
 void GraphicsViewZoom::cropMode(){
     cropActive = cropActive ? false : true;
     if(cropActive){
         this->setDragMode(QGraphicsView::NoDrag);
-
+        rubberR->show();
     }else{
         this->setDragMode(QGraphicsView::ScrollHandDrag);
-        rubber->setGeometry(QRect(-1, -1, 2, 2));
-        rubber->hide();
+        rubberR->setGeometry(QRect(-1, -1, 2, 2));
+        rubberR->hide();
     }
 }
 
 void GraphicsViewZoom::mousePressEvent(QMouseEvent *event){
     if(cropActive){
         rubberOrigin = this->mapToScene(event->pos()).toPoint();
-        rubber->setGeometry(QRect(rubberOrigin, QSize()));
+        rubberR->setGeometry(QRect(rubberOrigin, QSize()));
         rubberDrag = true;
-        rubber->show();
+        rubberR->show();
     }
     QGraphicsView::mousePressEvent(event);
 }
@@ -78,8 +85,8 @@ void GraphicsViewZoom::mousePressEvent(QMouseEvent *event){
 void GraphicsViewZoom::mouseMoveEvent(QMouseEvent *event){
     if(cropActive && rubberDrag){
         rubberEnd = this->mapToScene(event->pos()).toPoint();
-        rubber->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
-        rubber->show();
+        rubberR->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
+        rubberR->show();
     }
     QGraphicsView::mouseMoveEvent(event);
 }
@@ -87,7 +94,7 @@ void GraphicsViewZoom::mouseMoveEvent(QMouseEvent *event){
 void GraphicsViewZoom::mouseReleaseEvent(QMouseEvent *event){
     if(cropActive){
         rubberEnd = this->mapToScene(event->pos()).toPoint();
-        rubber->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
+        rubberR->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
         rubberDrag = false;
     }
     QGraphicsView::mouseReleaseEvent(event);

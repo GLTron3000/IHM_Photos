@@ -56,7 +56,7 @@ void MainWindow::showVisio(QString path){
     connect(ui->actionRotationP, SIGNAL(triggered()), visionneuse, SLOT(rotationMinus()));
     connect(ui->actionEnregistrer, SIGNAL(triggered()), visionneuse, SLOT(save()));
     connect(ui->actionEnregistrer_sous, SIGNAL(triggered()), visionneuse, SLOT(saveAs()));
-    connect(ui->actionInfos, SIGNAL(triggered()), visionneuse, SLOT(informations()));
+    connect(ui->actionInfos, SIGNAL(triggered()), visionneuse, SLOT(afficherInformations()));
 
     this->setCentralWidget(visionneuse);
     setToolBar(false);

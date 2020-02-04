@@ -32,7 +32,7 @@ private:
     QString imgPath;
     double imgWidth;
     double imgHeight;
-
+    bool modeEdition;
 
 };
 
