@@ -25,6 +25,7 @@ SOURCES += \
     customObjects/clipscene.cpp \
     widgets/explorer.cpp \
     widgets/info.cpp \
+    widgets/settings.cpp \
     widgets/visionneuse.cpp
 
 HEADERS += \
@@ -36,12 +37,14 @@ HEADERS += \
     customObjects/clipscene.h \
     widgets/explorer.h \
     widgets/info.h \
+    widgets/settings.h \
     widgets/visionneuse.h
 
 FORMS += \
     mainwindow.ui \
     widgets/explorer.ui \
     widgets/info.ui \
+    widgets/settings.ui \
     widgets/visionneuse.ui
 
 # Default rules for deployment.

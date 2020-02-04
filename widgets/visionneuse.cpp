@@ -5,6 +5,7 @@
 
 #include <QLabel>
 #include <QDir>
+#include <QRect>
 #include <QStatusTipEvent>
 #include <QPixmap>
 #include <QToolBar>
@@ -19,12 +20,11 @@ Visionneuse::Visionneuse(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    clipScene = new ClipScene(this, this->size());
-    //clipScene->setRect(); // <----------- !! crash instant !! effectivement
+    scene = new QGraphicsScene();
 
     graphicsViewZoom = new GraphicsViewZoom();
-    graphicsViewZoom->setScene(clipScene);
-    graphicsViewZoom->setDragMode(QGraphicsView::ScrollHandDrag);
+    graphicsViewZoom->setScene(scene);
+
     setCentralWidget(graphicsViewZoom);
 
     dock = new QDockWidget(this, Qt::Widget);
@@ -39,6 +39,7 @@ Visionneuse::~Visionneuse()
     delete ui;
 }
 
+<<<<<<< HEAD
 void Visionneuse::afficherInformations(){
     if(!visibleInfo){
         info = new Info();
@@ -56,14 +57,34 @@ void Visionneuse::afficherInformations(){
         dock->setVisible(false);
         info = nullptr;
     }
+=======
+void Visionneuse::createDockWindows(){
+    QDockWidget *dock = new QDockWidget(tr("Informations"), this);
+    dock->setAllowedAreas(Qt::LeftDockWidgetArea);
+
+    QStringList infos = {"Nom :","", "Dimensions :"};
+    //QPushButton *modifierTags = new QPushButton("Modifier tags", this);
+
+    //QHBoxLayout * layout = new QHBoxLayout;
+    //layout->addWidget(modifierTags);
+
+    labelList = new QListWidget(dock);
+    labelList->addItems(infos);
+    //buttonList->addItems();
+    dock->setWidget(labelList);
+    //dock->setLayout(layout);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    //viewMenu->addAction(dock->toggleViewAction());
+>>>>>>> 35581455a458d971e4727ea5686d577acc22abf1
 }
 
 void Visionneuse::afficherImage(QString path)
 {   
-    clipScene->setImage(path);
+    imagePath = path;
+    imagePixmap = new QGraphicsPixmapItem(path);
 
-   //const QString message = tr("Opened \"%1\", %2x%3").arg(QDir::toNativeSeparators(path)).arg(clipScene->width()).arg(clipScene->height());
-   //QCoreApplication::postEvent(this, new QStatusTipEvent(message));
+    graphicsViewZoom->scene()->addItem(imagePixmap);
+    graphicsViewZoom->initCrop();
 }
 
 void Visionneuse::zoomIn(){
@@ -81,14 +102,7 @@ void Visionneuse::restaurerTailleImg(){
 }
 
 void Visionneuse::crop(){
-    if(editMode == EditMode::crop){
-        editMode = EditMode::none;
-        graphicsViewZoom->setDragMode(QGraphicsView::ScrollHandDrag);
-    }else{
-        editMode = EditMode::crop;
-        graphicsViewZoom->setDragMode(QGraphicsView::RubberBandDrag);
-        graphicsViewZoom->setRubberBandSelectionMode(Qt::ContainsItemBoundingRect);
-    }
+    graphicsViewZoom->cropMode();
 }
 
 void Visionneuse::resize(){
@@ -100,3 +114,28 @@ void Visionneuse::createDockWindows(){
     this->setCentralWidget(info);
 }
 
+void Visionneuse::rotationPlus(){
+    graphicsViewZoom->rotate(90);
+}
+
+void Visionneuse::rotationMinus(){
+    graphicsViewZoom->rotate(-90);
+}
+
+void Visionneuse::save(){
+    qDebug() << "SAVE MODS";
+    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubber->geometry());
+    cropPixmap.save(imagePath);
+}
+
+void Visionneuse::saveAs(){
+    qDebug() << "SAVE AS MODS";
+    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubber->geometry());
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("Sauvegarder image"), "",
+            tr("Images (*)"));
+
+    qDebug() << "   save location: " << fileName;
+    cropPixmap.save(fileName);
+}

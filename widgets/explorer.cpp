@@ -48,6 +48,7 @@ Explorer::Explorer(QWidget *parent) :
 Explorer::~Explorer()
 {
     delete ui;
+    thumbsLoader.cancel();
 }
 
 void Explorer::loadPath(QString path){
@@ -153,12 +154,16 @@ void Explorer::loadAlbums(){
 
 void Explorer::loadImages(){
     imagesModel = new QStandardItemModel;
-    //loadPath("/amuhome/f16016927");
-    //loadPath("/home/thomsb/Images");
-    loadPath(":/ressources");
-    //loadPath("/mnt/DATA/Mes Images");
+
+    QStringList *pathList = db->getSources();
+    for (const auto& path : *pathList ){
+        qDebug() << "LOADING SOURCE: " <<path;
+        loadPath(path);
+    }
+    //loadPath(":/ressources");
     ui->listViewImages->setModel(imagesModel);
-    QtConcurrent::run(this, &Explorer::loadThumbs, imagesModel);
+    if(thumbsLoader.isRunning()) thumbsLoader.cancel();
+    thumbsLoader = QtConcurrent::run(this, &Explorer::loadThumbs, imagesModel);
 }
 
 void Explorer::editTitle(){

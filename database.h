@@ -14,13 +14,16 @@ class DataBase
 public:
     DataBase();
     int addImage(QString path, int position, int idAlbum);
-    void deleteImage(int id);
     int addAlbum(QString name, int index);
+    void addSource(QString path);
+    void deleteImage(int id);
     void deleteAlbum(int id);
+    int deleteSource(QString path);
     QStandardItemModel* getAlbums();
     QStandardItemModel* getImagesFromAlbum(int albumId);
     Image* getImageByPath(QString path);
     Image* getImageById(int id);
+    QStringList* getSources();
     void updateAlbum(int id, QString name, int index);
     void updateImage(int id, int index, int idAlbum);
 

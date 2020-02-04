@@ -13,6 +13,9 @@ public:
 private:
     QRubberBand* rubberband;
     void resizeEvent(QResizeEvent *);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
 signals:
 

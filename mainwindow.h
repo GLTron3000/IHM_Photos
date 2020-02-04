@@ -22,6 +22,7 @@ public:
 private slots:
     void showVisio(QString path);
     void showExplorer();
+    void showSettings();
     void fullscreen();
     void quit();
 
@@ -32,6 +33,8 @@ private:
 
     void createExplorerToolBar();
     void createVisioToolBar();
+
+    void setToolBar(bool isExplorer);
 
     QToolBar *explorerToolBar;
     QToolBar *visioToolBar;
