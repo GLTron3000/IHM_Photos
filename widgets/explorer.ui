@@ -19,24 +19,41 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayoutImages">
        <item>
-        <widget class="QLabel" name="img_label">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">padding: 0 10 0;</string>
-         </property>
-         <property name="text">
-          <string>&lt;span style=&quot; font-size:25pt; font-weight:1000; color:#000000;&quot;&gt;Images&lt;/span&gt;</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::RichText</enum>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="img_label">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">padding: 0 10 0;</string>
+           </property>
+           <property name="text">
+            <string>&lt;span style=&quot; font-size:25pt; font-weight:1000; color:#000000;&quot;&gt;Images&lt;/span&gt;</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::RichText</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="Recherche">
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="placeholderText">
+            <string>Recherche...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QScrollArea" name="img_scroll">
@@ -52,7 +69,7 @@
             <x>0</x>
             <y>0</y>
             <width>525</width>
-            <height>639</height>
+            <height>637</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -136,46 +153,44 @@
       </layout>
      </item>
      <item>
-      <widget class="QFrame" name="frame">
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <property name="lineWidth">
-        <number>10</number>
-       </property>
-      </widget>
-     </item>
-     <item>
       <layout class="QVBoxLayout" name="verticalLayoutAlbums">
        <item>
-        <widget class="QLabel" name="alb_label">
-         <property name="font">
-          <font>
-           <family>DejaVu Sans</family>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-           <underline>false</underline>
-           <strikeout>false</strikeout>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">padding: 0 10 0;</string>
-         </property>
-         <property name="text">
-          <string>&lt;span style=&quot; font-size:25pt; font-weight:1000; color:#000000;&quot;&gt;Albums&lt;/span&gt;</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::RichText</enum>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QToolButton" name="toolButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="alb_label">
+           <property name="font">
+            <font>
+             <family>DejaVu Sans</family>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
+             <underline>false</underline>
+             <strikeout>false</strikeout>
+             <kerning>true</kerning>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">padding: 0 10 0;</string>
+           </property>
+           <property name="text">
+            <string>&lt;span style=&quot; font-size:25pt; font-weight:1000; color:#000000;&quot;&gt;Albums&lt;/span&gt;</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::RichText</enum>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QScrollArea" name="alb_scroll">
@@ -191,7 +206,7 @@
             <x>0</x>
             <y>0</y>
             <width>525</width>
-            <height>639</height>
+            <height>636</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -261,6 +276,19 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QFrame" name="frame">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>10</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
