@@ -28,6 +28,7 @@ SOURCES += \
     widgets/exploreralbimg.cpp \
     widgets/explorerimg.cpp \
     widgets/info.cpp \
+    widgets/resizeimgwidget.cpp \
     widgets/settings.cpp \
     widgets/visionneuse.cpp
 
@@ -43,6 +44,7 @@ HEADERS += \
     widgets/exploreralbimg.h \
     widgets/explorerimg.h \
     widgets/info.h \
+    widgets/resizeimgwidget.h \
     widgets/settings.h \
     widgets/visionneuse.h
 
@@ -53,6 +55,7 @@ FORMS += \
     widgets/exploreralbimg.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
+    widgets/resizeimgwidget.ui \
     widgets/settings.ui \
     widgets/visionneuse.ui
 
