@@ -31,21 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
 
-<<<<<<< HEAD
-    connect(ui->actionNouvel_album, SIGNAL(triggered()), explorer, SLOT(addAlbum()));
-    connect(ui->actionRecharger, SIGNAL(triggered()), explorer, SLOT(loadImages()));
-    connect(ui->actionEditer_titres, SIGNAL(triggered()), explorer, SLOT(editTitle()));
-    connect(ui->actionRetour_Album, SIGNAL(triggered()), explorer, SLOT(returnAlbum()));
-
-    connect(ui->actionZoomIn, SIGNAL(triggered()), visionneuse, SLOT(zoomIn()));
-    connect(ui->actionZoomOut, SIGNAL(triggered()), visionneuse, SLOT(zoomOut()));
-    connect(ui->actionRestaurer, SIGNAL(triggered()), visionneuse, SLOT(restaurerTailleImg()));
-    connect(ui->actionRedimensionner, SIGNAL(triggered()), visionneuse, SLOT(resize()));
-    connect(ui->actionRogner, SIGNAL(triggered()), visionneuse, SLOT(crop()));
-    connect(ui->actionInfos, SIGNAL(triggered()), visionneuse, SLOT(afficherInformations()));
-
-=======
->>>>>>> 35581455a458d971e4727ea5686d577acc22abf1
     showExplorer();
 }
 

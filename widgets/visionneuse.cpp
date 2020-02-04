@@ -39,7 +39,6 @@ Visionneuse::~Visionneuse()
     delete ui;
 }
 
-<<<<<<< HEAD
 void Visionneuse::afficherInformations(){
     if(!visibleInfo){
         info = new Info();
@@ -57,25 +56,6 @@ void Visionneuse::afficherInformations(){
         dock->setVisible(false);
         info = nullptr;
     }
-=======
-void Visionneuse::createDockWindows(){
-    QDockWidget *dock = new QDockWidget(tr("Informations"), this);
-    dock->setAllowedAreas(Qt::LeftDockWidgetArea);
-
-    QStringList infos = {"Nom :","", "Dimensions :"};
-    //QPushButton *modifierTags = new QPushButton("Modifier tags", this);
-
-    //QHBoxLayout * layout = new QHBoxLayout;
-    //layout->addWidget(modifierTags);
-
-    labelList = new QListWidget(dock);
-    labelList->addItems(infos);
-    //buttonList->addItems();
-    dock->setWidget(labelList);
-    //dock->setLayout(layout);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    //viewMenu->addAction(dock->toggleViewAction());
->>>>>>> 35581455a458d971e4727ea5686d577acc22abf1
 }
 
 void Visionneuse::afficherImage(QString path)
