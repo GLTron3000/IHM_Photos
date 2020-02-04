@@ -42,7 +42,12 @@ Visionneuse::~Visionneuse()
 void Visionneuse::afficherInformations(){
     if(!visibleInfo){
         info = new Info();
+
         info->setImgPath(imagePath);
+        info->setH(clipScene->height());
+        info->setW(clipScene->width());
+        //info->setInfos(); /////////////////////::buguer la fenetre info
+
         dock->setWidget(info);
         dock->setVisible(true);
         visibleInfo = true;

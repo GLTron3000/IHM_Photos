@@ -16,6 +16,9 @@ public:
     explicit Info(QWidget *parent = nullptr);
     ~Info();
     void setImgPath(QString imgpath);
+    void setW(double width);
+    void setH(double height);
+    void setInfos();
 
 private slots:
 
@@ -27,6 +30,8 @@ private:
     Ui::Info *ui;
     bool isVisible =false;
     QString imgPath;
+    double imgWidth;
+    double imgHeight;
 
 
 };
