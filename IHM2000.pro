@@ -56,8 +56,6 @@ FORMS += \
     explorerb.ui \
     mainwindow.ui \
     widgets/explorer.ui \
-    widgets/exploreralb.ui \
-    widgets/exploreralbimg.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
     widgets/resizeimgwidget.ui \

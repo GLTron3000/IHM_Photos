@@ -18,9 +18,13 @@ public:
     explicit ExplorerB(QWidget *parent = nullptr);
     ~ExplorerB();
 
+signals:
+    void openImageFromAlbum(Image);
+
 private slots:
     void showAlbums();
     void showAlbumImages(int albumID);
+    void openImage(Image image);
 
 private:
     Ui::ExplorerB *ui;

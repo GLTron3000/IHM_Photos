@@ -26,9 +26,14 @@ void ExplorerB::showAlbumImages(int albumID){
     images = new ExplorerAblumImages();
 
     connect(images, SIGNAL(returnFromAlbum()), this, SLOT(showAlbums()));
+    connect(images, SIGNAL(openImage(Image)), this, SLOT(openImage(Image)));
 
     images->loadImages(albumID);
 
     setCentralWidget(images);
 }
 
+void ExplorerB::openImage(Image image){
+    qDebug() << "EXPLORERB SIGNAL" << image.path;
+    emit openImageFromAlbum(image);
+}

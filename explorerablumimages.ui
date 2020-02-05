@@ -101,7 +101,7 @@
            <bool>true</bool>
           </property>
           <property name="dragDropMode">
-           <enum>QAbstractItemView::NoDragDrop</enum>
+           <enum>QAbstractItemView::DropOnly</enum>
           </property>
           <property name="defaultDropAction">
            <enum>Qt::CopyAction</enum>
@@ -174,7 +174,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

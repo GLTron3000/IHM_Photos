@@ -11,6 +11,13 @@ ExplorerImg::ExplorerImg(QWidget *parent) :
     ui(new Ui::ExplorerImg)
 {
     ui->setupUi(this);
+
+    ui->listViewImages->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    ui->listViewImages->setDragEnabled(true);
+    ui->listViewImages->setAcceptDrops(false);
+    ui->listViewImages->setDropIndicatorShown(false);
+
+    loadImages();
 }
 
 ExplorerImg::~ExplorerImg()

@@ -34,6 +34,7 @@ public slots:
     void cropMode();
     void scalingTime(qreal x);
     void animFinished();
+    void scaleAll(double factor);
 
 signals:
 

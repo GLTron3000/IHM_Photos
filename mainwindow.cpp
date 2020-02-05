@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
 
+
     showExplorer();
 }
 
@@ -40,23 +41,11 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::showVisio(Image image){
-    qDebug() << "SHOW VISIO";
+    qDebug() << "SHOW VISIO " << image.path;
     visionneuse = new Visionneuse();
     visionneuse->afficherImage(image.path);
 
-    explorerToolBar->hide();
-    visioToolBar->show();
-
-    connect(ui->actionZoomIn, SIGNAL(triggered()), visionneuse, SLOT(zoomIn()));
-    connect(ui->actionZoomOut, SIGNAL(triggered()), visionneuse, SLOT(zoomOut()));
-    connect(ui->actionRestaurer, SIGNAL(triggered()), visionneuse, SLOT(restaurerTailleImg()));
-    connect(ui->actionRedimensionner, SIGNAL(triggered()), visionneuse, SLOT(resize()));
-    connect(ui->actionRogner, SIGNAL(triggered()), visionneuse, SLOT(crop()));
-    connect(ui->actionRotationM, SIGNAL(triggered()), visionneuse, SLOT(rotationPlus()));
-    connect(ui->actionRotationP, SIGNAL(triggered()), visionneuse, SLOT(rotationMinus()));
-    connect(ui->actionEnregistrer, SIGNAL(triggered()), visionneuse, SLOT(save()));
-    connect(ui->actionEnregistrer_sous, SIGNAL(triggered()), visionneuse, SLOT(saveAs()));
-    connect(ui->actionInfos, SIGNAL(triggered()), visionneuse, SLOT(afficherInformations()));
+    connect(visionneuse, SIGNAL(closeVisio()), this, SLOT(showExplorer()));
 
     this->setCentralWidget(visionneuse);
     setToolBar(false);
@@ -64,23 +53,9 @@ void MainWindow::showVisio(Image image){
 
 void MainWindow::showExplorer(){
     qDebug() << "SHOW EXPLORER";
+
     explorer = new ExplorerB();
-
-    /*explorer->loadImages();
-
-    visioToolBar->hide();
-    explorerToolBar->show();
-
-    connect(explorer, SIGNAL(openImage(QString)), this, SLOT(showVisio(QString)));
-    connect(ui->actionNouvel_album, SIGNAL(triggered()), explorer, SLOT(addAlbum()));
-    connect(ui->actionRecharger, SIGNAL(triggered()), explorer, SLOT(loadImages()));
-    connect(ui->actionEditer_titres, SIGNAL(triggered()), explorer, SLOT(editTitle()));
-    connect(ui->actionRetour_Album, SIGNAL(triggered()), explorer, SLOT(returnAlbum()));
-
-
-    setToolBar(true);*/
-
-    connect(explorer, SIGNAL(openImage(Image)), this, SLOT(showVisio(Image)));
+    connect(explorer, SIGNAL(openImageFromAlbum(Image)), this, SLOT(showVisio(Image)));
     setToolBar(true);
     this->setCentralWidget(explorer);
 }

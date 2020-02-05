@@ -9,11 +9,20 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     ui(new Ui::ExplorerAblumImages)
 {
     ui->setupUi(this);
+    albumID = -1;
     db = new DataBase();
-    isImgVisible = false;
+    imgDock = new QDockWidget(this, Qt::Widget);
+    this->addDockWidget(Qt::RightDockWidgetArea, imgDock);
+    imgDock->createWinId();
+    imgDock->setAllowedAreas(Qt::RightDockWidgetArea|Qt::LeftDockWidgetArea);
+    imgDock->setVisible(false);
 
     ui->toolButtonClose->setDefaultAction(ui->actionRetour);
     ui->toolButtonOpenImages->setDefaultAction(ui->actionOpenImages);
+
+    ui->listViewImages->setAcceptDrops(true);
+    ui->listViewImages->setDropIndicatorShown(true);
+    ui->listViewImages->setDragDropMode(QAbstractItemView::DragDrop);
 
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(returnFrom()));
     connect(ui->actionOpenImages, SIGNAL(triggered()), this, SLOT(openImagesDrawer()));
@@ -29,27 +38,39 @@ void ExplorerAblumImages::returnFrom(){
     emit returnFromAlbum();
 }
 
-void ExplorerAblumImages::loadImages(int albumID){
+void ExplorerAblumImages::onAlbumImageModelChange(QStandardItem *item){
+    qDebug() << "ALBUM IMAGE MODEL CHANGE";
+    if(albumID == -1) return;
+    qDebug() << "   +adding " << item->text() << " | " << item->data();
+    QStandardItemModel *imageDb = db->getImagesFromAlbum(albumID);
+    for(int i=0; i < imageDb->rowCount(); i++){
+        if(imageDb->item(i)->data().value<Image>().path == item->data().value<Image>().path) return;
+    }
+    db->addImage(item->data().value<Image>().path, 0, albumID);
+}
+
+void ExplorerAblumImages::loadImages(int albumID){ 
     albumImageModel = db->getImagesFromAlbum(albumID);
 
     QString albumName = db->getAlbumName(albumID);
     ui->labelTitre->setText(albumName);
 
     ui->listViewImages->setModel(albumImageModel);
+
+    this->albumID = albumID;
+    connect(this->albumImageModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumImageModelChange(QStandardItem*)));
     QtConcurrent::run(this, &ExplorerAblumImages::loadThumbs, albumImageModel);
 }
 
 void ExplorerAblumImages::openImagesDrawer(){
-    if(!isImgVisible){
-        explImg = new ExplorerImg();
-        isImgVisible = true;
-        imgDock->setWidget(explImg);
-        imgDock->setVisible(true);
-    }else{
-        isImgVisible = false;
+    if(imgDock->isVisible()){
         imgDock->setVisible(false);
         delete explImg;
         explImg = nullptr;
+    }else{
+        explImg = new ExplorerImg();
+        imgDock->setWidget(explImg);
+        imgDock->setVisible(true);
     }
 }
 

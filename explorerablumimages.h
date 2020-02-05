@@ -18,7 +18,6 @@ class ExplorerAblumImages : public QMainWindow
 public:
     explicit ExplorerAblumImages(QWidget *parent = nullptr);
     ~ExplorerAblumImages();
-    bool isImgVisible;
     QDockWidget *imgDock;
     ExplorerImg *explImg;
     QFuture<void> thumbsLoader;
@@ -26,17 +25,19 @@ public:
 
 signals:
     void returnFromAlbum();
-    void openImage(Image image);
+    void openImage(Image);
 
 private slots:
     void returnFrom();
     void openImagesDrawer();
     void onImageClick(QModelIndex item);
+    void onAlbumImageModelChange(QStandardItem *item);
 
 private:
     Ui::ExplorerAblumImages *ui;
     QStandardItemModel *albumImageModel;
     DataBase *db;
+    int albumID;
     void loadThumbs(QStandardItemModel *model);
 };
 

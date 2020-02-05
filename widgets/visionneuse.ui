@@ -16,39 +16,115 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QWidget" name="scrollAreaWidgetContents" native="true">
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
-       <widget class="QLabel" name="image">
-        <property name="maximumSize">
-         <size>
-          <width>3000</width>
-          <height>3000</height>
-         </size>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>image</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="margin">
-         <number>93</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <layout class="QGridLayout" name="gridLayout_2"/>
     </widget>
    </item>
   </layout>
-  <action name="actionTest">
+  <action name="actionZoomIn">
    <property name="text">
-    <string>Test</string>
+    <string>Zoom+</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="text">
+    <string>Zoom -</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+  <action name="actionRetablir">
+   <property name="text">
+    <string>Rétablir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionInfos">
+   <property name="icon">
+    <iconset resource="../ressources.qrc">
+     <normaloff>:/ressources/images/INFO-01.png</normaloff>:/ressources/images/INFO-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Infos...</string>
+   </property>
+   <property name="toolTip">
+    <string>Infos, tags...</string>
+   </property>
+  </action>
+  <action name="actionRogner">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../ressources.qrc">
+     <normaloff>:/ressources/images/TRIM-01.png</normaloff>:/ressources/images/TRIM-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rogner</string>
+   </property>
+  </action>
+  <action name="actionRedimensionner">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../ressources.qrc">
+     <normaloff>:/ressources/images/RESIZE-01.png</normaloff>:/ressources/images/RESIZE-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redimensionner</string>
+   </property>
+  </action>
+  <action name="actionRetour">
+   <property name="icon">
+    <iconset resource="../ressources.qrc">
+     <normaloff>:/ressources/images/BACK-01.png</normaloff>:/ressources/images/BACK-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Retour</string>
+   </property>
+  </action>
+  <action name="actionRotationP">
+   <property name="text">
+    <string>Rotation +90</string>
+   </property>
+  </action>
+  <action name="actionRotationM">
+   <property name="text">
+    <string>Rotation -90</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../ressources.qrc">
+     <normaloff>:/ressources/images/SAVE-01.png</normaloff>:/ressources/images/SAVE-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Enregistrer</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer_sous">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Enregistrer sous...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

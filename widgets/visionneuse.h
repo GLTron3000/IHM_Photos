@@ -10,22 +10,11 @@
 #include "customObjects/clipscene.h"
 #include "QListWidget"
 #include <QtWidgets>
-/*#if defined(QT_PRINTSUPPORT_LIB)
-#include <QtPrintSupport/qtprintsupportglobal.h>
-#if QT_CONFIG(printdialog)
-#include <QtPrintSupport>
-#endif
-#endif*/
+#include <QToolBar>
 
 namespace Ui {
 class Visionneuse;
 }
-
-enum EditMode{
-   none,
-   crop,
-   resize
-};
 
 class Visionneuse : public QMainWindow
 {
@@ -38,6 +27,9 @@ public:
     QString imagePath;
     QGraphicsPixmapItem *imagePixmap;
 
+signals:
+    void closeVisio();
+
 private:
     Ui::Visionneuse *ui; 
 
@@ -45,16 +37,15 @@ private:
     QGraphicsScene *scene;
     ClipScene* clipScene;
     GraphicsViewZoom *graphicsViewZoom;
-    EditMode editMode = none;
 
     QListWidget *labelList;
     QListWidget *buttonList;
-    QMenu *viewMenu; ///////////
 
+    QToolBar *toolbar;
+    QMenu *viewMenu; ///////////
 
     QDockWidget *dock;
     bool visibleInfo=false;
-
 
     void createDockWindows();
 
@@ -70,6 +61,7 @@ public slots:
     void rotationMinus();
     void save();
     void saveAs();
+    void close();
 };
 
 #endif // VISIONNEUSE_H
