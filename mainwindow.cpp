@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    createExplorerToolBar();
-    createVisioToolBar();
+    //createExplorerToolBar();
+    //createVisioToolBar();
 
     ui->actionEditer_titres->setEnabled(false);
     ui->actionRetour->setEnabled(false);
@@ -39,10 +39,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::showVisio(QString path){
+void MainWindow::showVisio(Image image){
     qDebug() << "SHOW VISIO";
     visionneuse = new Visionneuse();
-    visionneuse->afficherImage(path);
+    visionneuse->afficherImage(image.path);
 
     explorerToolBar->hide();
     visioToolBar->show();
@@ -64,8 +64,9 @@ void MainWindow::showVisio(QString path){
 
 void MainWindow::showExplorer(){
     qDebug() << "SHOW EXPLORER";
-    explorer = new Explorer();
-    explorer->loadImages();
+    explorer = new ExplorerB();
+
+    /*explorer->loadImages();
 
     visioToolBar->hide();
     explorerToolBar->show();
@@ -76,8 +77,12 @@ void MainWindow::showExplorer(){
     connect(ui->actionEditer_titres, SIGNAL(triggered()), explorer, SLOT(editTitle()));
     connect(ui->actionRetour_Album, SIGNAL(triggered()), explorer, SLOT(returnAlbum()));
 
-    this->setCentralWidget(explorer);
+
+    setToolBar(true);*/
+
+    connect(explorer, SIGNAL(openImage(Image)), this, SLOT(showVisio(Image)));
     setToolBar(true);
+    this->setCentralWidget(explorer);
 }
 
 void MainWindow::showSettings(){

@@ -78,7 +78,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QListView" name="listViewImages">
+        <widget class="QListView" name="listViewAlbums">
          <property name="tabKeyNavigation">
           <bool>true</bool>
          </property>
@@ -155,7 +155,18 @@
     </layout>
    </item>
   </layout>
+  <action name="actionNouvel_album">
+   <property name="icon">
+    <iconset resource="../ressources.qrc">
+     <normaloff>:/ressources/images/NEWALBUM-01.png</normaloff>:/ressources/images/NEWALBUM-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Nouvel album</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

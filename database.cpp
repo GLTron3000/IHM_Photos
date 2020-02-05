@@ -123,6 +123,23 @@ QStandardItemModel* DataBase::getAlbums(){
     return albumModel;
 }
 
+QString DataBase::getAlbumName(int id){
+    QSqlQuery query;
+    query.prepare("SELECT * FROM albums WHERE id = ?");
+    query.addBindValue(id);
+
+    bool ok = query.exec();
+    if(!ok){
+        qDebug() << "ERROR GetAlbumName " << query.lastError();
+        return "";
+    }
+
+    int idName = query.record().indexOf("name");
+
+    query.first();
+    return query.value(idName).toString();
+}
+
 QStringList* DataBase::getSources(){
     QSqlQuery query("SELECT * FROM sources");
     QStringList *pathList = new QStringList();
