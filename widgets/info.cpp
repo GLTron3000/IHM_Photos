@@ -5,7 +5,7 @@
 #include <QDockWidget>
 #include <QDirIterator>
 #include <QStandardItem>
-#include "widgets/explorer.h"
+#include "database.h"
 
 Info::Info(QWidget *parent, QString imagePath) :
     QWidget(parent),
@@ -23,12 +23,13 @@ Info::Info(QWidget *parent, QString imagePath) :
     currentImgWxH = wString + " x " + hString;
 
     DataBase *dataBase = new DataBase();
+    dataBase->addImage(currentImgPath);
     Image *image = dataBase->getImageByPath(currentImgPath);
-/*
+
     ui->textElements->setText(image->description);
     ui->textFeelings->setText(image->tags);
     ui->textKeyWords->setText(image->tags);
-*/
+
     ui->textElements->setReadOnly(true);
     ui->textFeelings->setReadOnly(true);
     ui->textKeyWords->setReadOnly(true);

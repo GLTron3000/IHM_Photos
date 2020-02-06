@@ -13,7 +13,8 @@ class DataBase
 {
 public:
     DataBase();
-    int addImage(QString path, int position, int idAlbum);
+    int addImageToAlbum(Image image, int position, int idAlbum);
+    int addImage(QString path);
     int addAlbum(QString name, int index);
     void addSource(QString path);
     void deleteImage(int id);
@@ -26,7 +27,8 @@ public:
     Image* getImageById(int id);
     QStringList* getSources();
     void updateAlbum(int id, QString name, int index);
-    void updateImage(int id, int index, int idAlbum);
+    void updateAlbumImage(int id, int index, int idAlbum);
+    void updateImage(int id, QString path, int score, QString description, QString tags);
 
 public:
     QSqlDatabase m_db;

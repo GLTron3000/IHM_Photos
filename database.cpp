@@ -31,8 +31,8 @@ int DataBase::getLastInsert(){
     return query.lastInsertId().toInt();
 }
 
-int DataBase::addImage(QString path, int position, int idAlbum){
-    qDebug() << "Add image :" << path << " | i:" << position << " | idA:" << idAlbum;
+int DataBase::addImage(QString path){
+    qDebug() << "Add image :" << path;
     QSqlQuery query;
 
     query.prepare("INSERT INTO images (path, score, description, tags) VALUES(?,?,?,?)");
@@ -43,13 +43,18 @@ int DataBase::addImage(QString path, int position, int idAlbum){
     if(!query.exec()){
         qDebug() << "ERROR add image: " << query.lastError();
     }
+    return getLastInsert();
+}
 
+int DataBase::addImageToAlbum(Image image, int position, int idAlbum){
+    qDebug() << "Add imageToAlbum:" << image.path << " | i:" << position << " | idA:" << idAlbum;
+    QSqlQuery query;
     QStandardItemModel *albumImages = getImagesFromAlbum(idAlbum);
-    Image *image = getImageByPath(path);
+    //Image *image = getImageByPath(path);
     int albumPosition = albumImages->rowCount();
 
     query.prepare("INSERT INTO albumImages (idImage, idAlbum, position) VALUES(?,?,?)");
-    query.addBindValue(image->id);
+    query.addBindValue(image.id);
     query.addBindValue(idAlbum);
     query.addBindValue(albumPosition);
     if(!query.exec()){
@@ -250,11 +255,25 @@ void DataBase::updateAlbum(int id, QString name, int position){
     }
 }
 
-void DataBase::updateImage(int id, int position, int idAlbum){
+void DataBase::updateAlbumImage(int id, int position, int idAlbum){
     QSqlQuery query;
     query.prepare("UPDATE albumImages set position = ?, idAlbum = ? WHERE id = ?");
     query.addBindValue(position);
     query.addBindValue(idAlbum);
+    query.addBindValue(id);
+
+    if(!query.exec()){
+        qDebug() << "ERROR update image: " << query.lastError();
+    }
+}
+
+void DataBase::updateImage(int id, QString path, int score, QString description, QString tags){
+    QSqlQuery query;
+    query.prepare("UPDATE images set path = ?, score = ?, description = ?, tags = ? WHERE id = ?");
+    query.addBindValue(path);
+    query.addBindValue(score);
+    query.addBindValue(description);
+    query.addBindValue(tags);
     query.addBindValue(id);
 
     if(!query.exec()){
