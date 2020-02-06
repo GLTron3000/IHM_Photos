@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QInputDialog>
+#include "widgets/explorerimg.h"
 
 namespace Ui {
 class Info;
@@ -28,6 +29,8 @@ private:
     double imgWidth;
     double imgHeight;
     bool modeEdition;
+    DataBase *database;
+    Image *currentImage;
 
 };
 

@@ -14,10 +14,6 @@ Info::Info(QWidget *parent, QString imagePath) :
     ui->setupUi(this);
     currentImgPath = imagePath;
 
-    QImage imageQ = QImage(currentImgPath);
-
-
-
     QString deleteExtImg=imagePath.section(".",0,0);
     QString filename = deleteExtImg.section('/', -1);
     currentImgName = filename;
@@ -26,19 +22,47 @@ Info::Info(QWidget *parent, QString imagePath) :
     QString hString = QString::number(QImage(imagePath).height());
     currentImgWxH = wString + " x " + hString;
 
-    DataBase *dataBase = new DataBase();
-    dataBase->addImage(currentImgPath);
-    Image *image = dataBase->getImageByPath(currentImgPath);
+    database = new DataBase();
+    database->addImage(currentImgPath);
+    currentImage = database->getImageByPath(currentImgPath);
 
-    ui->textElements->setText(image->description);
-    ui->textFeelings->setText(image->tags);
-    ui->textKeyWords->setText(image->tags);
+    ui->textElements->setText(currentImage->description);
+    ui->textFeelings->setText(currentImage->tags);
+    ui->textKeyWords->setText(currentImage->tags);
 
     ui->textElements->setReadOnly(true);
     ui->textFeelings->setReadOnly(true);
     ui->textKeyWords->setReadOnly(true);
     ui->valueNameLabel->setText(currentImgName);
     ui->valueWHLabel->setText(currentImgWxH);
+
+    QImage *qimage = new QImage(currentImgPath);
+    QColor color;
+    QPoint tl = qimage->rect().topLeft();
+
+    const int maxRight = qMin(qimage->width(),tl.x() + qimage->width());
+    const int maxBottom = qMin(qimage->height(),tl.y() + qimage->height());
+    qint64 sumRed = 0;
+    qint64 sumGreen = 0;
+    qint64 sumBlue = 0;
+    for(int x=tl.x();x<maxRight;++x){
+        for(int y=tl.y();y<maxBottom;++y){
+            const QColor tempColor=qimage->pixelColor(x,y);
+            sumRed += tempColor.red();
+            sumGreen += tempColor.green();
+            sumBlue += tempColor.blue();
+        }
+    }
+    if(sumRed >= sumGreen  && sumRed >= sumBlue)
+        color =  Qt::red;
+    else if(sumGreen  >= sumBlue)
+        color =  Qt::green;
+    else
+        color = Qt::blue;
+
+    ui->FrameColor->setPalette(QPalette(color));
+
+
 }
 
 Info::~Info()
@@ -70,7 +94,7 @@ void Info::on_ButtonEdit_clicked()
         ui->textKeyWords->setReadOnly(true);
         ui->textKeyWords->setTextColor(QColor(169,169,169));
 
-
+        database->updateImage(currentImage->id, currentImage->path, 5, ui->textElements->toPlainText(), ui->textKeyWords->toPlainText());
     }
 
 }
