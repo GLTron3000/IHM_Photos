@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include "widgets/explorer.h"
+#include "explorerb.h"
 #include "widgets/visionneuse.h"
 #include "widgets/info.h"
+
 #include <QToolBar>
 
 namespace Ui {
@@ -20,7 +22,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void showVisio(QString path);
+    void showVisio(Image image);
     void showExplorer();
     void showSettings();
     void fullscreen();
@@ -28,7 +30,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Explorer *explorer;
+    ExplorerB *explorer;
     Visionneuse *visionneuse;
 
     void createExplorerToolBar();

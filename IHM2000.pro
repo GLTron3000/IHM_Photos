@@ -17,6 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     customObjects/resizablerubberband.cpp \
+    explorerablumimages.cpp \
+    exploreralbums.cpp \
+    explorerb.cpp \
     main.cpp \
     database.cpp \
     mainwindow.cpp \
@@ -24,8 +27,6 @@ SOURCES += \
     customObjects/graphicsviewzoom.cpp \
     customObjects/clipscene.cpp \
     widgets/explorer.cpp \
-    widgets/exploreralb.cpp \
-    widgets/exploreralbimg.cpp \
     widgets/explorerimg.cpp \
     widgets/info.cpp \
     widgets/resizeimgwidget.cpp \
@@ -35,13 +36,14 @@ SOURCES += \
 HEADERS += \
     customObjects/resizablerubberband.h \
     database.h \
+    explorerablumimages.h \
+    exploreralbums.h \
+    explorerb.h \
     mainwindow.h \
     models/image.h \
     customObjects/graphicsviewzoom.h \
     customObjects/clipscene.h \
     widgets/explorer.h \
-    widgets/exploreralb.h \
-    widgets/exploreralbimg.h \
     widgets/explorerimg.h \
     widgets/info.h \
     widgets/resizeimgwidget.h \
@@ -49,10 +51,11 @@ HEADERS += \
     widgets/visionneuse.h
 
 FORMS += \
+    explorerablumimages.ui \
+    exploreralbums.ui \
+    explorerb.ui \
     mainwindow.ui \
     widgets/explorer.ui \
-    widgets/exploreralb.ui \
-    widgets/exploreralbimg.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
     widgets/resizeimgwidget.ui \

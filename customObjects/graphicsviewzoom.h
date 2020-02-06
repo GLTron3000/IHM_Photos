@@ -24,6 +24,7 @@ private:
     QPoint rubberEnd;
     bool rubberDrag;
     bool cropActive;
+    bool initialDrag;
 
 public slots:
     void wheelEvent(QWheelEvent* event);
@@ -33,6 +34,7 @@ public slots:
     void cropMode();
     void scalingTime(qreal x);
     void animFinished();
+    void scaleAll(double factor);
 
 signals:
 
