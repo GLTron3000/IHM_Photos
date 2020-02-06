@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QInputDialog>
+#include "widgets/explorer.h"
 
 namespace Ui {
 class Info;
@@ -13,23 +14,18 @@ class Info : public QWidget
     Q_OBJECT
 
 public:
-    explicit Info(QWidget *parent = nullptr);
-    ~Info();
-    void setImgPath(QString imgpath);
-    void setW(double width);
-    void setH(double height);
-    void setInfos();
+    explicit Info(QWidget *parent = nullptr, QString imagePath =nullptr);
+    ~Info();    
 
 private slots:
-
     void on_ButtonEdit_clicked();
-
-    void on_ButtonValider_clicked();
 
 private:
     Ui::Info *ui;
     bool isVisible =false;
-    QString imgPath;
+    QString currentImgPath;
+    QString currentImgName;
+    QString currentImgWxH;
     double imgWidth;
     double imgHeight;
     bool modeEdition;

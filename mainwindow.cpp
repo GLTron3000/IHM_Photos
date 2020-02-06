@@ -122,6 +122,8 @@ void MainWindow::createExplorerToolBar(){
     explorerToolBar->addAction(ui->actionRecharger);
     explorerToolBar->addAction(ui->actionRetour_Album);
     explorerToolBar->addAction(ui->actionEditer_titres);
+    //ajouter le bouton pour pouvoir ouvrir le Dock des images dans l'explorateur d'album dans lequel on ajoute les images.
+    //A faire apres le refactor des UIs car c'est utile dans cette UI.
 }
 
 void MainWindow::createVisioToolBar(){

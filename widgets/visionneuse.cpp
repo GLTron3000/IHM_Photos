@@ -29,7 +29,7 @@ Visionneuse::Visionneuse(QWidget *parent) :
 
     dock = new QDockWidget(this, Qt::Widget);
     this->addDockWidget(Qt::RightDockWidgetArea, dock);
-    dock->createWinId();
+    //dock->createWinId();
     dock->setAllowedAreas(Qt::RightDockWidgetArea|Qt::LeftDockWidgetArea);
     dock->setVisible(false);
 
@@ -42,13 +42,7 @@ Visionneuse::~Visionneuse()
 
 void Visionneuse::afficherInformations(){
     if(!visibleInfo){
-        info = new Info();
-
-        info->setImgPath(imagePath);
-        info->setH(imagePixmap->pixmap().height());
-        info->setW(imagePixmap->pixmap().width());
-        info->setInfos(); /////////////////////::buguer la fenetre info
-
+        info = new Info(this, imagePath);
         dock->setWidget(info);
         dock->setVisible(true);
         visibleInfo = true;
