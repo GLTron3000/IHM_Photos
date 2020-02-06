@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QInputDialog>
-#include "widgets/explorer.h"
 
 namespace Ui {
 class Info;

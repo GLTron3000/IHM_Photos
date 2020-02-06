@@ -25,8 +25,6 @@ SOURCES += \
     mainwindow.cpp \
     models/image.cpp \
     customObjects/graphicsviewzoom.cpp \
-    customObjects/clipscene.cpp \
-    widgets/explorer.cpp \
     widgets/explorerimg.cpp \
     widgets/info.cpp \
     widgets/resizeimgwidget.cpp \
@@ -42,8 +40,6 @@ HEADERS += \
     mainwindow.h \
     models/image.h \
     customObjects/graphicsviewzoom.h \
-    customObjects/clipscene.h \
-    widgets/explorer.h \
     widgets/explorerimg.h \
     widgets/info.h \
     widgets/resizeimgwidget.h \
@@ -55,7 +51,6 @@ FORMS += \
     exploreralbums.ui \
     explorerb.ui \
     mainwindow.ui \
-    widgets/explorer.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
     widgets/resizeimgwidget.ui \

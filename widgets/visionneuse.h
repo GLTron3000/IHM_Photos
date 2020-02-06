@@ -7,7 +7,6 @@
 #include <QLabel>
 #include <QMainWindow>
 #include "customObjects/graphicsviewzoom.h"
-#include "customObjects/clipscene.h"
 #include "QListWidget"
 #include <QtWidgets>
 #include <QToolBar>
@@ -35,7 +34,6 @@ private:
 
     Info* info;
     QGraphicsScene *scene;
-    ClipScene* clipScene;
     GraphicsViewZoom *graphicsViewZoom;
 
     QListWidget *labelList;

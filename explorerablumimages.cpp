@@ -46,7 +46,9 @@ void ExplorerAblumImages::onAlbumImageModelChange(QStandardItem *item){
     for(int i=0; i < imageDb->rowCount(); i++){
         if(imageDb->item(i)->data().value<Image>().path == item->data().value<Image>().path) return;
     }
-    db->addImage(item->data().value<Image>().path, 0, albumID);
+    db->addImage(item->data().value<Image>().path);
+    Image *image = db->getImageByPath(item->data().value<Image>().path);
+    db->addImageToAlbum(*image, 0, albumID);
 }
 
 void ExplorerAblumImages::loadImages(int albumID){ 

@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "widgets/explorer.h"
 #include "explorerb.h"
 #include "widgets/visionneuse.h"
 #include "widgets/info.h"
