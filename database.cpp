@@ -261,3 +261,4 @@ void DataBase::updateImage(int id, int position, int idAlbum){
         qDebug() << "ERROR update image: " << query.lastError();
     }
 }
+
