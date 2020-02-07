@@ -1,20 +1,20 @@
-#include "explorerb.h"
-#include "ui_explorerb.h"
+#include "explorer.h"
+#include "ui_explorer.h"
 
-ExplorerB::ExplorerB(QWidget *parent) :
+Explorer::Explorer(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::ExplorerB)
+    ui(new Ui::Explorer)
 {
     ui->setupUi(this);
     showAlbums();
 }
 
-ExplorerB::~ExplorerB()
+Explorer::~Explorer()
 {
     delete ui;
 }
 
-void ExplorerB::showAlbums(){
+void Explorer::showAlbums(){
     albums = new ExplorerAlbums();
 
     connect(albums, SIGNAL(openAlbum(int)), this, SLOT(showAlbumImages(int)));
@@ -22,7 +22,7 @@ void ExplorerB::showAlbums(){
     setCentralWidget(albums);
 }
 
-void ExplorerB::showAlbumImages(int albumID){
+void Explorer::showAlbumImages(int albumID){
     images = new ExplorerAblumImages();
 
     connect(images, SIGNAL(returnFromAlbum()), this, SLOT(showAlbums()));
@@ -33,7 +33,7 @@ void ExplorerB::showAlbumImages(int albumID){
     setCentralWidget(images);
 }
 
-void ExplorerB::openImage(Image image){
+void Explorer::openImage(Image image){
     qDebug() << "EXPLORERB SIGNAL" << image.path;
     emit openImageFromAlbum(image);
 }

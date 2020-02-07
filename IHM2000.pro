@@ -16,46 +16,47 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    customObjects/resizablerubberband.cpp \
     explorerablumimages.cpp \
     exploreralbums.cpp \
-    explorerb.cpp \
-    main.cpp \
+    explorer.cpp \
+    visionneuse.cpp \
     database.cpp \
+    main.cpp \
     mainwindow.cpp \
     models/image.cpp \
-    customObjects/graphicsviewzoom.cpp \
+    widgets/resizablerubberband.cpp \
+    widgets/graphicsviewzoom.cpp \
     widgets/explorerimg.cpp \
     widgets/info.cpp \
     widgets/resizeimgwidget.cpp \
-    widgets/settings.cpp \
-    widgets/visionneuse.cpp
+    widgets/settings.cpp
+
 
 HEADERS += \
-    customObjects/resizablerubberband.h \
     database.h \
     explorerablumimages.h \
     exploreralbums.h \
-    explorerb.h \
+    explorer.h \
     mainwindow.h \
     models/image.h \
-    customObjects/graphicsviewzoom.h \
+    widgets/graphicsviewzoom.h \
     widgets/explorerimg.h \
     widgets/info.h \
     widgets/resizeimgwidget.h \
     widgets/settings.h \
-    widgets/visionneuse.h
+    widgets/resizablerubberband.h \
+    visionneuse.h
 
 FORMS += \
     explorerablumimages.ui \
     exploreralbums.ui \
-    explorerb.ui \
+    explorer.ui \
     mainwindow.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
     widgets/resizeimgwidget.ui \
     widgets/settings.ui \
-    widgets/visionneuse.ui
+    visionneuse.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

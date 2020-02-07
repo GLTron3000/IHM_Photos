@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "explorerb.h"
-#include "widgets/visionneuse.h"
+#include "explorer.h"
+#include "visionneuse.h"
 #include "widgets/info.h"
 
 #include <QToolBar>
@@ -29,7 +29,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    ExplorerB *explorer;
+    Explorer *explorer;
     Visionneuse *visionneuse;
 
     void createExplorerToolBar();

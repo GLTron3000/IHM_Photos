@@ -89,9 +89,10 @@ void Visionneuse::afficherImage(QString path)
 {   
     imagePath = path;
     imagePixmap = new QGraphicsPixmapItem(path);
+    imagePixmap->setTransformationMode(Qt::SmoothTransformation);
 
     graphicsViewZoom->scene()->addItem(imagePixmap);
-    graphicsViewZoom->initCrop();
+    graphicsViewZoom->initCrop(new ResizableRubberBand(this));
 }
 
 void Visionneuse::zoomIn(){

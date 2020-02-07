@@ -54,7 +54,7 @@ void MainWindow::showVisio(Image image){
 void MainWindow::showExplorer(){
     qDebug() << "SHOW EXPLORER";
 
-    explorer = new ExplorerB();
+    explorer = new Explorer();
     connect(explorer, SIGNAL(openImageFromAlbum(Image)), this, SLOT(showVisio(Image)));
     setToolBar(true);
     this->setCentralWidget(explorer);

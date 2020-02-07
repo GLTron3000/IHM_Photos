@@ -83,10 +83,10 @@ void GraphicsViewZoom::scaleAll(double factor){
     }
 }
 
-void GraphicsViewZoom::initCrop(){
+void GraphicsViewZoom::initCrop(ResizableRubberBand *rubber){
     cropActive = false;
 
-    rubberR = new ResizableRubberBand(this);
+    rubberR = rubber;
     rubberR->setGeometry(QRect(-1, -1, 2, 2));
 }
 
