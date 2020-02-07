@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsView>
-#include "customObjects/resizablerubberband.h"
+#include "widgets/resizablerubberband.h"
 #include <QRubberBand>
 
 class GraphicsViewZoom : public QGraphicsView
@@ -13,7 +13,7 @@ class GraphicsViewZoom : public QGraphicsView
 
 public:
     explicit GraphicsViewZoom(QWidget *parent = 0);
-    void initCrop();
+    void initCrop(ResizableRubberBand *rubber);
     QRubberBand *rubber;
     ResizableRubberBand *rubberR;
 

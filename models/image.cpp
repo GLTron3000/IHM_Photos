@@ -1,12 +1,13 @@
 #include "image.h"
 
-Image::Image(int id, QString path, QString description, QString tags, int score)
+Image::Image(int id, QString path, QString description, QString tags, int score, QString feel)
 {
     this->id = id;
     this->path = path;
     this->description = description;
     this->tags = tags;
     this->score = score;
+    this->feel = feel;
 }
 
 void Image::initImage(){

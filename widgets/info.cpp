@@ -47,7 +47,7 @@ Info::Info(QWidget *parent, QString imagePath) :
 
 
     ui->textElements->setText(currentImage->description);
-    ui->textFeelings->setText(currentImage->tags);
+    ui->textFeelings->setText(currentImage->feel);
     ui->textKeyWords->setText(currentImage->tags);
 
     ui->textElements->setReadOnly(true);
@@ -142,7 +142,7 @@ void Info::on_ButtonEdit_clicked()
         ui->textKeyWords->setReadOnly(true);
         ui->textKeyWords->setTextColor(QColor(169,169,169));
 
-        database->updateImage(currentImage->id, currentImage->path, 5, ui->textElements->toPlainText(), ui->textKeyWords->toPlainText());
+        database->updateImage(currentImage->id, currentImage->path, 5, ui->textElements->toPlainText(), ui->textKeyWords->toPlainText(), ui->textFeelings->toPlainText());
     }
 
 }

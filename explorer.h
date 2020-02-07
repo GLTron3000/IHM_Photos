@@ -1,5 +1,5 @@
-#ifndef EXPLORERB_H
-#define EXPLORERB_H
+#ifndef EXPLORER_H
+#define EXPLORER_H
 
 #include <QMainWindow>
 #include <QToolBar>
@@ -7,16 +7,16 @@
 #include "exploreralbums.h"
 
 namespace Ui {
-class ExplorerB;
+class Explorer;
 }
 
-class ExplorerB : public QMainWindow
+class Explorer : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit ExplorerB(QWidget *parent = nullptr);
-    ~ExplorerB();
+    explicit Explorer(QWidget *parent = nullptr);
+    ~Explorer();
 
 signals:
     void openImageFromAlbum(Image);
@@ -27,10 +27,10 @@ private slots:
     void openImage(Image image);
 
 private:
-    Ui::ExplorerB *ui;
+    Ui::Explorer *ui;
     ExplorerAlbums *albums;
     ExplorerAblumImages *images;
     QToolBar *toolbar;
 };
 
-#endif // EXPLORERB_H
+#endif // EXPLORER_H

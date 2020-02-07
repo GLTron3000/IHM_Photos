@@ -23,12 +23,17 @@ public slots:
 private:
     Ui::ExplorerImg *ui;
     QStandardItemModel *imagesModel;
+    QStandardItemModel *imagesSearchModel;
     DataBase *db;
     QFuture<void> thumbsLoader;
+
+private slots:
+    void searchList(QString);
 
 private:
     void loadPath(QString path);
     void loadThumbs(QStandardItemModel *model);
+    bool isSupportedFormat(QString format);
 };
 
 #endif // EXPLORERIMG_H

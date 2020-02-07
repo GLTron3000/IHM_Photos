@@ -15,6 +15,7 @@ ExplorerAlbums::ExplorerAlbums(QWidget *parent) :
 
     connect(ui->listViewAlbums, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
     connect(ui->listViewAlbums, SIGNAL(indexesMoved(const QModelIndexList)), this, SLOT(onAlbumMoved(QModelIndexList)));
+    connect(ui->recherche, SIGNAL(textEdited(QString)), this, SLOT(searchList(QString)));
 }
 
 ExplorerAlbums::~ExplorerAlbums()
@@ -62,4 +63,30 @@ void ExplorerAlbums::onAlbumMoved(QModelIndexList indexes){
         qDebug() << indexes.at(i).column();
         qDebug() << albumModel->itemFromIndex(indexes.at(i))->row();
     }
+}
+
+void ExplorerAlbums::searchList(QString name){
+    qDebug() << "SEARCH : " << name;
+    if(name == ""){
+        qDebug() << "   +RESET";
+        ui->listViewAlbums->setModel(albumModel);
+        return;
+    }
+
+    albumSearchModel = new QStandardItemModel();
+    for(int i=0; i < albumModel->rowCount(); i++){
+        QStandardItem *album = albumModel->item(i);
+        QString albumName = album->text();
+        if(albumName.contains(name)){
+            qDebug() << "   +=" << albumName;
+
+            QStandardItem *item = new QStandardItem;
+            item->setText(albumName);
+            item->setData(album->data());
+            item->setIcon(QIcon(":/ressources/images/defaultA.png"));
+            albumSearchModel->appendRow(item);
+        }
+    }
+
+    ui->listViewAlbums->setModel(albumSearchModel);
 }

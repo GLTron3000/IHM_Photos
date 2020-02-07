@@ -13,12 +13,13 @@ public:
     Image(const Image &) = default;
     Image &operator=(const Image &) = default;
 
-    Image(int id, QString path, QString description, QString tags, int score);
+    Image(int id, QString path, QString description, QString tags, int score, QString feel);
     int id;
     QString path;
     int score;
     QString description;
     QString tags;
+    QString feel;
     static void initImage ();
 
 private:

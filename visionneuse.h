@@ -6,7 +6,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QMainWindow>
-#include "customObjects/graphicsviewzoom.h"
+#include "widgets/graphicsviewzoom.h"
 #include "QListWidget"
 #include <QtWidgets>
 #include <QToolBar>
