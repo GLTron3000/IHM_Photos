@@ -13,7 +13,7 @@ DataBase::DataBase()
     QSqlQuery query;
     if(!query.exec("CREATE TABLE IF NOT EXISTS albums (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE NOT NULL, position INTEGER UNIQUE NOT NULL)"))
         qDebug() << "ERROR create albums " << query.lastError();
-    if(!query.exec("CREATE TABLE IF NOT EXISTS images (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE NOT NULL, score INTEGER NOT NULL, description TEXT, tags TEXT)"))
+    if(!query.exec("CREATE TABLE IF NOT EXISTS images (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE NOT NULL, score INTEGER NOT NULL, description TEXT, tags TEXT, feel TEXT)"))
         qDebug() << "ERROR create images " << query.lastError();
     if(!query.exec("CREATE TABLE IF NOT EXISTS albumImages (id INTEGER PRIMARY KEY AUTOINCREMENT, idImage INTEGER NOT NULL, idAlbum INTEGER NOT NULL, position INTEGER NOT NULL)"))
         qDebug() << "ERROR create albumImages " << query.lastError();
@@ -35,9 +35,10 @@ int DataBase::addImage(QString path){
     qDebug() << "Add image :" << path;
     QSqlQuery query;
 
-    query.prepare("INSERT INTO images (path, score, description, tags) VALUES(?,?,?,?)");
+    query.prepare("INSERT INTO images (path, score, description, tags, feel) VALUES(?,?,?,?,?)");
     query.addBindValue(path);
     query.addBindValue(0);
+    query.addBindValue("");
     query.addBindValue("");
     query.addBindValue("");
     if(!query.exec()){
@@ -174,14 +175,16 @@ Image* DataBase::getImageByPath(QString path){
     int idDescription = query.record().indexOf("description");
     int idTags = query.record().indexOf("tags");
     int idScore = query.record().indexOf("score");
+    int idFeel = query.record().indexOf("feel");
 
-    query.first();
+    if(!query.first()) return new Image(-1, path,  "", "", 0, "");
     return new Image(
                 query.value(idId).toInt(),
                 query.value(idPath).toString(),
                 query.value(idDescription).toString(),
                 query.value(idTags).toString(),
-                query.value(idScore).toInt()
+                query.value(idScore).toInt(),
+                query.value(idFeel).toString()
                 );
 }
 
@@ -201,6 +204,7 @@ Image* DataBase::getImageById(int id){
     int idDescription = query.record().indexOf("description");
     int idTags = query.record().indexOf("tags");
     int idScore = query.record().indexOf("score");
+    int idFeel = query.record().indexOf("feel");
 
     query.first();
     return new Image(
@@ -208,7 +212,8 @@ Image* DataBase::getImageById(int id){
                 query.value(idPath).toString(),
                 query.value(idDescription).toString(),
                 query.value(idTags).toString(),
-                query.value(idScore).toInt()
+                query.value(idScore).toInt(),
+                query.value(idFeel).toString()
                 );
 }
 
@@ -267,13 +272,14 @@ void DataBase::updateAlbumImage(int id, int position, int idAlbum){
     }
 }
 
-void DataBase::updateImage(int id, QString path, int score, QString description, QString tags){
+void DataBase::updateImage(int id, QString path, int score, QString description, QString tags, QString feel){
     QSqlQuery query;
-    query.prepare("UPDATE images set path = ?, score = ?, description = ?, tags = ? WHERE id = ?");
+    query.prepare("UPDATE images set path = ?, score = ?, description = ?, tags = ?, feel = ? WHERE id = ?");
     query.addBindValue(path);
     query.addBindValue(score);
     query.addBindValue(description);
     query.addBindValue(tags);
+    query.addBindValue(feel);
     query.addBindValue(id);
 
     if(!query.exec()){

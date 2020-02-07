@@ -40,6 +40,7 @@ void ExplorerAblumImages::returnFrom(){
 
 void ExplorerAblumImages::onAlbumImageModelChange(QStandardItem *item){
     qDebug() << "ALBUM IMAGE MODEL CHANGE";
+    if(item->text() == "") return;
     if(albumID == -1) return;
     qDebug() << "   +adding " << item->text() << " | " << item->data();
     QStandardItemModel *imageDb = db->getImagesFromAlbum(albumID);
@@ -69,10 +70,14 @@ void ExplorerAblumImages::openImagesDrawer(){
         imgDock->setVisible(false);
         delete explImg;
         explImg = nullptr;
+        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
+        ui->actionOpenImages->setToolTip("Ouvrir le repertoire d'images");
     }else{
         explImg = new ExplorerImg();
         imgDock->setWidget(explImg);
         imgDock->setVisible(true);
+        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/ok.png"));
+        ui->actionOpenImages->setToolTip("Fermer le repertoire d'images");
     }
 }
 

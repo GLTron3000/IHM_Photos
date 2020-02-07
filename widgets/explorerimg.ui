@@ -73,27 +73,35 @@
            <property name="placeholderText">
             <string>Recherche...</string>
            </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cible_rechercheBox">
+          <widget class="QComboBox" name="rechercheFilter">
            <property name="editable">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="currentText">
-            <string>Tous</string>
+            <string>Nom</string>
            </property>
            <property name="duplicatesEnabled">
             <bool>false</bool>
            </property>
            <item>
             <property name="text">
-             <string>Tous</string>
+             <string>Nom</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Nom</string>
+             <string>Description</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Tags</string>
             </property>
            </item>
            <item>
@@ -117,7 +125,7 @@
           <bool>true</bool>
          </property>
          <property name="dragDropMode">
-          <enum>QAbstractItemView::DragOnly</enum>
+          <enum>QAbstractItemView::NoDragDrop</enum>
          </property>
          <property name="defaultDropAction">
           <enum>Qt::CopyAction</enum>

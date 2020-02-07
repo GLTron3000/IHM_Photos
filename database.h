@@ -28,7 +28,7 @@ public:
     QStringList* getSources();
     void updateAlbum(int id, QString name, int index);
     void updateAlbumImage(int id, int index, int idAlbum);
-    void updateImage(int id, QString path, int score, QString description, QString tags);
+    void updateImage(int id, QString path, int score, QString description, QString tags, QString feel);
 
 public:
     QSqlDatabase m_db;
