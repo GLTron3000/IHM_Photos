@@ -13,6 +13,25 @@ Info::Info(QWidget *parent, QString imagePath) :
 {
     ui->setupUi(this);
     currentImgPath = imagePath;
+    modeEdition = false;
+
+    /*ui->textElements->cursor().setShape(Qt::ArrowCursor);
+    ui->textFeelings->cursor().setShape(Qt::ArrowCursor);
+    ui->textElements->cursor().setShape(Qt::ArrowCursor);*/
+
+    ui->textElements->setFrameShape(QFrame::NoFrame);
+    ui->textFeelings->setFrameShape(QFrame::NoFrame);
+    ui->textKeyWords->setFrameShape(QFrame::NoFrame);
+
+    /*QPalette p;
+    p.setColor(QPalette::Base, QColor(250,250,250));
+    ui->textElements->setPalette(p);
+    ui->textFeelings->setPalette(p);
+    ui->textKeyWords->setPalette(p);*/
+
+    ui->textElements->setTextColor(QColor(169,169,169));
+    ui->textFeelings->setTextColor(QColor(169,169,169));
+    ui->textKeyWords->setTextColor(QColor(169,169,169));
 
     QString deleteExtImg=imagePath.section(".",0,0);
     QString filename = deleteExtImg.section('/', -1);
@@ -25,6 +44,7 @@ Info::Info(QWidget *parent, QString imagePath) :
     database = new DataBase();
     database->addImage(currentImgPath);
     currentImage = database->getImageByPath(currentImgPath);
+
 
     ui->textElements->setText(currentImage->description);
     ui->textFeelings->setText(currentImage->tags);
@@ -76,19 +96,47 @@ void Info::on_ButtonEdit_clicked()
     modeEdition = modeEdition ? false : true;
 
     if(modeEdition){
+        ui->textElements->cursor().setShape(Qt::IBeamCursor);
+        ui->textFeelings->setCursor(Qt::IBeamCursor);
+        ui->textKeyWords->setCursor(Qt::IBeamCursor);
+
+        ui->textElements->setFrameShape(QFrame::StyledPanel);
+        ui->textFeelings->setFrameShape(QFrame::StyledPanel);
+        ui->textKeyWords->setFrameShape(QFrame::StyledPanel);
+
+        /*QPalette p;
+        p.setColor(QPalette::Base, QColor(255,255,255)); // set color "Red" for textedit base
+        ui->textElements->setPalette(p); // change textedit palette
+        ui->textFeelings->setPalette(p);
+        ui->textKeyWords->setPalette(p);*/
+
         ui->ButtonEdit->setText("Sauvegarder");
         ui->textElements->setReadOnly(false);
         ui->textElements->setTextColor(QColor(0,0,0));
+        ui->textElements->update();
         ui->textFeelings->setReadOnly(false);
         ui->textElements->setTextColor(QColor(0,0,0));
         ui->textKeyWords->setReadOnly(false);
         ui->textElements->setTextColor(QColor(0,0,0));
 
     }else{
+        ui->textElements->cursor().setShape(Qt::ArrowCursor);
+        ui->textFeelings->cursor().setShape(Qt::ArrowCursor);
+        ui->textKeyWords->cursor().setShape(Qt::ArrowCursor);
+
+        ui->textElements->setFrameShape(QFrame::NoFrame);
+        ui->textFeelings->setFrameShape(QFrame::NoFrame);
+        ui->textKeyWords->setFrameShape(QFrame::NoFrame);
+
+        /*QPalette p;
+        p.setColor(QPalette::Base, QColor(250,250,250));
+        ui->textElements->setPalette(p);
+        ui->textFeelings->setPalette(p);
+        ui->textKeyWords->setPalette(p);*/
+
         ui->ButtonEdit->setText("Modifier");
         ui->textElements->setReadOnly(true);
         ui->textElements->setTextColor(QColor(169,169,169));
-        //ui->textElements->setTextBackgroundColor(QColor(255, 0, 0));
         ui->textFeelings->setReadOnly(true);
         ui->textFeelings->setTextColor(QColor(169,169,169));
         ui->textKeyWords->setReadOnly(true);

@@ -199,8 +199,20 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QTextEdit" name="textKeyWords">
+         <property name="cursor" stdset="0">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
          <property name="contextMenuPolicy">
           <enum>Qt::DefaultContextMenu</enum>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="accessibleDescription">
+          <string extracomment="Clicker sur Modifier pour éditer le(s) mot(s)-clé(s)..."/>
          </property>
          <property name="overwriteMode">
           <bool>false</bool>
@@ -208,10 +220,24 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="textFeelings"/>
+        <widget class="QTextEdit" name="textFeelings">
+         <property name="cursor" stdset="0">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="textElements"/>
+        <widget class="QTextEdit" name="textElements">
+         <property name="cursor" stdset="0">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
