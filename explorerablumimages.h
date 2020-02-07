@@ -6,6 +6,7 @@
 #include <QDockWidget>
 #include "database.h"
 #include "widgets/explorerimg.h"
+#include "imageswitcher.h"
 
 namespace Ui {
 class ExplorerAblumImages;
@@ -25,7 +26,7 @@ public:
 
 signals:
     void returnFromAlbum();
-    void openImage(Image);
+    void openImage(ImageSwitcher*);
 
 private slots:
     void returnFrom();

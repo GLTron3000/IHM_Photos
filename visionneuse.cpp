@@ -52,6 +52,10 @@ Visionneuse::Visionneuse(QWidget *parent) :
     toolbar->addAction(ui->actionEnregistrer);
     toolbar->addAction(ui->actionEnregistrer_sous);
 
+    toolbar->addSeparator();
+    toolbar->addAction(ui->actionImage_precedente);
+    toolbar->addAction(ui->actionImage_suivante);
+
     connect(ui->actionZoomIn, SIGNAL(triggered()), this, SLOT(zoomIn()));
     connect(ui->actionZoomOut, SIGNAL(triggered()), this, SLOT(zoomOut()));
     connect(ui->actionRetablir, SIGNAL(triggered()), this, SLOT(restaurerTailleImg()));
@@ -64,6 +68,8 @@ Visionneuse::Visionneuse(QWidget *parent) :
     connect(ui->actionInfos, SIGNAL(triggered()), this, SLOT(afficherInformations()));
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(close()));
 
+    connect(ui->actionImage_precedente, SIGNAL(triggered()), this, SLOT(imagePrecedente()));
+    connect(ui->actionImage_suivante, SIGNAL(triggered()), this, SLOT(imageSuivante()));
 }
 
 Visionneuse::~Visionneuse()
@@ -152,4 +158,12 @@ void Visionneuse::saveAs(){
 
 void Visionneuse::close(){
     emit closeVisio();
+}
+
+void Visionneuse::imagePrecedente(){
+    qDebug() << __FUNCTION__;
+}
+
+void Visionneuse::imageSuivante(){
+    qDebug() << __FUNCTION__;
 }

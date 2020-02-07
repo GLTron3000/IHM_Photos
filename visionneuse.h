@@ -60,6 +60,8 @@ public slots:
     void save();
     void saveAs();
     void close();
+    void imagePrecedente();
+    void imageSuivante();
 };
 
 #endif // VISIONNEUSE_H

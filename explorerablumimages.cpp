@@ -101,6 +101,7 @@ void ExplorerAblumImages::loadThumbs(QStandardItemModel *model){
 
 void ExplorerAblumImages::onImageClick(QModelIndex item){
     QStandardItem *image = albumImageModel->itemFromIndex(item);
-    qDebug() << "Open Image " <<image->data().value<Image>().path;
-    emit openImage(image->data().value<Image>());
+    ImageSwitcher *switcher = new ImageSwitcher(image, albumImageModel);
+    qDebug() << "Open Image " <<switcher->m_image->data().value<Image>().path;
+    emit openImage(switcher);
 }
