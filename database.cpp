@@ -106,6 +106,15 @@ void DataBase::deleteAlbum(int id){
     }
 }
 
+void DataBase::deleteSource(int id){
+    QSqlQuery query;
+    query.prepare("DELETE FROM sources WHERE id = ?");
+    query.addBindValue(id);
+    if(!query.exec()){
+        qDebug() << "ERROR delete source: " << query.lastError();
+    }
+}
+
 QStandardItemModel* DataBase::getAlbums(){
     QSqlQuery query("SELECT * FROM albums");
     QStandardItemModel *albumModel = new QStandardItemModel;

@@ -40,6 +40,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="pbSup">
+       <property name="text">
+        <string>Supprimer le dossier</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pbEnd">
        <property name="text">
         <string>Terminé</string>

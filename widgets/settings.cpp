@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <QListView>
 #include <QStringListModel>
+#include <QDebug>
+
 
 Settings::Settings(QWidget *parent) :
     QWidget(parent),
@@ -22,7 +24,11 @@ Settings::Settings(QWidget *parent) :
     ui->listRep->setModel(model);
 
     connect(ui->pbRep, &QPushButton::pressed, this, &Settings::addRepository);
-    connect(ui->pbEnd, &QPushButton::pressed, this, &Settings::end);    
+    connect(ui->pbEnd, &QPushButton::pressed, this, &Settings::end);
+    connect(ui->listRep, SIGNAL(clicked(const QModelIndex)), this, SLOT(leftClick(QModelIndex)));
+    connect(ui->pbSup, SIGNAL(pressed()), this, SLOT(delRepository()));
+    ui->pbSup->setDisabled(true);
+
 }
 
 Settings::~Settings()
@@ -38,11 +44,11 @@ void Settings::addRepository(){
     QString outputFolder = QFileDialog::getExistingDirectory(0, ("Ajouter une nouvelle source"), QDir::currentPath());
 
     qDebug() << "NOUVELLE SOURCE";
+
     if(outputFolder != nullptr){
         pathList->append((outputFolder));
         model->setStringList(*pathList);
         ui->listRep->setModel(model);
-
         qDebug() << "   +" << outputFolder;
         database->addSource(outputFolder);
     }
@@ -50,4 +56,26 @@ void Settings::addRepository(){
 
 void Settings::end(){
     this->close();
+}
+
+void Settings::leftClick(QModelIndex i){
+
+    ui->pbSup->setDisabled(false);
+    index = i.row();
+}
+
+
+void Settings::delRepository(){
+
+    if(ui->listRep->model()->removeRow(index))
+        qDebug() << "Removed \n";
+
+    else
+        qDebug() << "Fail \n";
+
+
+    database->deleteSource(index);
+    ui->listRep->update();
+    ui->pbSup->setDisabled(true);
+
 }
