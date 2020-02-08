@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QSplashScreen splash(pixmap);
     splash.show();
 
-    splash.showMessage("Chargement des images...", Qt::AlignBottom, Qt::white);
+    splash.showMessage("Chargement de la base de données...", Qt::AlignBottom, Qt::white);
 
     a.processEvents();
 

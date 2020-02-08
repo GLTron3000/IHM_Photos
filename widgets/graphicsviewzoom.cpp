@@ -12,24 +12,6 @@ GraphicsViewZoom::GraphicsViewZoom(QWidget *parent) : QGraphicsView(parent){
 }
 
 void GraphicsViewZoom::wheelEvent(QWheelEvent* event){
-/*  SMOOTH ZOOM
-    wheelEventMousePos = event->pos();
-
-    int numDegrees = event->delta() / 8;
-    int numSteps = numDegrees / 15; // see QWheelEvent documentation
-    _numScheduledScalings += numSteps;
-    if (_numScheduledScalings * numSteps < 0) // if user moved the wheel in another direction, we reset previously scheduled scalings
-        _numScheduledScalings = numSteps;
-
-    QTimeLine *anim = new QTimeLine(350, this);
-    anim->setUpdateInterval(10);
-
-    connect(anim, SIGNAL (valueChanged(qreal)), SLOT (scalingTime(qreal)));
-    connect(anim, SIGNAL (finished()), SLOT (animFinished()));
-    anim->start();
-*/
-    //if(event->modifiers() & Qt::ControlModifier){
-
     double angle = event->angleDelta().y();
     double factor = qPow(1.0015, angle);
 
@@ -51,28 +33,6 @@ void GraphicsViewZoom::wheelEvent(QWheelEvent* event){
     }
 }
 
-void GraphicsViewZoom::scalingTime(qreal x){
-    QPointF oldPos = mapToScene(wheelEventMousePos);
-    qreal factor = 1.0+ qreal(_numScheduledScalings) / 300.0;
-
-    scaleAll(factor);
-
-    QPointF newPos = mapToScene(wheelEventMousePos);
-    QPointF delta = newPos - oldPos;
-    this->translate(delta.x(), delta.y());
-
-}
-
-void GraphicsViewZoom::animFinished()
-{
-    if (_numScheduledScalings > 0)
-        _numScheduledScalings--;
-    else
-        _numScheduledScalings++;
-
-    sender()->~QObject();
-}
-
 void GraphicsViewZoom::scaleAll(double factor){
     QPointF rubberPosOld = mapToScene(rubberR->pos());
     scale(factor, factor);
@@ -85,7 +45,6 @@ void GraphicsViewZoom::scaleAll(double factor){
 
 void GraphicsViewZoom::initCrop(ResizableRubberBand *rubber){
     cropActive = false;
-
     rubberR = rubber;
     rubberR->setGeometry(QRect(-1, -1, 2, 2));
 }
@@ -94,16 +53,14 @@ void GraphicsViewZoom::cropMode(){
     cropActive = cropActive ? false : true;
     if(cropActive){
         this->setDragMode(QGraphicsView::NoDrag);
-        //rubberR->setGeometry(QRect(-1, -1, 2, 2));
-        //rubberR->show();
         initialDrag = true;
         QApplication::setOverrideCursor(Qt::CrossCursor);
-
     }else{
         this->setDragMode(QGraphicsView::ScrollHandDrag);
         rubberR->setGeometry(QRect(-1, -1, 2, 2));
         rubberR->hide();
         initialDrag = false;
+        QApplication::restoreOverrideCursor();
     }
 }
 

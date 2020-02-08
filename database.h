@@ -18,6 +18,7 @@ public:
     int addAlbum(QString name, int index);
     void addSource(QString path);
     void deleteImage(int id);
+    void deleteImageFromAlbum(int id);
     void deleteAlbum(int id);
     void deleteSource(int id);
     QStandardItemModel* getAlbums();
@@ -29,6 +30,7 @@ public:
     void updateAlbum(int id, QString name, int index);
     void updateAlbumImage(int id, int index, int idAlbum);
     void updateImage(int id, QString path, int score, QString description, QString tags, QString feel);
+    void cleaner();
 
 public:
     QSqlDatabase m_db;

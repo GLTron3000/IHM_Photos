@@ -9,9 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //createExplorerToolBar();
-    //createVisioToolBar();
-
     ui->actionEditer_titres->setEnabled(false);
     ui->actionRetour->setEnabled(false);
     ui->actionRecharger->setEnabled(false);
@@ -32,6 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
 
+    DataBase *db = new DataBase();
+    db->cleaner();
+    delete db;
+    db = nullptr;
 
     showExplorer();
 }

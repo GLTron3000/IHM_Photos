@@ -10,7 +10,6 @@ class GraphicsViewZoom : public QGraphicsView
 {
     Q_OBJECT
 
-
 public:
     explicit GraphicsViewZoom(QWidget *parent = 0);
     void initCrop(ResizableRubberBand *rubber);
@@ -18,8 +17,6 @@ public:
     ResizableRubberBand *rubberR;
 
 private:
-    qreal _numScheduledScalings = 0;
-    QPoint wheelEventMousePos;
     QPoint rubberOrigin;
     QPoint rubberEnd;
     bool rubberDrag;
@@ -32,11 +29,7 @@ public slots:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void cropMode();
-    void scalingTime(qreal x);
-    void animFinished();
     void scaleAll(double factor);
-
-signals:
 
 };
 

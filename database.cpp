@@ -97,6 +97,15 @@ void DataBase::deleteImage(int id){
     }
 }
 
+void DataBase::deleteImageFromAlbum(int id){
+    QSqlQuery query;
+    query.prepare("DELETE FROM albumImages where idImage = ?");
+    query.addBindValue(id);
+    if(!query.exec()){
+        qDebug() << "ERROR delete imageFromAlbum: " << query.lastError();
+    }
+}
+
 void DataBase::deleteAlbum(int id){
     QSqlQuery query;
     query.prepare("DELETE FROM albums WHERE id = ?");
@@ -294,4 +303,28 @@ void DataBase::updateImage(int id, QString path, int score, QString description,
     if(!query.exec()){
         qDebug() << "ERROR update image: " << query.lastError();
     }
+}
+
+void DataBase::cleaner(){
+    QSqlQuery query;
+    query.prepare("SELECT * FROM images");
+    bool ok = query.exec();
+    if(!ok){
+        qDebug() << "ERROR cleaner " << query.lastError();
+    }
+
+    int idId = query.record().indexOf("id");
+    int idPath = query.record().indexOf("path");
+
+    while (query.next()) {
+        QString path = query.value(idPath).toString();
+        int idImage = query.value(idId).toInt();
+
+        if (FILE *file = fopen(path.toUtf8().constData(), "r")) fclose(file);
+        else {
+            deleteImage(idImage);
+            deleteImageFromAlbum(idImage);
+        }
+    }
+
 }

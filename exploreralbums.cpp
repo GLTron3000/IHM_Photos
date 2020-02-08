@@ -1,6 +1,8 @@
 #include "exploreralbums.h"
 #include "ui_exploreralbums.h"
 
+#include <QtConcurrent/QtConcurrentRun>
+
 ExplorerAlbums::ExplorerAlbums(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ExplorerAlbums)
@@ -11,11 +13,14 @@ ExplorerAlbums::ExplorerAlbums(QWidget *parent) :
     loadAlbums();
 
     ui->toolButton->setDefaultAction(ui->actionNouvel_album);
-    connect(ui->actionNouvel_album, SIGNAL(triggered()), this, SLOT(addAlbum()));
 
+    connect(ui->actionNouvel_album, SIGNAL(triggered()), this, SLOT(addAlbum()));
     connect(ui->listViewAlbums, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
     connect(ui->listViewAlbums, SIGNAL(indexesMoved(const QModelIndexList)), this, SLOT(onAlbumMoved(QModelIndexList)));
     connect(ui->recherche, SIGNAL(textEdited(QString)), this, SLOT(searchList(QString)));
+
+    //QtConcurrent::run(this, &DataBase::cleaner);
+    db->cleaner();
 }
 
 ExplorerAlbums::~ExplorerAlbums()
