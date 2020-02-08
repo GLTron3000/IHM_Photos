@@ -13,7 +13,6 @@ class Settings : public QWidget
 {
     Q_OBJECT
 
-
 public:
     explicit Settings(QWidget *parent = nullptr);
     ~Settings();
@@ -22,11 +21,13 @@ private:
     Ui::Settings *ui;
     DataBase *database;
     QStringList *pathList;
-
+    int index;
 
 private slots:
     void addRepository();
     void end();
+    void leftClick(QModelIndex);
+    void delRepository();
 };
 
 #endif // SETTINGS_H
