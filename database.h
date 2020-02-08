@@ -19,7 +19,7 @@ public:
     void addSource(QString path);
     void deleteImage(int id);
     void deleteAlbum(int id);
-    int deleteSource(QString path);
+    void deleteSource(int id);
     QStandardItemModel* getAlbums();
     QString getAlbumName(int id);
     QStandardItemModel* getImagesFromAlbum(int albumId);
