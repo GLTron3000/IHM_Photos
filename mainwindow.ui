@@ -292,6 +292,18 @@
     <string>Ctrl+S</string>
    </property>
   </action>
+  <action name="actionNoter">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ok.png</normaloff>:/ressources/images/ok.png</iconset>
+   </property>
+   <property name="text">
+    <string>Noter votre photo...</string>
+   </property>
+   <property name="toolTip">
+    <string>Noter votre photo...</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="ressources.qrc"/>

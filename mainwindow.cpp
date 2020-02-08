@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionRogner->setEnabled(false);
     ui->actionRedimensionner->setEnabled(false);
     ui->actionRetour->setEnabled(false);
+    ui->actionNoter->setEnabled(false);
 
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(showExplorer()));
     connect(ui->actionPr_f_rences, SIGNAL(triggered()), this, SLOT(showSettings()));

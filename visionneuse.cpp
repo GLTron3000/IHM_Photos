@@ -56,6 +56,9 @@ Visionneuse::Visionneuse(QWidget *parent) :
     toolbar->addAction(ui->actionImage_precedente);
     toolbar->addAction(ui->actionImage_suivante);
 
+    toolbar->addSeparator();
+    toolbar->addAction(ui->actionNoter);
+
     connect(ui->actionZoomIn, SIGNAL(triggered()), this, SLOT(zoomIn()));
     connect(ui->actionZoomOut, SIGNAL(triggered()), this, SLOT(zoomOut()));
     connect(ui->actionRetablir, SIGNAL(triggered()), this, SLOT(restaurerTailleImg()));
