@@ -5,17 +5,21 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <QtDebug>
+#include "models/image.h"
 
 class ImageSwitcher
 {
 public:
     ImageSwitcher(QStandardItem *image, QStandardItemModel *model);
+    Image getImage();
+
+private:
     QStandardItem *m_image;
     QStandardItemModel *m_model;
 
 public slots:
-    void imagePrecedente();
-    void imageSuivante();
+    Image imagePrecedente();
+    Image imageSuivante();
 };
 
 #endif // IMAGESWITCHER_H

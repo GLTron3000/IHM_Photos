@@ -2,11 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QToolBar>
+
 #include "explorer.h"
 #include "visionneuse.h"
+#include "models/imageswitcher.h"
 #include "widgets/info.h"
-
-#include <QToolBar>
 
 namespace Ui {
 class MainWindow;
@@ -21,7 +22,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void showVisio(Image image);
+    void showVisio(ImageSwitcher *imageSwitcher);
     void showExplorer();
     void showSettings();
     void fullscreen();

@@ -18,6 +18,7 @@ ExplorerImg::ExplorerImg(QWidget *parent) :
     ui->listViewImages->setDropIndicatorShown(false);
 
     connect(ui->recherche, SIGNAL(textEdited(QString)), this, SLOT(searchList(QString)));
+    connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
 
     loadImages();
 }
@@ -130,7 +131,12 @@ void ExplorerImg::searchList(QString name){
     thumbsLoader = QtConcurrent::run(this, &ExplorerImg::loadThumbs, imagesSearchModel);
 }
 
-
+void ExplorerImg::onImageClick(QModelIndex item){
+    QStandardItem *image = imagesModel->itemFromIndex(item);
+    ImageSwitcher *switcher = new ImageSwitcher(image, imagesModel);
+    qDebug() << "Open Image " <<switcher->getImage().path;
+    emit openImage(switcher);
+}
 
 
 

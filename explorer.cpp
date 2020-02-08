@@ -34,6 +34,6 @@ void Explorer::showAlbumImages(int albumID){
 }
 
 void Explorer::openImage(ImageSwitcher *switcher){
-    qDebug() << "EXPLORERB SIGNAL" << switcher->m_image->data().value<Image>().path;
-    emit openImageFromAlbum(switcher->m_image->data().value<Image>());
+    qDebug() << "EXPLORER SIGNAL" << switcher->getImage().path;
+    emit openImageFromAlbum(switcher);
 }

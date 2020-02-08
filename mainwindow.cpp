@@ -41,10 +41,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::showVisio(Image image){
-    qDebug() << "SHOW VISIO " << image.path;
-    visionneuse = new Visionneuse();
-    visionneuse->afficherImage(image.path);
+void MainWindow::showVisio(ImageSwitcher *imageSwitcher){
+    qDebug() << "SHOW VISIO " << imageSwitcher->getImage().path;
+    visionneuse = new Visionneuse(nullptr, imageSwitcher);
+    visionneuse->afficherImage(imageSwitcher->getImage().path);
 
     connect(visionneuse, SIGNAL(closeVisio()), this, SLOT(showExplorer()));
 
@@ -56,7 +56,7 @@ void MainWindow::showExplorer(){
     qDebug() << "SHOW EXPLORER";
 
     explorer = new Explorer();
-    connect(explorer, SIGNAL(openImageFromAlbum(Image)), this, SLOT(showVisio(Image)));
+    connect(explorer, SIGNAL(openImageFromAlbum(ImageSwitcher*)), this, SLOT(showVisio(ImageSwitcher*)));
     setToolBar(true);
     this->setCentralWidget(explorer);
 }

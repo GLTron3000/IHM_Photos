@@ -34,24 +34,6 @@ ExplorerAblumImages::~ExplorerAblumImages()
     delete ui;
 }
 
-void ExplorerAblumImages::returnFrom(){
-    emit returnFromAlbum();
-}
-
-void ExplorerAblumImages::onAlbumImageModelChange(QStandardItem *item){
-    qDebug() << "ALBUM IMAGE MODEL CHANGE";
-    if(item->text() == "") return;
-    if(albumID == -1) return;
-    qDebug() << "   +adding " << item->text() << " | " << item->data();
-    QStandardItemModel *imageDb = db->getImagesFromAlbum(albumID);
-    for(int i=0; i < imageDb->rowCount(); i++){
-        if(imageDb->item(i)->data().value<Image>().path == item->data().value<Image>().path) return;
-    }
-    db->addImage(item->data().value<Image>().path);
-    Image *image = db->getImageByPath(item->data().value<Image>().path);
-    db->addImageToAlbum(*image, 0, albumID);
-}
-
 void ExplorerAblumImages::loadImages(int albumID){ 
     albumImageModel = db->getImagesFromAlbum(albumID);
 
@@ -65,22 +47,7 @@ void ExplorerAblumImages::loadImages(int albumID){
     QtConcurrent::run(this, &ExplorerAblumImages::loadThumbs, albumImageModel);
 }
 
-void ExplorerAblumImages::openImagesDrawer(){
-    if(imgDock->isVisible()){
-        imgDock->setVisible(false);
-        delete explImg;
-        explImg = nullptr;
-        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
-        ui->actionOpenImages->setToolTip("Ouvrir le repertoire d'images");
-    }else{
-        explImg = new ExplorerImg();
-        imgDock->setWidget(explImg);
-        imgDock->setVisible(true);
-        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/ok.png"));
-        ui->actionOpenImages->setToolTip("Fermer le repertoire d'images");
-    }
-}
-
+//PRIVATE
 void ExplorerAblumImages::loadThumbs(QStandardItemModel *model){
     for(int i=0; i < model->rowCount(); i++){
         QStandardItem *item = model->item(i);
@@ -99,9 +66,49 @@ void ExplorerAblumImages::loadThumbs(QStandardItemModel *model){
     }
 }
 
+//PRIVATE SLOTS
+void ExplorerAblumImages::returnFrom(){
+    emit returnFromAlbum();
+}
+
+void ExplorerAblumImages::openImagesDrawer(){
+    if(imgDock->isVisible()){
+        imgDock->setVisible(false);
+        delete explImg;
+        explImg = nullptr;
+        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
+        ui->actionOpenImages->setToolTip("Ouvrir le repertoire d'images");
+    }else{
+        explImg = new ExplorerImg();
+        imgDock->setWidget(explImg);
+        imgDock->setVisible(true);
+        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/ok.png"));
+        ui->actionOpenImages->setToolTip("Fermer le repertoire d'images");
+        connect(explImg, SIGNAL(openImage(ImageSwitcher*)), this, SLOT(openImageFromDrawer(ImageSwitcher*)));
+    }
+}
+
 void ExplorerAblumImages::onImageClick(QModelIndex item){
     QStandardItem *image = albumImageModel->itemFromIndex(item);
     ImageSwitcher *switcher = new ImageSwitcher(image, albumImageModel);
-    qDebug() << "Open Image " <<switcher->m_image->data().value<Image>().path;
+    qDebug() << "Open Image " <<switcher->getImage().path;
+    emit openImage(switcher);
+}
+
+void ExplorerAblumImages::onAlbumImageModelChange(QStandardItem *item){
+    qDebug() << "ALBUM IMAGE MODEL CHANGE";
+    if(item->text() == "") return;
+    if(albumID == -1) return;
+    qDebug() << "   +adding " << item->text() << " | " << item->data();
+    QStandardItemModel *imageDb = db->getImagesFromAlbum(albumID);
+    for(int i=0; i < imageDb->rowCount(); i++){
+        if(imageDb->item(i)->data().value<Image>().path == item->data().value<Image>().path) return;
+    }
+    db->addImage(item->data().value<Image>().path);
+    Image *image = db->getImageByPath(item->data().value<Image>().path);
+    db->addImageToAlbum(*image, 0, albumID);
+}
+
+void ExplorerAblumImages::openImageFromDrawer(ImageSwitcher* switcher){
     emit openImage(switcher);
 }

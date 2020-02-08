@@ -19,7 +19,7 @@ SOURCES += \
     explorerablumimages.cpp \
     exploreralbums.cpp \
     explorer.cpp \
-    imageswitcher.cpp \
+    models/imageswitcher.cpp \
     visionneuse.cpp \
     database.cpp \
     main.cpp \
@@ -38,7 +38,7 @@ HEADERS += \
     explorerablumimages.h \
     exploreralbums.h \
     explorer.h \
-    imageswitcher.h \
+    models/imageswitcher.h \
     mainwindow.h \
     models/image.h \
     widgets/graphicsviewzoom.h \

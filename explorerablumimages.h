@@ -6,7 +6,7 @@
 #include <QDockWidget>
 #include "database.h"
 #include "widgets/explorerimg.h"
-#include "imageswitcher.h"
+#include "models/imageswitcher.h"
 
 namespace Ui {
 class ExplorerAblumImages;
@@ -33,6 +33,7 @@ private slots:
     void openImagesDrawer();
     void onImageClick(QModelIndex item);
     void onAlbumImageModelChange(QStandardItem *item);
+    void openImageFromDrawer(ImageSwitcher*);
 
 private:
     Ui::ExplorerAblumImages *ui;

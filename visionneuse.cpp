@@ -14,13 +14,16 @@
 #include <QDebug>
 #include <QDockWidget>
 
-Visionneuse::Visionneuse(QWidget *parent) :
+Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     QMainWindow(parent),
     ui(new Ui::Visionneuse)
 {
     ui->setupUi(this);
+    this->imageSwitcher = imageSwitcher;
 
     scene = new QGraphicsScene();
+
+    imagePixmap = new QGraphicsPixmapItem();
 
     graphicsViewZoom = new GraphicsViewZoom();
     graphicsViewZoom->setScene(scene);
@@ -94,25 +97,24 @@ void Visionneuse::afficherInformations(){
     }
 }
 
-void Visionneuse::afficherImage(QString path)
-{   
+void Visionneuse::afficherImage(QString path){   
     imagePath = path;
+
+    graphicsViewZoom->scene()->removeItem(imagePixmap);
+
     imagePixmap = new QGraphicsPixmapItem(path);
     imagePixmap->setTransformationMode(Qt::SmoothTransformation);
 
     graphicsViewZoom->scene()->addItem(imagePixmap);
     graphicsViewZoom->initCrop(new ResizableRubberBand(this));
+    graphicsViewZoom->centerOn(imagePixmap);
 }
 
 void Visionneuse::zoomIn(){
-    qDebug() << __FUNCTION__;
-
     graphicsViewZoom->scaleAll(1.1);
 }
 
 void Visionneuse::zoomOut(){
-    qDebug() << __FUNCTION__;
-
     graphicsViewZoom->scaleAll(0.9);
 }
 
@@ -164,9 +166,9 @@ void Visionneuse::close(){
 }
 
 void Visionneuse::imagePrecedente(){
-    qDebug() << __FUNCTION__;
+    afficherImage(imageSwitcher->imagePrecedente().path);
 }
 
 void Visionneuse::imageSuivante(){
-    qDebug() << __FUNCTION__;
+    afficherImage(imageSwitcher->imageSuivante().path);
 }

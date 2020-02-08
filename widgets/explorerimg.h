@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QStandardItemModel>
 #include "database.h"
+#include "models/imageswitcher.h"
 
 namespace Ui {
 class ExplorerImg;
@@ -20,6 +21,9 @@ public:
 public slots:
     void loadImages();
 
+signals:
+    void openImage(ImageSwitcher*);
+
 private:
     Ui::ExplorerImg *ui;
     QStandardItemModel *imagesModel;
@@ -29,6 +33,7 @@ private:
 
 private slots:
     void searchList(QString);
+     void onImageClick(QModelIndex item);
 
 private:
     void loadPath(QString path);

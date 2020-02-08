@@ -5,7 +5,7 @@
 #include <QToolBar>
 #include "explorerablumimages.h"
 #include "exploreralbums.h"
-#include "imageswitcher.h"
+#include "models/imageswitcher.h"
 
 namespace Ui {
 class Explorer;
@@ -20,7 +20,7 @@ public:
     ~Explorer();
 
 signals:
-    void openImageFromAlbum(Image);
+    void openImageFromAlbum(ImageSwitcher *);
 
 private slots:
     void showAlbums();

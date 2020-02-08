@@ -1,15 +1,16 @@
 #ifndef VISIONNEUSE_H
 #define VISIONNEUSE_H
 
-#include "widgets/info.h"
-
 #include <QWidget>
 #include <QLabel>
 #include <QMainWindow>
-#include "widgets/graphicsviewzoom.h"
-#include "QListWidget"
 #include <QtWidgets>
 #include <QToolBar>
+
+#include "widgets/info.h"
+#include "widgets/graphicsviewzoom.h"
+#include "models/imageswitcher.h"
+
 
 namespace Ui {
 class Visionneuse;
@@ -20,7 +21,7 @@ class Visionneuse : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Visionneuse(QWidget *parent = nullptr);
+    explicit Visionneuse(QWidget *parent = nullptr, ImageSwitcher *imageSwitcher = nullptr);
     ~Visionneuse();
     void afficherImage(QString path);
     QString imagePath;
@@ -38,6 +39,8 @@ private:
 
     QListWidget *labelList;
     QListWidget *buttonList;
+
+    ImageSwitcher *imageSwitcher;
 
     QToolBar *toolbar;
     QMenu *viewMenu; ///////////
