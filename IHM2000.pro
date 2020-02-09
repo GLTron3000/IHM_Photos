@@ -25,6 +25,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     models/image.cpp \
+    widgets/note.cpp \
     widgets/resizablerubberband.cpp \
     widgets/graphicsviewzoom.cpp \
     widgets/explorerimg.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     widgets/graphicsviewzoom.h \
     widgets/explorerimg.h \
     widgets/info.h \
+    widgets/note.h \
     widgets/resizeimgwidget.h \
     widgets/settings.h \
     widgets/resizablerubberband.h \
@@ -56,6 +58,7 @@ FORMS += \
     mainwindow.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
+    widgets/note.ui \
     widgets/resizeimgwidget.ui \
     widgets/settings.ui \
     visionneuse.ui
