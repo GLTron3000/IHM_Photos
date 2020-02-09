@@ -32,8 +32,11 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
 
     dock = new QDockWidget(this, Qt::Widget);
     this->addDockWidget(Qt::RightDockWidgetArea, dock);
-    //dock->createWinId();
     dock->setAllowedAreas(Qt::RightDockWidgetArea|Qt::LeftDockWidgetArea);
+    dock->setVisible(false);
+
+    dockNote = new QDockWidget(this, Qt::Widget);
+    this->addDockWidget(Qt::LeftDockWidgetArea, dockNote);
     dock->setVisible(false);
 
     toolbar = this->addToolBar(tr("visio"));
@@ -76,11 +79,20 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
 
     connect(ui->actionImage_precedente, SIGNAL(triggered()), this, SLOT(imagePrecedente()));
     connect(ui->actionImage_suivante, SIGNAL(triggered()), this, SLOT(imageSuivante()));
+
+    connect(ui->actionNoter, SIGNAL(triggered()), this, SLOT(noteDialogueBox()));
 }
 
 Visionneuse::~Visionneuse()
 {
     delete ui;
+}
+
+void Visionneuse::noteDialogueBox(){
+    note = new Note();
+    dockNote->setWidget(note);
+    dockNote->setVisible(true);
+
 }
 
 void Visionneuse::afficherInformations(){

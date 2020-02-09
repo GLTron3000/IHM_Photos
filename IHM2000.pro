@@ -20,6 +20,9 @@ SOURCES += \
     exploreralbums.cpp \
     explorer.cpp \
     models/imageswitcher.cpp \
+    stardelegate.cpp \
+    stareditor.cpp \
+    starrating.cpp \
     visionneuse.cpp \
     database.cpp \
     main.cpp \
@@ -42,6 +45,9 @@ HEADERS += \
     models/imageswitcher.h \
     mainwindow.h \
     models/image.h \
+    stardelegate.h \
+    stareditor.h \
+    starrating.h \
     widgets/graphicsviewzoom.h \
     widgets/explorerimg.h \
     widgets/info.h \

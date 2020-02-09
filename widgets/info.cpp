@@ -15,10 +15,6 @@ Info::Info(QWidget *parent, QString imagePath) :
     currentImgPath = imagePath;
     modeEdition = false;
 
-    /*ui->textElements->cursor().setShape(Qt::ArrowCursor);
-    ui->textFeelings->cursor().setShape(Qt::ArrowCursor);
-    ui->textElements->cursor().setShape(Qt::ArrowCursor);*/
-
     ui->textElements->setFrameShape(QFrame::StyledPanel);
     ui->textFeelings->setFrameShape(QFrame::StyledPanel);
     ui->textKeyWords->setFrameShape(QFrame::StyledPanel);
@@ -28,10 +24,6 @@ Info::Info(QWidget *parent, QString imagePath) :
     ui->textElements->setPalette(p);
     ui->textFeelings->setPalette(p);
     ui->textKeyWords->setPalette(p);
-/*
-    ui->textElements->setTextColor(QColor(169,169,169));
-    ui->textFeelings->setTextColor(QColor(169,169,169));
-    ui->textKeyWords->setTextColor(QColor(169,169,169));*/
 
     QString deleteExtImg=imagePath.section(".",0,0);
     QString filename = deleteExtImg.section('/', -1);

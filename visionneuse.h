@@ -10,6 +10,7 @@
 #include "widgets/info.h"
 #include "widgets/graphicsviewzoom.h"
 #include "models/imageswitcher.h"
+#include "widgets/note.h"
 
 
 namespace Ui {
@@ -46,7 +47,10 @@ private:
     QMenu *viewMenu; ///////////
 
     QDockWidget *dock;
+    QDockWidget *dockNote;
     bool visibleInfo=false;
+
+    Note *note;
 
     void createDockWindows();
 
@@ -65,6 +69,7 @@ public slots:
     void close();
     void imagePrecedente();
     void imageSuivante();
+    void noteDialogueBox();
 };
 
 #endif // VISIONNEUSE_H
