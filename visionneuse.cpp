@@ -40,30 +40,29 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     dock->setVisible(false);
 
     toolbar = this->addToolBar(tr("visio"));
-    toolbar->addAction(ui->actionRetour);
-    toolbar->addAction(ui->actionInfos);
 
+    toolbar->addAction(ui->actionRetour);
+    toolbar->addSeparator();
+    toolbar->addAction(ui->actionEnregistrer);
+    toolbar->addAction(ui->actionEnregistrer_sous);
+    toolbar->addSeparator();
+    toolbar->addAction(ui->actionInfos);
+    toolbar->addSeparator();
+    toolbar->addAction(ui->actionImage_precedente);
+    toolbar->addAction(ui->actionImage_suivante);
     toolbar->addSeparator();
     toolbar->addAction(ui->actionZoomIn);
     toolbar->addAction(ui->actionZoomOut);
     toolbar->addAction(ui->actionRetablir);
-
+    toolbar->addSeparator();
+    toolbar->addAction(ui->actionRotationM);
+    toolbar->addAction(ui->actionRotationP);
     toolbar->addSeparator();
     toolbar->addAction(ui->actionRogner);
     toolbar->addAction(ui->actionRedimensionner);
-    toolbar->addAction(ui->actionRotationM);
-    toolbar->addAction(ui->actionRotationP);
-
-    toolbar->addSeparator();
-    toolbar->addAction(ui->actionEnregistrer);
-    toolbar->addAction(ui->actionEnregistrer_sous);
-
-    toolbar->addSeparator();
-    toolbar->addAction(ui->actionImage_precedente);
-    toolbar->addAction(ui->actionImage_suivante);
-
     toolbar->addSeparator();
     toolbar->addAction(ui->actionNoter);
+    toolbar->addAction(ui->actionInfos);
 
     connect(ui->actionZoomIn, SIGNAL(triggered()), this, SLOT(zoomIn()));
     connect(ui->actionZoomOut, SIGNAL(triggered()), this, SLOT(zoomOut()));
@@ -179,9 +178,11 @@ void Visionneuse::close(){
 }
 
 void Visionneuse::imagePrecedente(){
+    graphicsViewZoom->resetTransform();
     afficherImage(imageSwitcher->imagePrecedente().path);
 }
 
 void Visionneuse::imageSuivante(){
+    graphicsViewZoom->resetTransform();
     afficherImage(imageSwitcher->imageSuivante().path);
 }
