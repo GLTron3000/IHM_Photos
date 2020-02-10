@@ -131,6 +131,7 @@ void Visionneuse::zoomOut(){
 }
 
 void Visionneuse::restaurerTailleImg(){
+    graphicsViewZoom->resetTransform();
     qDebug() << __FUNCTION__;
 }
 
