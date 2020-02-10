@@ -115,10 +115,10 @@ void DataBase::deleteAlbum(int id){
     }
 }
 
-void DataBase::deleteSource(int id){
+void DataBase::deleteSource(QString path){
     QSqlQuery query;
-    query.prepare("DELETE FROM sources WHERE id = ?");
-    query.addBindValue(id);
+    query.prepare("DELETE FROM sources WHERE path = ?");
+    query.addBindValue(path);
     if(!query.exec()){
         qDebug() << "ERROR delete source: " << query.lastError();
     }
