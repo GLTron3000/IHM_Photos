@@ -19,16 +19,14 @@ Settings::Settings(QWidget *parent) :
     database = new DataBase();
     pathList = database->getSources();
 
-    QStringListModel* model = new QStringListModel(this);
-    model->setStringList(*pathList);
-    ui->listRep->setModel(model);
+    pathModel = new QStringListModel(this);
+    pathModel->setStringList(*pathList);
+    ui->listRep->setModel(pathModel);
 
-    connect(ui->pbRep, &QPushButton::pressed, this, &Settings::addRepository);
-    connect(ui->pbEnd, &QPushButton::pressed, this, &Settings::end);
-    connect(ui->listRep, SIGNAL(clicked(const QModelIndex)), this, SLOT(leftClick(QModelIndex)));
+    connect(ui->pbRep, SIGNAL(pressed()), this, SLOT(addRepository()));
+    connect(ui->pbEnd, SIGNAL(pressed()), this, SLOT(end()));
     connect(ui->pbSup, SIGNAL(pressed()), this, SLOT(delRepository()));
-    ui->pbSup->setDisabled(true);
-
+    connect(ui->pushButtonNuke, SIGNAL(pressed()), this, SLOT(destroyDatabase()));
 }
 
 Settings::~Settings()
@@ -37,8 +35,7 @@ Settings::~Settings()
 }
 
 void Settings::addRepository(){
-
-    QStringListModel* model = new QStringListModel(this);
+    pathModel = new QStringListModel(this);
     QFileDialog dialog(this);
     dialog.setFileMode(QFileDialog::Directory);
 
@@ -48,8 +45,8 @@ void Settings::addRepository(){
 
     if(outputFolder != nullptr){
         pathList->append((outputFolder));
-        model->setStringList(*pathList);
-        ui->listRep->setModel(model);
+        pathModel->setStringList(*pathList);
+        ui->listRep->setModel(pathModel);
         qDebug() << "   +" << outputFolder;
         database->addSource(outputFolder);
     }
@@ -59,28 +56,17 @@ void Settings::end(){
     this->close();
 }
 
-void Settings::leftClick(QModelIndex i){
-
-    ui->pbSup->setDisabled(false);
-    indexModel = i;
-    index = i.row();
-    qDebug() << "Le chemlin selectionné est : " << i.data(index);
+void Settings::delRepository(){
+    qDebug() << "REMOVE REPO SELECTION";
+    QModelIndexList selected = ui->listRep->selectionModel()->selectedIndexes();
+    if (!selected.isEmpty()){
+        qDebug() << "   +REMOVED " << selected.first().row();
+        QString path = pathModel->data(selected.first()).toString();
+        database->deleteSource(path);
+        pathModel->removeRow(selected.first().row());
+    }
 }
 
-
-void Settings::delRepository(){
-
-    QVariant path;
-    path = indexModel.data(index);
-    qDebug() << "Le chemlin supprimé est : " <<path;
-
-
-    ui->listRep->model()->removeRow(index);
-
-    QString str = QString ("%1").arg(path.toString());
-
-    database->deleteSource(str);
-    ui->listRep->update();
-    ui->pbSup->setDisabled(true);
+void Settings::destroyDatabase(){
 
 }

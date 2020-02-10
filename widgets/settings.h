@@ -22,14 +22,15 @@ private:
     DataBase *database;
     QStringList *pathList;
     QModelIndex indexModel;
+    QStringListModel* pathModel;
     int index;
 
 
 private slots:
     void addRepository();
     void end();
-    void leftClick(QModelIndex);
     void delRepository();
+    void destroyDatabase();
 };
 
 #endif // SETTINGS_H
