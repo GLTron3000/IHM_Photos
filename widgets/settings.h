@@ -21,7 +21,9 @@ private:
     Ui::Settings *ui;
     DataBase *database;
     QStringList *pathList;
+    QModelIndex indexModel;
     int index;
+
 
 private slots:
     void addRepository();
