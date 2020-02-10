@@ -33,6 +33,7 @@ private:
     Explorer *explorer;
     Visionneuse *visionneuse;
     Info *info;
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // MAINWINDOW_H

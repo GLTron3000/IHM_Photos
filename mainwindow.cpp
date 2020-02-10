@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     ui->actionRetour->setEnabled(false);
     ui->actionRecharger->setEnabled(false);
     ui->actionNouvel_album->setEnabled(false);
@@ -107,5 +106,14 @@ void MainWindow::fullscreen(){
         this->setWindowState(Qt::WindowFullScreen);
     }else{
         this->setWindowState(Qt::WindowMaximized);
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *ev){
+    qDebug() << ev->text() << "Appuye";
+    switch (ev->key()) {
+        case Qt::Key_Escape :
+            if(this->isFullScreen()) this->showNormal();
+        break;
     }
 }
