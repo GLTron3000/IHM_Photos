@@ -12,6 +12,7 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     ui->setupUi(this);
     albumID = -1;
     db = new DataBase();
+    reorderMode = false;
     imgDock = new QDockWidget(this, Qt::Widget);
     this->addDockWidget(Qt::RightDockWidgetArea, imgDock);
     imgDock->createWinId();
@@ -22,15 +23,18 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     ui->toolButtonOpenImages->setDefaultAction(ui->actionOpenImages);
     ui->toolButtonEditTitle->setDefaultAction(ui->actionEditer_le_titre);
     ui->toolButtonRemoveImage->setDefaultAction(ui->actionRetirer_l_image);
+    ui->toolButtonReorder->setDefaultAction(ui->actionChangeImageOrder);
 
-    ui->listViewImages->setAcceptDrops(true);
-    ui->listViewImages->setDropIndicatorShown(true);
-    ui->listViewImages->setDragDropMode(QAbstractItemView::DragDrop);
+    ui->listViewImages->setAcceptDrops(false);
+    ui->listViewImages->setDropIndicatorShown(false);
+    ui->listViewImages->setDragDropMode(QAbstractItemView::NoDragDrop);
+    ui->listViewImages->setMovement(QListView::Static);
 
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(returnFrom()));
     connect(ui->actionOpenImages, SIGNAL(triggered()), this, SLOT(openImagesDrawer()));
     connect(ui->actionEditer_le_titre, SIGNAL(triggered()), this, SLOT(editTitle()));
     connect(ui->actionRetirer_l_image, SIGNAL(triggered()), this, SLOT(removeImage()));
+    connect(ui->actionChangeImageOrder, SIGNAL(triggered()), this, SLOT(reorderImage()));
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
 }
 
@@ -82,6 +86,10 @@ void ExplorerAblumImages::openImagesDrawer(){
         explImg = nullptr;
         //ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
         ui->actionOpenImages->setToolTip("Ouvrir le repertoire d'images");
+
+        ui->listViewImages->setAcceptDrops(false);
+        ui->listViewImages->setDropIndicatorShown(false);
+        ui->listViewImages->setDragDropMode(QAbstractItemView::NoDragDrop);
     }else{
         explImg = new ExplorerImg();
         imgDock->setWidget(explImg);
@@ -89,6 +97,10 @@ void ExplorerAblumImages::openImagesDrawer(){
         //ui->actionOpenImages->setIcon(QIcon(":/ressources/images/ok.png"));
         ui->actionOpenImages->setToolTip("Fermer le repertoire d'images");
         connect(explImg, SIGNAL(openImage(ImageSwitcher*)), this, SLOT(openImageFromDrawer(ImageSwitcher*)));
+
+        ui->listViewImages->setAcceptDrops(true);
+        ui->listViewImages->setDropIndicatorShown(true);
+        ui->listViewImages->setDragDropMode(QAbstractItemView::DropOnly);
     }
 }
 
@@ -145,6 +157,20 @@ void ExplorerAblumImages::removeImage(){
     }
 }
 
+void ExplorerAblumImages::reorderImage(){
+    reorderMode = reorderMode ? false : true;
+    if(reorderMode){
+        ui->listViewImages->setFlow(QListView::TopToBottom);
+        ui->listViewImages->setViewMode(QListView::ListMode);
+        ui->listViewImages->setDragDropMode(QAbstractItemView::InternalMove);
+        ui->listViewImages->setMovement(QListView::Snap);
+    }else{
+        ui->listViewImages->setFlow(QListView::LeftToRight);
+        ui->listViewImages->setViewMode(QListView::IconMode);
+        ui->listViewImages->setDragDropMode(QAbstractItemView::NoDragDrop);
+        ui->listViewImages->setMovement(QListView::Static);
+    }
+}
 
 
 

@@ -271,6 +271,7 @@ QStandardItemModel* DataBase::getImagesFromAlbum(int albumId){
         QStandardItem *item = new QStandardItem;
         item->setText(filename);
         item->setData(QVariant::fromValue(*image));
+        item->setFlags(item->flags() ^ (Qt::ItemIsDropEnabled));
 
         albumImgModel->setItem(query.value(idPosition).toInt(), item);
         qDebug() << " +get image " << item->text() << " | " << item->data() << " at pos: "<< item->row();

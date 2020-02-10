@@ -130,6 +130,10 @@
    </property>
   </action>
   <action name="actionAnnuler">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/CANCEL-01.png</normaloff>:/ressources/images/CANCEL-01.png</iconset>
+   </property>
    <property name="text">
     <string>Annuler</string>
    </property>
@@ -154,6 +158,10 @@
    </property>
   </action>
   <action name="actionZoomIn">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ZOOM+-01.png</normaloff>:/ressources/images/ZOOM+-01.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom+</string>
    </property>
@@ -162,6 +170,10 @@
    </property>
   </action>
   <action name="actionZoomOut">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ZOOM--01.png</normaloff>:/ressources/images/ZOOM--01.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom -</string>
    </property>
@@ -216,21 +228,10 @@
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/RESIZE-01.png</normaloff>:/ressources/images/RESIZE-01.png</iconset>
+     <normaloff>:/ressources/images/RESIZE-02.png</normaloff>:/ressources/images/RESIZE-02.png</iconset>
    </property>
    <property name="text">
     <string>Redimensionner</string>
-   </property>
-  </action>
-  <action name="actionEditer_titres">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Editer titres</string>
    </property>
   </action>
   <action name="actionRetour">
@@ -242,26 +243,20 @@
     <string>Retour</string>
    </property>
   </action>
-  <action name="actionActualiser">
-   <property name="text">
-    <string>Actualiser</string>
-   </property>
-  </action>
-  <action name="actionRetour_Album">
+  <action name="actionRotationP">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/BACK-01.png</normaloff>:/ressources/images/BACK-01.png</iconset>
+     <normaloff>:/ressources/images/ROTATE+-01.png</normaloff>:/ressources/images/ROTATE+-01.png</iconset>
    </property>
-   <property name="text">
-    <string>Retour Album</string>
-   </property>
-  </action>
-  <action name="actionRotationP">
    <property name="text">
     <string>Rotation +90</string>
    </property>
   </action>
   <action name="actionRotationM">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ROTATE--01.png</normaloff>:/ressources/images/ROTATE--01.png</iconset>
+   </property>
    <property name="text">
     <string>Rotation -90</string>
    </property>
@@ -281,6 +276,10 @@
   <action name="actionEnregistrer_sous">
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/SAVE-01.png</normaloff>:/ressources/images/SAVE-01.png</iconset>
    </property>
    <property name="text">
     <string>Enregistrer sous...</string>

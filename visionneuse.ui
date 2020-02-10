@@ -21,6 +21,10 @@
    </item>
   </layout>
   <action name="actionZoomIn">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ZOOM+-01.png</normaloff>:/ressources/images/ZOOM+-01.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom+</string>
    </property>
@@ -29,6 +33,10 @@
    </property>
   </action>
   <action name="actionZoomOut">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ZOOM--01.png</normaloff>:/ressources/images/ZOOM--01.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom -</string>
    </property>
@@ -37,6 +45,10 @@
    </property>
   </action>
   <action name="actionRetablir">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/CANCEL-01.png</normaloff>:/ressources/images/CANCEL-01.png</iconset>
+   </property>
    <property name="text">
     <string>Rétablir</string>
    </property>
@@ -74,7 +86,7 @@
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/RESIZE-01.png</normaloff>:/ressources/images/RESIZE-01.png</iconset>
+     <normaloff>:/ressources/images/RESIZE-02.png</normaloff>:/ressources/images/RESIZE-02.png</iconset>
    </property>
    <property name="text">
     <string>Redimensionner</string>
@@ -90,11 +102,19 @@
    </property>
   </action>
   <action name="actionRotationP">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ROTATE+-01.png</normaloff>:/ressources/images/ROTATE+-01.png</iconset>
+   </property>
    <property name="text">
     <string>Rotation +90</string>
    </property>
   </action>
   <action name="actionRotationM">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/ROTATE--01.png</normaloff>:/ressources/images/ROTATE--01.png</iconset>
+   </property>
    <property name="text">
     <string>Rotation -90</string>
    </property>
@@ -115,6 +135,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/SAVE-01.png</normaloff>:/ressources/images/SAVE-01.png</iconset>
+   </property>
    <property name="text">
     <string>Enregistrer sous...</string>
    </property>
@@ -123,6 +147,10 @@
    </property>
   </action>
   <action name="actionImage_precedente">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/LEFT_Plan de travail 1.png</normaloff>:/ressources/images/LEFT_Plan de travail 1.png</iconset>
+   </property>
    <property name="text">
     <string>Image précédente</string>
    </property>
@@ -131,6 +159,10 @@
    </property>
   </action>
   <action name="actionImage_suivante">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/RIGHT_Plan de travail 1.png</normaloff>:/ressources/images/RIGHT_Plan de travail 1.png</iconset>
+   </property>
    <property name="text">
     <string>Image suivante</string>
    </property>

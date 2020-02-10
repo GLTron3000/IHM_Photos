@@ -15,5 +15,13 @@
         <file>images/TRIM-01.png</file>
         <file>images/defaultA.png</file>
         <file>images/ok.png</file>
+        <file>images/CANCEL-01.png</file>
+        <file>images/LEFT_Plan de travail 1.png</file>
+        <file>images/RESIZE-02.png</file>
+        <file>images/RIGHT_Plan de travail 1.png</file>
+        <file>images/ROTATE+-01.png</file>
+        <file>images/ROTATE--01.png</file>
+        <file>images/ZOOM+-01.png</file>
+        <file>images/ZOOM--01.png</file>
     </qresource>
 </RCC>

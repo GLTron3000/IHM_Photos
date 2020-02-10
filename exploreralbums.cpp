@@ -61,9 +61,7 @@ void ExplorerAlbums::addAlbum(){
 
 //PRIVATE SLOTS
 void ExplorerAlbums::onAlbumClick(QModelIndex item){
-    qDebug() << "ON 1";
     QStandardItem *album = albumModel->itemFromIndex(item);
-    qDebug() << "ON 2";
     int albumID = album->data().toInt();
     qDebug() << "Open Album " << albumID;
 

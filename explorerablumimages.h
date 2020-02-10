@@ -36,6 +36,7 @@ private slots:
     void openImageFromDrawer(ImageSwitcher*);
     void editTitle();
     void removeImage();
+    void reorderImage();
 
 private:
     Ui::ExplorerAblumImages *ui;
@@ -44,6 +45,7 @@ private:
     int albumID;
     void loadThumbs(QStandardItemModel *model);
     QString albumTitle;
+    bool reorderMode;
 };
 
 #endif // EXPLORERABLUMIMAGES_H

@@ -81,6 +81,13 @@
            </spacer>
           </item>
           <item>
+           <widget class="QToolButton" name="toolButtonReorder">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QToolButton" name="toolButtonEditTitle">
             <property name="text">
              <string>...</string>
@@ -115,10 +122,10 @@
            <bool>true</bool>
           </property>
           <property name="dragDropMode">
-           <enum>QAbstractItemView::InternalMove</enum>
+           <enum>QAbstractItemView::NoDragDrop</enum>
           </property>
           <property name="defaultDropAction">
-           <enum>Qt::TargetMoveAction</enum>
+           <enum>Qt::CopyAction</enum>
           </property>
           <property name="alternatingRowColors">
            <bool>false</bool>
@@ -159,7 +166,7 @@
           <property name="gridSize">
            <size>
             <width>110</width>
-            <height>150</height>
+            <height>110</height>
            </size>
           </property>
           <property name="viewMode">
@@ -172,6 +179,9 @@
            <number>1</number>
           </property>
           <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="selectionRectVisible">
            <bool>true</bool>
           </property>
           <property name="itemAlignment">
@@ -233,6 +243,11 @@
    </property>
    <property name="text">
     <string>Retirer l'image</string>
+   </property>
+  </action>
+  <action name="actionChangeImageOrder">
+   <property name="text">
+    <string>Changer l'ordre des images</string>
    </property>
   </action>
  </widget>
