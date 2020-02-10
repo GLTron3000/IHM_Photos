@@ -19,6 +19,9 @@ public:
     explicit Explorer(QWidget *parent = nullptr);
     ~Explorer();
 
+public slots:
+    void reload();
+
 signals:
     void openImageFromAlbum(ImageSwitcher *);
 
@@ -32,6 +35,8 @@ private:
     ExplorerAlbums *albums;
     ExplorerAblumImages *images;
     QToolBar *toolbar;
+    int currentAlbum;
+    bool albumMode;
 };
 
 #endif // EXPLORER_H

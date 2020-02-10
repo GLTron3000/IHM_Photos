@@ -20,8 +20,6 @@ DataBase::DataBase()
 
     if(!query.exec("CREATE TABLE IF NOT EXISTS sources (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT NOT NULL)"))
         qDebug() << "ERROR create sources " << query.lastError();
-    if(!query.exec("CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT UNIQUE NOT NULL, path TEXT NOT NULL)"))
-        qDebug() << "ERROR create settings " << query.lastError();
 }
 
 int DataBase::getLastInsert(){
@@ -342,5 +340,20 @@ void DataBase::cleaner(){
             deleteImageFromAll(idImage);
         }
     }
-
 }
+
+void DataBase::clear(){
+    QSqlQuery query;
+    query.exec("DROP TABLE IF EXISTS albums");
+    query.exec("DROP TABLE IF EXISTS images");
+    query.exec("DROP TABLE IF EXISTS albumImages");
+    query.exec("DROP TABLE IF EXISTS sources");
+}
+
+
+
+
+
+
+
+

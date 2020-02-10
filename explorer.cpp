@@ -16,6 +16,7 @@ Explorer::~Explorer()
 
 void Explorer::showAlbums(){
     albums = new ExplorerAlbums();
+    albumMode = true;
 
     connect(albums, SIGNAL(openAlbum(int)), this, SLOT(showAlbumImages(int)));
 
@@ -24,6 +25,8 @@ void Explorer::showAlbums(){
 
 void Explorer::showAlbumImages(int albumID){
     images = new ExplorerAblumImages();
+    albumMode = false;
+    currentAlbum = albumID;
 
     connect(images, SIGNAL(returnFromAlbum()), this, SLOT(showAlbums()));
     connect(images, SIGNAL(openImage(ImageSwitcher*)), this, SLOT(openImage(ImageSwitcher*)));
@@ -36,4 +39,12 @@ void Explorer::showAlbumImages(int albumID){
 void Explorer::openImage(ImageSwitcher *switcher){
     qDebug() << "EXPLORER SIGNAL" << switcher->getImage().path;
     emit openImageFromAlbum(switcher);
+}
+
+void Explorer::reload(){
+    if(albumMode){
+        albums->loadAlbums();
+    }else{
+        images->loadImages(currentAlbum);
+    }
 }

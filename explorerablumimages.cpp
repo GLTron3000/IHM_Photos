@@ -9,7 +9,6 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ExplorerAblumImages)
 {
-    qDebug() << "CONSTRU 1";
     ui->setupUi(this);
     albumID = -1;
     db = new DataBase();
@@ -33,7 +32,6 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     connect(ui->actionEditer_le_titre, SIGNAL(triggered()), this, SLOT(editTitle()));
     connect(ui->actionRetirer_l_image, SIGNAL(triggered()), this, SLOT(removeImage()));
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
-    qDebug() << "CONSTRU 2";
 }
 
 ExplorerAblumImages::~ExplorerAblumImages(){
@@ -41,7 +39,6 @@ ExplorerAblumImages::~ExplorerAblumImages(){
 }
 
 void ExplorerAblumImages::loadImages(int albumID){   
-    qDebug() << "TEST 1";
     albumImageModel = db->getImagesFromAlbum(albumID);
     this->albumTitle = db->getAlbumName(albumID);
     this->albumID = albumID;
@@ -51,7 +48,6 @@ void ExplorerAblumImages::loadImages(int albumID){
     ui->listViewImages->setModel(albumImageModel);
 
     connect(this->albumImageModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumImageModelChange(QStandardItem*)));
-    qDebug() << "TEST 2";
     QtConcurrent::run(this, &ExplorerAblumImages::loadThumbs, albumImageModel);
 }
 
@@ -84,13 +80,13 @@ void ExplorerAblumImages::openImagesDrawer(){
         imgDock->setVisible(false);
         delete explImg;
         explImg = nullptr;
-        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
+        //ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
         ui->actionOpenImages->setToolTip("Ouvrir le repertoire d'images");
     }else{
         explImg = new ExplorerImg();
         imgDock->setWidget(explImg);
         imgDock->setVisible(true);
-        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/ok.png"));
+        //ui->actionOpenImages->setIcon(QIcon(":/ressources/images/ok.png"));
         ui->actionOpenImages->setToolTip("Fermer le repertoire d'images");
         connect(explImg, SIGNAL(openImage(ImageSwitcher*)), this, SLOT(openImageFromDrawer(ImageSwitcher*)));
     }

@@ -32,6 +32,7 @@ public:
     void updateAlbum(int id, QString name);
     void updateAlbumImage(int position, int idAlbum, int idImage);
     void updateImage(int id, QString path, int score, QString description, QString tags, QString feel);
+    void clear();
     void cleaner();
 
 public:

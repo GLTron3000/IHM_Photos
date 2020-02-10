@@ -6,6 +6,7 @@
 #include <QListView>
 #include <QStringListModel>
 #include <QDebug>
+#include <QMessageBox>
 
 
 Settings::Settings(QWidget *parent) :
@@ -27,6 +28,7 @@ Settings::Settings(QWidget *parent) :
     connect(ui->pbEnd, SIGNAL(pressed()), this, SLOT(end()));
     connect(ui->pbSup, SIGNAL(pressed()), this, SLOT(delRepository()));
     connect(ui->pushButtonNuke, SIGNAL(pressed()), this, SLOT(destroyDatabase()));
+    connect(ui->pushButtonClean, SIGNAL(pressed()), this, SLOT(cleanDatabase()));
 }
 
 Settings::~Settings()
@@ -67,6 +69,19 @@ void Settings::delRepository(){
     }
 }
 
-void Settings::destroyDatabase(){
+void Settings::cleanDatabase(){
+    ui->pushButtonClean->setDisabled(true);
+    database->cleaner();
+    ui->pushButtonClean->setDisabled(false);
+}
 
+void Settings::destroyDatabase(){
+    int ret = QMessageBox::critical(this, tr("Supprimer toutes les données ?"),
+                                   tr("Cette action supprimera tous les albums.\n"
+                                      "Etes vous sur ?"),
+                                   QMessageBox::Yes | QMessageBox::No,
+                                   QMessageBox::Yes);
+    if(ret == QMessageBox::Yes){
+        database->clear();
+    }
 }

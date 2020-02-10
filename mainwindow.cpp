@@ -72,6 +72,7 @@ void MainWindow::showExplorer(){
 
     explorer = new Explorer();
     connect(explorer, SIGNAL(openImageFromAlbum(ImageSwitcher*)), this, SLOT(showVisio(ImageSwitcher*)));
+    connect(ui->actionRecharger, SIGNAL(triggered()), explorer, SLOT(reload()));
     this->setCentralWidget(explorer);
 
     ui->actionRetour->setEnabled(true);

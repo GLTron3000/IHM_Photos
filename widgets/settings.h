@@ -30,6 +30,7 @@ private slots:
     void addRepository();
     void end();
     void delRepository();
+    void cleanDatabase();
     void destroyDatabase();
 };
 
