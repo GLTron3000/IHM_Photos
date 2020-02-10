@@ -64,6 +64,7 @@ void Settings::delRepository(){
         QString path = pathModel->data(selected.first()).toString();
         database->deleteSource(path);
         pathModel->removeRow(selected.first().row());
+        pathList->removeAt(selected.first().row());
     }
 }
 
