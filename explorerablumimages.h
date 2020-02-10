@@ -34,6 +34,8 @@ private slots:
     void onImageClick(QModelIndex item);
     void onAlbumImageModelChange(QStandardItem *item);
     void openImageFromDrawer(ImageSwitcher*);
+    void editTitle();
+    void removeImage();
 
 private:
     Ui::ExplorerAblumImages *ui;
@@ -41,6 +43,7 @@ private:
     DataBase *db;
     int albumID;
     void loadThumbs(QStandardItemModel *model);
+    QString albumTitle;
 };
 
 #endif // EXPLORERABLUMIMAGES_H

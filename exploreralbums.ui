@@ -48,13 +48,20 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton">
+           <widget class="QToolButton" name="toolButtonAdd">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>0</height>
              </size>
             </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButtonDelete">
             <property name="text">
              <string>...</string>
             </property>
@@ -113,6 +120,9 @@
           </property>
           <property name="alternatingRowColors">
            <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ContiguousSelection</enum>
           </property>
           <property name="iconSize">
            <size>
@@ -191,6 +201,15 @@
    </property>
    <property name="text">
     <string>Nouvel album</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_album">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/DELETE-01.png</normaloff>:/ressources/images/DELETE-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Supprimer album</string>
    </property>
   </action>
  </widget>

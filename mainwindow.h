@@ -32,17 +32,7 @@ private:
     Ui::MainWindow *ui;
     Explorer *explorer;
     Visionneuse *visionneuse;
-
-    void createExplorerToolBar();
-    void createVisioToolBar();
-
-    void setToolBar(bool isExplorer);
-
-    QToolBar *explorerToolBar;
-    QToolBar *visioToolBar;
-
     Info *info;
-
 };
 
 #endif // MAINWINDOW_H

@@ -2,12 +2,14 @@
 #include "ui_explorerablumimages.h"
 
 #include <sstream>
+#include <QInputDialog>
 #include <QtConcurrent/QtConcurrentRun>
 
 ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ExplorerAblumImages)
 {
+    qDebug() << "CONSTRU 1";
     ui->setupUi(this);
     albumID = -1;
     db = new DataBase();
@@ -19,6 +21,8 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
 
     ui->toolButtonClose->setDefaultAction(ui->actionRetour);
     ui->toolButtonOpenImages->setDefaultAction(ui->actionOpenImages);
+    ui->toolButtonEditTitle->setDefaultAction(ui->actionEditer_le_titre);
+    ui->toolButtonRemoveImage->setDefaultAction(ui->actionRetirer_l_image);
 
     ui->listViewImages->setAcceptDrops(true);
     ui->listViewImages->setDropIndicatorShown(true);
@@ -26,24 +30,28 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
 
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(returnFrom()));
     connect(ui->actionOpenImages, SIGNAL(triggered()), this, SLOT(openImagesDrawer()));
+    connect(ui->actionEditer_le_titre, SIGNAL(triggered()), this, SLOT(editTitle()));
+    connect(ui->actionRetirer_l_image, SIGNAL(triggered()), this, SLOT(removeImage()));
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    qDebug() << "CONSTRU 2";
 }
 
-ExplorerAblumImages::~ExplorerAblumImages()
-{
+ExplorerAblumImages::~ExplorerAblumImages(){
     delete ui;
 }
 
-void ExplorerAblumImages::loadImages(int albumID){ 
+void ExplorerAblumImages::loadImages(int albumID){   
+    qDebug() << "TEST 1";
     albumImageModel = db->getImagesFromAlbum(albumID);
+    this->albumTitle = db->getAlbumName(albumID);
+    this->albumID = albumID;
 
-    QString albumName = db->getAlbumName(albumID);
-    ui->labelTitre->setText(albumName);
+    ui->labelTitre->setText(this->albumTitle);
 
     ui->listViewImages->setModel(albumImageModel);
 
-    this->albumID = albumID;
     connect(this->albumImageModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(onAlbumImageModelChange(QStandardItem*)));
+    qDebug() << "TEST 2";
     QtConcurrent::run(this, &ExplorerAblumImages::loadThumbs, albumImageModel);
 }
 
@@ -112,3 +120,37 @@ void ExplorerAblumImages::onAlbumImageModelChange(QStandardItem *item){
 void ExplorerAblumImages::openImageFromDrawer(ImageSwitcher* switcher){
     emit openImage(switcher);
 }
+
+void ExplorerAblumImages::editTitle(){
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Modifier le titre de l'album"),
+                                         tr("Titre de l'album:"), QLineEdit::Normal,
+                                         albumTitle, &ok);
+    if (ok && !text.isEmpty()){
+        this->albumTitle = text;
+        ui->labelTitre->setText(albumTitle);
+        db->updateAlbum(albumID, albumTitle);
+    }
+}
+
+void ExplorerAblumImages::removeImage(){
+    QModelIndexList indexes;
+    qDebug() << "REMOVE SELECTION";
+    while((indexes = ui->listViewImages->selectionModel()->selectedIndexes()).size()) {
+        qDebug() << "   +REMOVED ";
+        int imageID = albumImageModel->item(indexes.first().row())->data().value<Image>().id;
+        db->deleteImageFromAlbum(albumID, imageID);
+        albumImageModel->removeRow(indexes.first().row());
+    }
+
+    for(int i=0; i < albumImageModel->rowCount(); i++){
+        int imageID = albumImageModel->item(i)->data().value<Image>().id;
+        db->updateAlbumImage(i, albumID, imageID);
+    }
+}
+
+
+
+
+
+

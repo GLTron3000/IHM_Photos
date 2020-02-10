@@ -12,9 +12,11 @@ ExplorerAlbums::ExplorerAlbums(QWidget *parent) :
     db = new DataBase();
     loadAlbums();
 
-    ui->toolButton->setDefaultAction(ui->actionNouvel_album);
+    ui->toolButtonAdd->setDefaultAction(ui->actionNouvel_album);
+    ui->toolButtonDelete->setDefaultAction(ui->actionSupprimer_album);
 
     connect(ui->actionNouvel_album, SIGNAL(triggered()), this, SLOT(addAlbum()));
+    connect(ui->actionSupprimer_album, SIGNAL(triggered()), this, SLOT(deleteAlbum()));
     connect(ui->listViewAlbums, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
     connect(ui->listViewAlbums, SIGNAL(indexesMoved(const QModelIndexList)), this, SLOT(onAlbumMoved(QModelIndexList)));
     connect(ui->recherche, SIGNAL(textEdited(QString)), this, SLOT(searchList(QString)));
@@ -31,6 +33,10 @@ ExplorerAlbums::~ExplorerAlbums()
 //PUBLIC SLOTS
 void ExplorerAlbums::loadAlbums(){
     albumModel = db->getAlbums();
+
+    //proxyModel = new QSortFilterProxyModel(this);
+    //proxyModel->setSourceModel(albumModel);
+
     ui->listViewAlbums->setModel(albumModel);
 }
 
@@ -43,7 +49,7 @@ void ExplorerAlbums::editTitle(){
 void ExplorerAlbums::addAlbum(){
     QString albumName = QString("Album%1").arg(albumModel->rowCount());
 
-    int id = db->addAlbum(albumName, albumModel->rowCount());
+    int id = db->addAlbum(albumName);
 
     QStandardItem *item = new QStandardItem;
     item->setIcon(QIcon(":/ressources/images/defaultA.png"));
@@ -55,7 +61,9 @@ void ExplorerAlbums::addAlbum(){
 
 //PRIVATE SLOTS
 void ExplorerAlbums::onAlbumClick(QModelIndex item){
+    qDebug() << "ON 1";
     QStandardItem *album = albumModel->itemFromIndex(item);
+    qDebug() << "ON 2";
     int albumID = album->data().toInt();
     qDebug() << "Open Album " << albumID;
 
@@ -94,4 +102,16 @@ void ExplorerAlbums::searchList(QString name){
     }
 
     ui->listViewAlbums->setModel(albumSearchModel);
+}
+
+void ExplorerAlbums::deleteAlbum(){
+    QModelIndexList indexes;
+    qDebug() << "REMOVE ALBUM SELECTION";
+    while((indexes = ui->listViewAlbums->selectionModel()->selectedIndexes()).size()) {
+        qDebug() << "   +REMOVED ";
+        int albumID = albumModel->item(indexes.first().row())->data().toInt();
+        db->deleteAlbum(albumID);
+        db->deleteAlbumImages(albumID);
+        albumModel->removeRow(indexes.first().row());
+    }
 }

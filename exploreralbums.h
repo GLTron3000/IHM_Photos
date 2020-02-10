@@ -29,11 +29,13 @@ private slots:
     void onAlbumClick(QModelIndex);
     void onAlbumMoved(QModelIndexList);
     void searchList(QString name);
+    void deleteAlbum();
 
 private:
     Ui::ExplorerAlbums *ui;
     QStandardItemModel *albumModel;
     QStandardItemModel *albumSearchModel;
+    QSortFilterProxyModel *proxyModel;
     DataBase *db;
     bool editMode;
 };

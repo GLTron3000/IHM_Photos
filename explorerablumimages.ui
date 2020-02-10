@@ -81,6 +81,20 @@
            </spacer>
           </item>
           <item>
+           <widget class="QToolButton" name="toolButtonEditTitle">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButtonRemoveImage">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QToolButton" name="toolButtonOpenImages">
             <property name="text">
              <string>...</string>
@@ -101,13 +115,16 @@
            <bool>true</bool>
           </property>
           <property name="dragDropMode">
-           <enum>QAbstractItemView::DropOnly</enum>
+           <enum>QAbstractItemView::InternalMove</enum>
           </property>
           <property name="defaultDropAction">
-           <enum>Qt::CopyAction</enum>
+           <enum>Qt::TargetMoveAction</enum>
           </property>
           <property name="alternatingRowColors">
            <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ContiguousSelection</enum>
           </property>
           <property name="iconSize">
            <size>
@@ -198,6 +215,24 @@
    </property>
    <property name="toolTip">
     <string>Ouvrir le repertoire d'images</string>
+   </property>
+  </action>
+  <action name="actionEditer_le_titre">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/EDIT-01.png</normaloff>:/ressources/images/EDIT-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Editer le titre</string>
+   </property>
+  </action>
+  <action name="actionRetirer_l_image">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/DELETE-01.png</normaloff>:/ressources/images/DELETE-01.png</iconset>
+   </property>
+   <property name="text">
+    <string>Retirer l'image</string>
    </property>
   </action>
  </widget>

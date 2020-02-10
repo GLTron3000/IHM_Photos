@@ -47,9 +47,6 @@
     <addaction name="actionAnnuler"/>
     <addaction name="actionRetablir"/>
     <addaction name="separator"/>
-    <addaction name="separator"/>
-    <addaction name="actionEditer_titres"/>
-    <addaction name="actionRetour_Album"/>
     <addaction name="actionRetour"/>
     <addaction name="separator"/>
     <addaction name="actionPr_f_rences"/>
