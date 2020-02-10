@@ -22,7 +22,7 @@ public:
     void deleteImageFromAll(int imageId);
     void deleteAlbumImages(int albumId);
     void deleteAlbum(int id);
-    void deleteSource(int id);
+    void deleteSource(QString path);
     QStandardItemModel* getAlbums();
     QString getAlbumName(int id);
     QStandardItemModel* getImagesFromAlbum(int albumId);

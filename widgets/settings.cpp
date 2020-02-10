@@ -37,6 +37,7 @@ Settings::~Settings()
 }
 
 void Settings::addRepository(){
+
     QStringListModel* model = new QStringListModel(this);
     QFileDialog dialog(this);
     dialog.setFileMode(QFileDialog::Directory);
@@ -61,20 +62,24 @@ void Settings::end(){
 void Settings::leftClick(QModelIndex i){
 
     ui->pbSup->setDisabled(false);
+    indexModel = i;
     index = i.row();
+    qDebug() << "Le chemlin selectionné est : " << i.data(index);
 }
 
 
 void Settings::delRepository(){
 
-    if(ui->listRep->model()->removeRow(index))
-        qDebug() << "Removed \n";
-
-    else
-        qDebug() << "Fail \n";
+    QVariant path;
+    path = indexModel.data(index);
+    qDebug() << "Le chemlin supprimé est : " <<path;
 
 
-    database->deleteSource(index);
+    ui->listRep->model()->removeRow(index);
+
+    QString str = QString ("%1").arg(path.toString());
+
+    database->deleteSource(str);
     ui->listRep->update();
     ui->pbSup->setDisabled(true);
 
