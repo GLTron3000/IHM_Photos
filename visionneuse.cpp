@@ -2,6 +2,7 @@
 #include "ui_visionneuse.h"
 #include "mainwindow.h"
 #include "QInputDialog"
+#include "widgets/resizeimgwidget.h"
 
 #include <QLabel>
 #include <QDir>
@@ -35,10 +36,6 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     dock->setAllowedAreas(Qt::RightDockWidgetArea|Qt::LeftDockWidgetArea);
     dock->setVisible(false);
 
-    dockNote = new QDockWidget(this, Qt::Widget);
-    this->addDockWidget(Qt::LeftDockWidgetArea, dockNote);
-    dock->setVisible(false);
-
     toolbar = this->addToolBar(tr("visio"));
 
     toolbar->addAction(ui->actionRetour);
@@ -61,7 +58,6 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     toolbar->addAction(ui->actionRogner);
     toolbar->addAction(ui->actionRedimensionner);
     toolbar->addSeparator();
-    toolbar->addAction(ui->actionNoter);
     toolbar->addAction(ui->actionInfos);
 
     connect(ui->actionZoomIn, SIGNAL(triggered()), this, SLOT(zoomIn()));
@@ -79,19 +75,11 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     connect(ui->actionImage_precedente, SIGNAL(triggered()), this, SLOT(imagePrecedente()));
     connect(ui->actionImage_suivante, SIGNAL(triggered()), this, SLOT(imageSuivante()));
 
-    connect(ui->actionNoter, SIGNAL(triggered()), this, SLOT(noteDialogueBox()));
 }
 
 Visionneuse::~Visionneuse()
 {
     delete ui;
-}
-
-void Visionneuse::noteDialogueBox(){
-    note = new Note();
-    dockNote->setWidget(note);
-    dockNote->setVisible(true);
-
 }
 
 void Visionneuse::afficherInformations(){
@@ -139,7 +127,23 @@ void Visionneuse::crop(){
 }
 
 void Visionneuse::resize(){
+    ResizeImgWidget *resizeImageWidget = new ResizeImgWidget(this, imagePixmap->pixmap().height(), imagePixmap->pixmap().width());
+    connect(resizeImageWidget, SIGNAL(changeResolution(int, int)), this, SLOT(resizeTo(int, int)));
+    resizeImageWidget->show();
+}
 
+void Visionneuse::resizeTo(int width, int height){
+    qDebug() << "RESIZE h:" << height << " w:" << width;
+    QImage image = imagePixmap->pixmap().toImage();
+    QImage scaledImage = image.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+    graphicsViewZoom->scene()->removeItem(imagePixmap);
+
+    imagePixmap = new QGraphicsPixmapItem(QPixmap::fromImage(scaledImage));
+
+    graphicsViewZoom->scene()->addItem(imagePixmap);
+    graphicsViewZoom->initCrop(new ResizableRubberBand(this));
+    graphicsViewZoom->centerOn(imagePixmap);
 }
 
 void Visionneuse::createDockWindows(){

@@ -81,9 +81,6 @@
    </property>
   </action>
   <action name="actionRedimensionner">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/RESIZE-02.png</normaloff>:/ressources/images/RESIZE-02.png</iconset>
@@ -104,7 +101,7 @@
   <action name="actionRotationP">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/ROTATE+-01.png</normaloff>:/ressources/images/ROTATE+-01.png</iconset>
+     <normaloff>:/ressources/images/ROTATE--01.png</normaloff>:/ressources/images/ROTATE--01.png</iconset>
    </property>
    <property name="text">
     <string>Rotation +90</string>
@@ -113,7 +110,7 @@
   <action name="actionRotationM">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/ROTATE--01.png</normaloff>:/ressources/images/ROTATE--01.png</iconset>
+     <normaloff>:/ressources/images/ROTATE+-01.png</normaloff>:/ressources/images/ROTATE+-01.png</iconset>
    </property>
    <property name="text">
     <string>Rotation -90</string>
@@ -168,18 +165,6 @@
    </property>
    <property name="toolTip">
     <string>Image suivante</string>
-   </property>
-  </action>
-  <action name="actionNoter">
-   <property name="icon">
-    <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/ok.png</normaloff>:/ressources/images/ok.png</iconset>
-   </property>
-   <property name="text">
-    <string>actionNoter</string>
-   </property>
-   <property name="toolTip">
-    <string>Noter votre image...</string>
    </property>
   </action>
  </widget>

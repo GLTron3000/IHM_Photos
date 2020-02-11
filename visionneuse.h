@@ -44,16 +44,14 @@ private:
     ImageSwitcher *imageSwitcher;
 
     QToolBar *toolbar;
-    QMenu *viewMenu; ///////////
+    QMenu *viewMenu;
 
     QDockWidget *dock;
-    QDockWidget *dockNote;
     bool visibleInfo=false;
 
     Note *note;
 
     void createDockWindows();
-
 
 public slots:
     void zoomIn();
@@ -69,7 +67,7 @@ public slots:
     void close();
     void imagePrecedente();
     void imageSuivante();
-    void noteDialogueBox();
+    void resizeTo(int, int);
 };
 
 #endif // VISIONNEUSE_H

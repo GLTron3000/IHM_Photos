@@ -43,7 +43,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Taille Image</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Nouvelle taille de l'image&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::RichText</enum>
@@ -59,10 +59,14 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QSpinBox" name="largeurSpinBox"/>
+        <widget class="QSpinBox" name="widthSpinBox">
+         <property name="maximum">
+          <number>100000</number>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QLabel" name="largeurLabel">
+        <widget class="QLabel" name="widthLabel">
          <property name="text">
           <string>largeur</string>
          </property>
@@ -73,19 +77,23 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QSpinBox" name="longueurSpinBox"/>
+        <widget class="QSpinBox" name="heightSpinBox">
+         <property name="maximum">
+          <number>100000</number>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QLabel" name="longueurLabel">
+        <widget class="QLabel" name="heightLabel">
          <property name="text">
-          <string>longueur</string>
+          <string>hauteur</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="checkBoxRatio">
        <property name="text">
         <string>Conserver le ratio </string>
        </property>
