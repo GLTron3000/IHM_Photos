@@ -163,15 +163,28 @@ void ExplorerAblumImages::removeImage(){
 void ExplorerAblumImages::reorderImage(){
     reorderMode = reorderMode ? false : true;
     if(reorderMode){
-        ui->listViewImages->setFlow(QListView::TopToBottom);
         ui->listViewImages->setViewMode(QListView::ListMode);
         ui->listViewImages->setDragDropMode(QAbstractItemView::InternalMove);
         ui->listViewImages->setMovement(QListView::Snap);
+
+        ui->listViewImages->setSelectionMode(QAbstractItemView::SingleSelection);
+        ui->listViewImages->setDragEnabled(true);
+        ui->listViewImages->viewport()->setAcceptDrops(true);
+        ui->listViewImages->setDropIndicatorShown(true);
     }else{
         ui->listViewImages->setFlow(QListView::LeftToRight);
         ui->listViewImages->setViewMode(QListView::IconMode);
         ui->listViewImages->setDragDropMode(QAbstractItemView::NoDragDrop);
         ui->listViewImages->setMovement(QListView::Static);
+
+        ui->listViewImages->setDragEnabled(false);
+        ui->listViewImages->viewport()->setAcceptDrops(false);
+        ui->listViewImages->setDropIndicatorShown(false);
+
+        for(int i=0; i < albumImageModel->rowCount(); i++){
+            qDebug() << " +" << i << " at " << albumImageModel->item(i)->text();
+            db->updateAlbumImage(i, albumID, albumImageModel->item(i)->data().value<Image>().id);
+        }
     }
 }
 
@@ -180,5 +193,3 @@ void ExplorerAblumImages::slideShow(){
     Slideshow *slideshow = new Slideshow(NULL, switcher);
     slideshow->show();
 }
-
-
