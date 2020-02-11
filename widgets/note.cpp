@@ -27,18 +27,6 @@ Note::Note(QWidget *parent) :
     ui->note->setItem(0, 0, item0);
 
     ui->note->resizeColumnToContents(this->size().rwidth());
-    /*QTableWidget tableWidget(1,1);
-    tableWidget.setItemDelegate(new StarDelegate);
-    tableWidget.setEditTriggers(QAbstractItemView::DoubleClicked
-                                | QAbstractItemView::SelectedClicked);
-    tableWidget.setSelectionBehavior(QAbstractItemView::SelectRows);
-    tableWidget.setHorizontalHeaderLabels({"Rating"});
-
-    populateTableWidget(&tableWidget);
-
-    tableWidget.resizeColumnsToContents();
-    tableWidget.resize(500, 300);
-    tableWidget.show();*/
 
 }
 

@@ -6,6 +6,8 @@
 #include <QDirIterator>
 #include <QStandardItem>
 #include "database.h"
+#include "stardelegate.h"
+#include "starrating.h"
 
 Info::Info(QWidget *parent, QString imagePath) :
     QWidget(parent),
@@ -25,25 +27,46 @@ Info::Info(QWidget *parent, QString imagePath) :
     ui->textFeelings->setPalette(p);
     ui->textKeyWords->setPalette(p);
 
+
+    /* set le nom de l'image */
     QString deleteExtImg=imagePath.section(".",0,0);
     QString filename = deleteExtImg.section('/', -1);
     currentImgName = filename;
 
+    /* set les dimensions de l'image */
     QString wString = QString::number(QImage(imagePath).width());
     QString hString = QString::number(QImage(imagePath).height());
     currentImgWxH = wString + " x " + hString;
 
+    /* recup les infos de l'image qui sont dans la database */
     database = new DataBase();
-    database->addImage(currentImgPath);//////////////////////////////////////////////
+    database->addImage(currentImgPath);
     currentImage = database->getImageByPath(currentImgPath);
 
-
+    /* set les infos */
     ui->textElements->setText(currentImage->description);
     qDebug() <<currentImage->description;
     ui->textFeelings->setText(currentImage->feel);
     qDebug() <<currentImage->feel;
     ui->textKeyWords->setText(currentImage->tags);
     qDebug() <<currentImage->tags;
+
+    ui->note->setRowCount(1);
+    ui->note->setColumnCount(1);
+    ui->note->setItemDelegate(new StarDelegate);
+    ui->note->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::SelectedClicked);
+    ui->note->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->note->horizontalHeader()->hide();
+    ui->note->verticalHeader()->hide();
+
+    int note = currentImage->score;
+    static struct {int rating;}
+    staticData[] = {{note}};
+    QTableWidgetItem *item0 = new QTableWidgetItem;
+    item0->setData(0,QVariant::fromValue(StarRating(staticData[0].rating)));
+    ui->note->setItem(0, 0, item0);
+    ui->note->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    ui->note->verticalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
 
     ui->textElements->setReadOnly(true);
     ui->textFeelings->setReadOnly(true);

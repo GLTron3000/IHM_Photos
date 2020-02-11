@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QInputDialog>
 #include "widgets/explorerimg.h"
+#include "widgets/note.h"
 #include <QFrame>
 
 namespace Ui {
@@ -32,6 +33,7 @@ private:
     bool modeEdition;
     DataBase *database;
     Image *currentImage;
+
 
 
 };
