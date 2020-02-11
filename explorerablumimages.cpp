@@ -4,6 +4,7 @@
 #include <sstream>
 #include <QInputDialog>
 #include <QtConcurrent/QtConcurrentRun>
+#include "slideshow.h"
 
 ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     QMainWindow(parent),
@@ -24,6 +25,7 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     ui->toolButtonEditTitle->setDefaultAction(ui->actionEditer_le_titre);
     ui->toolButtonRemoveImage->setDefaultAction(ui->actionRetirer_l_image);
     ui->toolButtonReorder->setDefaultAction(ui->actionChangeImageOrder);
+    ui->toolButtonSlide->setDefaultAction(ui->actionMode_diaporama);
 
     ui->listViewImages->setAcceptDrops(false);
     ui->listViewImages->setDropIndicatorShown(false);
@@ -35,6 +37,7 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     connect(ui->actionEditer_le_titre, SIGNAL(triggered()), this, SLOT(editTitle()));
     connect(ui->actionRetirer_l_image, SIGNAL(triggered()), this, SLOT(removeImage()));
     connect(ui->actionChangeImageOrder, SIGNAL(triggered()), this, SLOT(reorderImage()));
+    connect(ui->actionMode_diaporama, SIGNAL(triggered()), this, SLOT(slideShow()));
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
 }
 
@@ -172,7 +175,10 @@ void ExplorerAblumImages::reorderImage(){
     }
 }
 
-
-
+void ExplorerAblumImages::slideShow(){
+    ImageSwitcher *switcher = new ImageSwitcher(albumImageModel->item(0), albumImageModel);
+    Slideshow *slideshow = new Slideshow(NULL, switcher);
+    slideshow->show();
+}
 
 

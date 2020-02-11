@@ -37,6 +37,7 @@ private slots:
     void editTitle();
     void removeImage();
     void reorderImage();
+    void slideShow();
 
 private:
     Ui::ExplorerAblumImages *ui;

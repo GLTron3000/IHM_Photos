@@ -20,6 +20,7 @@ SOURCES += \
     exploreralbums.cpp \
     explorer.cpp \
     models/imageswitcher.cpp \
+    slideshow.cpp \
     stardelegate.cpp \
     stareditor.cpp \
     starrating.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     models/imageswitcher.h \
     mainwindow.h \
     models/image.h \
+    slideshow.h \
     stardelegate.h \
     stareditor.h \
     starrating.h \
@@ -62,6 +64,7 @@ FORMS += \
     exploreralbums.ui \
     explorer.ui \
     mainwindow.ui \
+    slideshow.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
     widgets/note.ui \
