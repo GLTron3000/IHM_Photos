@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionPr_f_rences, SIGNAL(triggered()), this, SLOT(showSettings()));
     connect(ui->actionA_propos, SIGNAL(triggered()), this, SLOT(showAbout()));
+    connect(ui->actionAide_en_ligne, SIGNAL(triggered()), this, SLOT(showHelp()));
 
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
@@ -94,7 +95,9 @@ void MainWindow::showAbout(){
 }
 
 void MainWindow::showHelp(){
-
+    qDebug() << __FUNCTION__;
+    QString link = "https://doc.qt.io/";
+    QDesktopServices::openUrl(QUrl(link));
 }
 
 void MainWindow::quit(){
