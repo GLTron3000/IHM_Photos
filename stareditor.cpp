@@ -1,7 +1,6 @@
 #include "stareditor.h"
 #include "starrating.h"
 #include "widgets/info.h"
-
 #include <QtWidgets>
 
 StarEditor::StarEditor(QWidget *parent)

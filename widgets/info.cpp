@@ -9,6 +9,8 @@
 #include "stardelegate.h"
 #include "starrating.h"
 
+int numberOfStar;
+
 
 Info::Info(QWidget *parent, QString imagePath) :
     QWidget(parent),
