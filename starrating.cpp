@@ -31,7 +31,7 @@ void StarRating::paint(QPainter *painter, const QRect &rect,
     painter->setRenderHint(QPainter::Antialiasing, true);
     painter->setPen(Qt::NoPen);
     painter->setBrush(mode == EditMode::Editable ?
-                          palette.highlight() :
+                          palette.windowText() :
                           palette.windowText());
 
     const int yOffset = (rect.height() - PaintingScaleFactor) / 2;

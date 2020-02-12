@@ -6,6 +6,10 @@
 #include "widgets/explorerimg.h"
 #include "widgets/note.h"
 #include <QFrame>
+#include <QTableWidget>
+#include "starrating.h"
+
+extern int numberOfStar;
 
 namespace Ui {
 class Info;
@@ -33,6 +37,8 @@ private:
     bool modeEdition;
     DataBase *database;
     Image *currentImage;
+    QTableWidgetItem *item0;
+    StarRating *starRating;
 
 
 

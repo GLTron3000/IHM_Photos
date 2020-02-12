@@ -11,7 +11,7 @@ void StarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
         StarRating starRating = qvariant_cast<StarRating>(index.data());
 
         if (option.state & QStyle::State_Selected)
-            painter->fillRect(option.rect, option.palette.highlight());
+            painter->fillRect(option.rect, option.palette.base());
 
         starRating.paint(painter, option.rect, option.palette,
                          StarRating::EditMode::ReadOnly);

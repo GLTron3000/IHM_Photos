@@ -9,6 +9,7 @@
 #include "stardelegate.h"
 #include "starrating.h"
 
+
 Info::Info(QWidget *parent, QString imagePath) :
     QWidget(parent),
     ui(new Ui::Info)
@@ -51,23 +52,28 @@ Info::Info(QWidget *parent, QString imagePath) :
     ui->textKeyWords->setText(currentImage->tags);
     qDebug() <<currentImage->tags;
 
+    /* set le système de notation */
     ui->note->setRowCount(1);
     ui->note->setColumnCount(1);
     ui->note->setItemDelegate(new StarDelegate);
-    ui->note->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::SelectedClicked);
+    ui->note->setEditTriggers(QAbstractItemView::DoubleClicked);
     ui->note->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->note->horizontalHeader()->hide();
     ui->note->verticalHeader()->hide();
 
     int note = currentImage->score;
-    static struct {int rating;}
-    staticData[] = {{note}};
-    QTableWidgetItem *item0 = new QTableWidgetItem;
-    item0->setData(0,QVariant::fromValue(StarRating(staticData[0].rating)));
+    struct {int rating;}
+    Data[] = {{note}};
+    item0 = new QTableWidgetItem;
+
+    item0->setData(0,QVariant::fromValue(StarRating(Data[0].rating)));
     ui->note->setItem(0, 0, item0);
     ui->note->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     ui->note->verticalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
 
+    ui->note->setDisabled(true);
+
+    /* set les zones de texte en lecture seulement */
     ui->textElements->setReadOnly(true);
     ui->textFeelings->setReadOnly(true);
     ui->textKeyWords->setReadOnly(true);
@@ -115,6 +121,8 @@ void Info::on_ButtonEdit_clicked()
         ui->textElements->setCursor(Qt::IBeamCursor);
         ui->textFeelings->setCursor(Qt::IBeamCursor);
         ui->textKeyWords->setCursor(Qt::IBeamCursor);
+        ui->note->setCursor(Qt::PointingHandCursor);
+
 
         QPalette p;
         p.setColor(QPalette::Base, QColor(255,255,255));
@@ -126,11 +134,14 @@ void Info::on_ButtonEdit_clicked()
         ui->textElements->setReadOnly(false);
         ui->textFeelings->setReadOnly(false);
         ui->textKeyWords->setReadOnly(false);
+        ui->note->setDisabled(false);
 
     }else{
         ui->textElements->setCursor(Qt::ArrowCursor);
         ui->textFeelings->setCursor(Qt::ArrowCursor);
         ui->textKeyWords->setCursor(Qt::ArrowCursor);
+        ui->note->setCursor(Qt::ArrowCursor);
+        ui->note->setDisabled(true);
 
         QPalette p;
         p.setColor(QPalette::Base, QColor(240,240,240));
@@ -143,7 +154,7 @@ void Info::on_ButtonEdit_clicked()
         ui->textFeelings->setReadOnly(true);
         ui->textKeyWords->setReadOnly(true);
 
-        database->updateImage(currentImage->id, currentImage->path, 5, ui->textElements->text(), ui->textKeyWords->text(), ui->textFeelings->text());
+        database->updateImage(currentImage->id, currentImage->path, ::numberOfStar, ui->textElements->text(), ui->textKeyWords->text(), ui->textFeelings->text());
 
     }
 

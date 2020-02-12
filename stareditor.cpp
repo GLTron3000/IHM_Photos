@@ -1,5 +1,6 @@
 #include "stareditor.h"
 #include "starrating.h"
+#include "widgets/info.h"
 
 #include <QtWidgets>
 
@@ -28,6 +29,7 @@ void StarEditor::mouseMoveEvent(QMouseEvent *event)
 
     if (star != myStarRating.starCount() && star != -1) {
         myStarRating.setStarCount(star);
+        ::numberOfStar = star;
         update();
     }
     QWidget::mouseMoveEvent(event);
