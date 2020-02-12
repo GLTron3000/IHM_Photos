@@ -291,6 +291,10 @@
    </property>
   </action>
   <action name="actionChangeImageOrder">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/MENU2_Plan de travail 1.png</normaloff>:/ressources/images/MENU2_Plan de travail 1.png</iconset>
+   </property>
    <property name="text">
     <string>Changer l'ordre des images</string>
    </property>

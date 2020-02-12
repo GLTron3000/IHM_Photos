@@ -34,7 +34,7 @@ void ExplorerImg::loadPath(QString path){
         it.next();
 
         QString extension = it.fileInfo().suffix().toLower();
-        if(isSupportedFormat(extension)){
+        if(isSupportedFormat(extension) && !isInModel(it.filePath())){
             QStandardItem *item = new QStandardItem;
             QString fileName = it.fileName().remove("."+it.fileInfo().suffix());
 
@@ -56,6 +56,13 @@ bool ExplorerImg::isSupportedFormat(QString format){
             || format == "pgm"
             || format == "xbm"
             || format == "xpm";
+}
+
+bool ExplorerImg::isInModel(QString path){
+    for(int i=0; i < imagesModel->rowCount(); i++){
+        if(imagesModel->item(i)->data().value<Image>().path == path) return true;
+    }
+    return false;
 }
 
 void ExplorerImg::loadThumbs(QStandardItemModel *model){

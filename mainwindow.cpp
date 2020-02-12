@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    setWindowIcon(QIcon(":/ressources/images/LOGO.png"));
+
     ui->actionRetour->setEnabled(false);
     ui->actionRecharger->setEnabled(false);
     ui->actionNouvel_album->setEnabled(false);

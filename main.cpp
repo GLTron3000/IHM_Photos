@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow mainWindow;    
 
-    QPixmap pixmap(":/ressources/images/splash.png");
+    QPixmap pixmap(":/ressources/images/LOGO.png");
     QSplashScreen splash(pixmap);
     splash.show();
 

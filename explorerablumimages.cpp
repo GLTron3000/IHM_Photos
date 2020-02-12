@@ -39,6 +39,8 @@ ExplorerAblumImages::ExplorerAblumImages(QWidget *parent) :
     connect(ui->actionChangeImageOrder, SIGNAL(triggered()), this, SLOT(reorderImage()));
     connect(ui->actionMode_diaporama, SIGNAL(triggered()), this, SLOT(slideShow()));
     connect(ui->listViewImages, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onImageClick(QModelIndex)));
+    connect(imgDock, SIGNAL(visibilityChanged(bool)), this, SLOT(imageDrawerChange(bool)));
+
 }
 
 ExplorerAblumImages::~ExplorerAblumImages(){
@@ -83,27 +85,32 @@ void ExplorerAblumImages::returnFrom(){
 }
 
 void ExplorerAblumImages::openImagesDrawer(){
-    if(imgDock->isVisible()){
-        imgDock->setVisible(false);
-        delete explImg;
-        explImg = nullptr;
-        //ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
+    imgDock->setVisible(imgDock->isVisible() ? false : true);
+}
+
+void ExplorerAblumImages::imageDrawerChange(bool visible){
+    if(visible){
+        qDebug() << "BUILD WIDGET";
+        explImg = new ExplorerImg();
+        imgDock->setWidget(explImg);
+        connect(explImg, SIGNAL(openImage(ImageSwitcher*)), this, SLOT(openImageFromDrawer(ImageSwitcher*)));
+
+        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/CANCEL-01.png"));
+        ui->actionOpenImages->setToolTip("Fermer le repertoire d'images");
+
+        ui->listViewImages->setAcceptDrops(true);
+        ui->listViewImages->setDropIndicatorShown(true);
+        ui->listViewImages->setDragDropMode(QAbstractItemView::DropOnly);
+    }else{
+        qDebug() << "DESTROY WIDGET";
+        //delete explImg;
+        //explImg = nullptr;
+        ui->actionOpenImages->setIcon(QIcon(":/ressources/images/NEWALBUM-02.png"));
         ui->actionOpenImages->setToolTip("Ouvrir le repertoire d'images");
 
         ui->listViewImages->setAcceptDrops(false);
         ui->listViewImages->setDropIndicatorShown(false);
         ui->listViewImages->setDragDropMode(QAbstractItemView::NoDragDrop);
-    }else{
-        explImg = new ExplorerImg();
-        imgDock->setWidget(explImg);
-        imgDock->setVisible(true);
-        //ui->actionOpenImages->setIcon(QIcon(":/ressources/images/ok.png"));
-        ui->actionOpenImages->setToolTip("Fermer le repertoire d'images");
-        connect(explImg, SIGNAL(openImage(ImageSwitcher*)), this, SLOT(openImageFromDrawer(ImageSwitcher*)));
-
-        ui->listViewImages->setAcceptDrops(true);
-        ui->listViewImages->setDropIndicatorShown(true);
-        ui->listViewImages->setDragDropMode(QAbstractItemView::DropOnly);
     }
 }
 

@@ -39,6 +39,7 @@ private:
     void loadPath(QString path);
     void loadThumbs(QStandardItemModel *model);
     bool isSupportedFormat(QString format);
+    bool isInModel(QString path);
 };
 
 #endif // EXPLORERIMG_H

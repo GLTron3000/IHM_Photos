@@ -31,6 +31,7 @@ signals:
 private slots:
     void returnFrom();
     void openImagesDrawer();
+    void imageDrawerChange(bool visible);
     void onImageClick(QModelIndex item);
     void onAlbumImageModelChange(QStandardItem *item);
     void openImageFromDrawer(ImageSwitcher*);
