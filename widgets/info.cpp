@@ -17,9 +17,9 @@ Info::Info(QWidget *parent, QString imagePath) :
     currentImgPath = imagePath;
     modeEdition = false;
 
-    ui->textElements->setFrameShape(QFrame::StyledPanel);
-    ui->textFeelings->setFrameShape(QFrame::StyledPanel);
-    ui->textKeyWords->setFrameShape(QFrame::StyledPanel);
+    ui->textElements->setFrame(QFrame::StyledPanel);
+    ui->textFeelings->setFrame(QFrame::StyledPanel);
+    ui->textKeyWords->setFrame(QFrame::StyledPanel);
 
     QPalette p;
     p.setColor(QPalette::Base, QColor(240,240,240));
@@ -112,9 +112,9 @@ void Info::on_ButtonEdit_clicked()
 
     if(modeEdition){
 
-        ui->textElements->viewport()->setCursor(Qt::IBeamCursor);
-        ui->textFeelings->viewport()->setCursor(Qt::IBeamCursor);
-        ui->textKeyWords->viewport()->setCursor(Qt::IBeamCursor);
+        ui->textElements->setCursor(Qt::IBeamCursor);
+        ui->textFeelings->setCursor(Qt::IBeamCursor);
+        ui->textKeyWords->setCursor(Qt::IBeamCursor);
 
         QPalette p;
         p.setColor(QPalette::Base, QColor(255,255,255));
@@ -128,9 +128,9 @@ void Info::on_ButtonEdit_clicked()
         ui->textKeyWords->setReadOnly(false);
 
     }else{
-        ui->textElements->viewport()->setCursor(Qt::ArrowCursor);
-        ui->textFeelings->viewport()->setCursor(Qt::ArrowCursor);
-        ui->textKeyWords->viewport()->setCursor(Qt::ArrowCursor);
+        ui->textElements->setCursor(Qt::ArrowCursor);
+        ui->textFeelings->setCursor(Qt::ArrowCursor);
+        ui->textKeyWords->setCursor(Qt::ArrowCursor);
 
         QPalette p;
         p.setColor(QPalette::Base, QColor(240,240,240));
@@ -143,7 +143,7 @@ void Info::on_ButtonEdit_clicked()
         ui->textFeelings->setReadOnly(true);
         ui->textKeyWords->setReadOnly(true);
 
-        database->updateImage(currentImage->id, currentImage->path, 5, ui->textElements->toPlainText(), ui->textKeyWords->toPlainText(), ui->textFeelings->toPlainText());
+        database->updateImage(currentImage->id, currentImage->path, 5, ui->textElements->text(), ui->textKeyWords->text(), ui->textFeelings->text());
 
     }
 
