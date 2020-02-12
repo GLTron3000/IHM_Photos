@@ -28,7 +28,7 @@ public slots:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
-    void cropMode();
+    bool cropMode();
     void scaleAll(double factor);
 
 };

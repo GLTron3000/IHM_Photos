@@ -167,7 +167,7 @@
     <string>Rétablir</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Y</string>
+    <string>Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionQuitter">
@@ -285,6 +285,9 @@
    <property name="toolTip">
     <string>Revenir aux albums</string>
    </property>
+   <property name="shortcut">
+    <string>Backspace</string>
+   </property>
   </action>
   <action name="actionRotationP">
    <property name="enabled">
@@ -300,6 +303,9 @@
    <property name="toolTip">
     <string>Pivoter l'image dans le sens horraire</string>
    </property>
+   <property name="shortcut">
+    <string>R</string>
+   </property>
   </action>
   <action name="actionRotationM">
    <property name="enabled">
@@ -314,6 +320,9 @@
    </property>
    <property name="toolTip">
     <string>Pivoter l'image dans le sens anti-horraire</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+R</string>
    </property>
   </action>
   <action name="actionEnregistrer">
@@ -337,7 +346,7 @@
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/SAVE-01.png</normaloff>:/ressources/images/SAVE-01.png</iconset>
+     <normaloff>:/ressources/images/SAVEAS-01.png</normaloff>:/ressources/images/SAVEAS-01.png</iconset>
    </property>
    <property name="text">
     <string>Enregistrer sous...</string>
@@ -359,6 +368,9 @@
    <property name="toolTip">
     <string>Lancer l'affichage diaporama</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
+   </property>
   </action>
   <action name="actionImageSuivante">
    <property name="enabled">
@@ -373,6 +385,9 @@
    </property>
    <property name="toolTip">
     <string>Afficher l'image suivante</string>
+   </property>
+   <property name="shortcut">
+    <string>Right</string>
    </property>
   </action>
   <action name="actionImagePrecedente">
@@ -389,6 +404,9 @@
    <property name="toolTip">
     <string>Afficher l'image précédente</string>
    </property>
+   <property name="shortcut">
+    <string>Left</string>
+   </property>
   </action>
   <action name="actionTiroirImages">
    <property name="enabled">
@@ -404,6 +422,9 @@
    <property name="toolTip">
     <string>Ouvrir / fermer le tiroir d'images</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
   </action>
   <action name="actionChangerOrder">
    <property name="enabled">
@@ -418,6 +439,9 @@
    </property>
    <property name="toolTip">
     <string>Changer l'ordre des images</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
    </property>
   </action>
  </widget>
