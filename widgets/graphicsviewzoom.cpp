@@ -15,7 +15,7 @@ void GraphicsViewZoom::wheelEvent(QWheelEvent* event){
     double angle = event->angleDelta().y();
     double factor = qPow(1.0015, angle);
 
-    QPointF rubberPosOld = mapToScene(rubberR->pos());
+    QPointF rubberPosOld = mapToScene(rubber->pos());
 
     auto targetViewportPos = event->pos();
     auto targetScenePos = mapToScene(event->pos());
@@ -27,26 +27,26 @@ void GraphicsViewZoom::wheelEvent(QWheelEvent* event){
     centerOn(mapToScene(viewportCenter.toPoint()));
 
     if(cropActive){
-        QSize rubberSize = rubberR->size() * factor;
-        rubberR->resize(rubberSize);
-        rubberR->move(mapFromScene(rubberPosOld));
+        QSize rubberSize = rubber->size() * factor;
+        rubber->resize(rubberSize);
+        rubber->move(mapFromScene(rubberPosOld));
     }
 }
 
 void GraphicsViewZoom::scaleAll(double factor){
-    QPointF rubberPosOld = mapToScene(rubberR->pos());
+    QPointF rubberPosOld = mapToScene(rubber->pos());
     scale(factor, factor);
     if(cropActive){
-        QSize rubberSize = rubberR->size() * factor;
-        rubberR->resize(rubberSize);
-        rubberR->move(mapFromScene(rubberPosOld));
+        QSize rubberSize = rubber->size() * factor;
+        rubber->resize(rubberSize);
+        rubber->move(mapFromScene(rubberPosOld));
     }
 }
 
-void GraphicsViewZoom::initCrop(ResizableRubberBand *rubber){
+void GraphicsViewZoom::initCrop(){
     cropActive = false;
-    rubberR = rubber;
-    rubberR->setGeometry(QRect(-1, -1, 2, 2));
+    this->rubber = new QRubberBand(QRubberBand::Rectangle, this);
+    this->rubber->setGeometry(QRect(-1, -1, 2, 2));
 }
 
 bool GraphicsViewZoom::cropMode(){
@@ -57,8 +57,8 @@ bool GraphicsViewZoom::cropMode(){
         QApplication::setOverrideCursor(Qt::CrossCursor);
     }else{
         this->setDragMode(QGraphicsView::ScrollHandDrag);
-        rubberR->setGeometry(QRect(-1, -1, 2, 2));
-        rubberR->hide();
+        rubber->setGeometry(QRect(-1, -1, 2, 2));
+        rubber->hide();
         initialDrag = false;
         QApplication::restoreOverrideCursor();
     }
@@ -67,31 +67,29 @@ bool GraphicsViewZoom::cropMode(){
 }
 
 void GraphicsViewZoom::mousePressEvent(QMouseEvent *event){
-    if(cropActive && initialDrag){
+    if(cropActive){
         rubberOrigin = event->pos();
-        rubberR->setGeometry(QRect(rubberOrigin, QSize()));
+        rubber->setGeometry(QRect(rubberOrigin, QSize()));
         rubberDrag = true;
-        rubberR->show();
+        rubber->show();
     }
     QGraphicsView::mousePressEvent(event);
 }
 
 void GraphicsViewZoom::mouseMoveEvent(QMouseEvent *event){
-    if(cropActive && initialDrag && rubberDrag){
+    if(cropActive && rubberDrag){
         rubberEnd = event->pos();
-        rubberR->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
-        rubberR->show();
+        rubber->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
+        rubber->show();
     }
     QGraphicsView::mouseMoveEvent(event);
 }
 
 void GraphicsViewZoom::mouseReleaseEvent(QMouseEvent *event){
-    if(cropActive && initialDrag){
+    if(cropActive){
         rubberEnd = event->pos();
-        rubberR->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
+        rubber->setGeometry(QRect(rubberOrigin, rubberEnd).normalized());
         rubberDrag = false;
-        initialDrag = false;
-        QApplication::restoreOverrideCursor();
     }
     QGraphicsView::mouseReleaseEvent(event);
 }

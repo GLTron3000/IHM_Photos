@@ -12,7 +12,7 @@ class GraphicsViewZoom : public QGraphicsView
 
 public:
     explicit GraphicsViewZoom(QWidget *parent = 0);
-    void initCrop(ResizableRubberBand *rubber);
+    void initCrop();
     QRubberBand *rubber;
     ResizableRubberBand *rubberR;
 

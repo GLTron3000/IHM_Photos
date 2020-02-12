@@ -107,7 +107,7 @@ void Visionneuse::afficherImage(QString path){
     imagePixmap->setTransformationMode(Qt::SmoothTransformation);
 
     graphicsViewZoom->scene()->addItem(imagePixmap);
-    graphicsViewZoom->initCrop(new ResizableRubberBand(this));
+    graphicsViewZoom->initCrop();
     graphicsViewZoom->centerOn(imagePixmap);
 }
 
@@ -189,7 +189,7 @@ void Visionneuse::imageSuivante(){
 }
 
 void Visionneuse::setCrop(){
-    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubberR->geometry());
+    QPixmap cropPixmap = imagePixmap->pixmap().copy(QRect(graphicsViewZoom->rubber->pos(), graphicsViewZoom->rubber->size()));
 
     graphicsViewZoom->scene()->removeItem(imagePixmap);
 
@@ -198,4 +198,5 @@ void Visionneuse::setCrop(){
     graphicsViewZoom->scene()->addItem(imagePixmap);
     crop();
     ui->actionRogner->setChecked(false);
+    QApplication::restoreOverrideCursor();
 }

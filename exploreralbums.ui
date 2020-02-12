@@ -231,6 +231,9 @@
    <property name="text">
     <string>Supprimer album</string>
    </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
   </action>
  </widget>
  <resources>

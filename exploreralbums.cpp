@@ -9,6 +9,7 @@ ExplorerAlbums::ExplorerAlbums(QWidget *parent) :
 {
     ui->setupUi(this);
     editMode = false;
+    searchMode = false;
     db = new DataBase();
     loadAlbums();
 
@@ -18,10 +19,8 @@ ExplorerAlbums::ExplorerAlbums(QWidget *parent) :
     connect(ui->actionNouvel_album, SIGNAL(triggered()), this, SLOT(addAlbum()));
     connect(ui->actionSupprimer_album, SIGNAL(triggered()), this, SLOT(deleteAlbum()));
     connect(ui->listViewAlbums, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(onAlbumClick(QModelIndex)));
-    connect(ui->listViewAlbums, SIGNAL(indexesMoved(const QModelIndexList)), this, SLOT(onAlbumMoved(QModelIndexList)));
     connect(ui->recherche, SIGNAL(textEdited(QString)), this, SLOT(searchList(QString)));
 
-    //QtConcurrent::run(this, &DataBase::cleaner);
     db->cleaner();
 }
 
@@ -40,12 +39,6 @@ void ExplorerAlbums::loadAlbums(){
     ui->listViewAlbums->setModel(albumModel);
 }
 
-void ExplorerAlbums::editTitle(){
-    editMode = editMode ? false : true;
-    qDebug() << "EDIT MODE " << editMode;
-    ui->listViewAlbums->blockSignals(editMode);
-}
-
 void ExplorerAlbums::addAlbum(){
     QString albumName = QString("Album%1").arg(albumModel->rowCount());
 
@@ -61,19 +54,13 @@ void ExplorerAlbums::addAlbum(){
 
 //PRIVATE SLOTS
 void ExplorerAlbums::onAlbumClick(QModelIndex item){
-    QStandardItem *album = albumModel->itemFromIndex(item);
+    QStandardItem *album;
+    if(searchMode) album  = albumSearchModel->itemFromIndex(item);
+    else album = albumModel->itemFromIndex(item);
     int albumID = album->data().toInt();
     qDebug() << "Open Album " << albumID;
 
     emit openAlbum(albumID);
-}
-
-void ExplorerAlbums::onAlbumMoved(QModelIndexList indexes){
-    qDebug() << "ALBUMS MOVED";
-    for(int i=0; i < indexes.count(); i++){
-        qDebug() << indexes.at(i).column();
-        qDebug() << albumModel->itemFromIndex(indexes.at(i))->row();
-    }
 }
 
 void ExplorerAlbums::searchList(QString name){
@@ -81,9 +68,11 @@ void ExplorerAlbums::searchList(QString name){
     if(name == ""){
         qDebug() << "   +RESET";
         ui->listViewAlbums->setModel(albumModel);
+        searchMode = false;
         return;
     }
 
+    searchMode = true;
     albumSearchModel = new QStandardItemModel();
     for(int i=0; i < albumModel->rowCount(); i++){
         QStandardItem *album = albumModel->item(i);

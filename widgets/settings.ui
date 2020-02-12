@@ -68,7 +68,7 @@
        <item>
         <widget class="QPushButton" name="pushButtonNuke">
          <property name="text">
-          <string>Obliterate database</string>
+          <string>Réinitialiser la base de données</string>
          </property>
         </widget>
        </item>

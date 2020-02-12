@@ -23,11 +23,9 @@ signals:
 public slots:
     void addAlbum();
     void loadAlbums();
-    void editTitle();
 
 private slots:
     void onAlbumClick(QModelIndex);
-    void onAlbumMoved(QModelIndexList);
     void searchList(QString name);
     void deleteAlbum();
 
@@ -38,6 +36,7 @@ private:
     QSortFilterProxyModel *proxyModel;
     DataBase *db;
     bool editMode;
+    bool searchMode;
 };
 
 #endif // EXPLORERALBUMS_H
