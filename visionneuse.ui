@@ -118,7 +118,7 @@
   </action>
   <action name="actionEnregistrer">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
@@ -130,11 +130,11 @@
   </action>
   <action name="actionEnregistrer_sous">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/SAVE-01.png</normaloff>:/ressources/images/SAVE-01.png</iconset>
+     <normaloff>:/ressources/images/SAVEAS-01.png</normaloff>:/ressources/images/SAVEAS-01.png</iconset>
    </property>
    <property name="text">
     <string>Enregistrer sous...</string>
@@ -165,6 +165,20 @@
    </property>
    <property name="toolTip">
     <string>Image suivante</string>
+   </property>
+  </action>
+  <action name="actionValider">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Valider</string>
+   </property>
+   <property name="toolTip">
+    <string>Valider le rognage</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
    </property>
   </action>
  </widget>

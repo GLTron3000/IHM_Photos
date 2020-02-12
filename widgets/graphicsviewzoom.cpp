@@ -49,7 +49,7 @@ void GraphicsViewZoom::initCrop(ResizableRubberBand *rubber){
     rubberR->setGeometry(QRect(-1, -1, 2, 2));
 }
 
-void GraphicsViewZoom::cropMode(){
+bool GraphicsViewZoom::cropMode(){
     cropActive = cropActive ? false : true;
     if(cropActive){
         this->setDragMode(QGraphicsView::NoDrag);
@@ -62,6 +62,8 @@ void GraphicsViewZoom::cropMode(){
         initialDrag = false;
         QApplication::restoreOverrideCursor();
     }
+
+    return cropActive;
 }
 
 void GraphicsViewZoom::mousePressEvent(QMouseEvent *event){

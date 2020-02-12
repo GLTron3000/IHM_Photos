@@ -68,6 +68,7 @@ public slots:
     void imagePrecedente();
     void imageSuivante();
     void resizeTo(int, int);
+    void setCrop();
 };
 
 #endif // VISIONNEUSE_H

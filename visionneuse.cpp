@@ -57,6 +57,7 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     toolbar->addSeparator();
     toolbar->addAction(ui->actionRogner);
     toolbar->addAction(ui->actionRedimensionner);
+    toolbar->addAction(ui->actionValider);
     toolbar->addSeparator();
     toolbar->addAction(ui->actionInfos);
 
@@ -71,6 +72,7 @@ Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     connect(ui->actionEnregistrer_sous, SIGNAL(triggered()), this, SLOT(saveAs()));
     connect(ui->actionInfos, SIGNAL(triggered()), this, SLOT(afficherInformations()));
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui->actionValider, SIGNAL(triggered()), this, SLOT(setCrop()));
 
     connect(ui->actionImage_precedente, SIGNAL(triggered()), this, SLOT(imagePrecedente()));
     connect(ui->actionImage_suivante, SIGNAL(triggered()), this, SLOT(imageSuivante()));
@@ -123,7 +125,7 @@ void Visionneuse::restaurerTailleImg(){
 }
 
 void Visionneuse::crop(){
-    graphicsViewZoom->cropMode();
+    ui->actionValider->setEnabled(graphicsViewZoom->cropMode());
 }
 
 void Visionneuse::resize(){
@@ -142,8 +144,6 @@ void Visionneuse::resizeTo(int width, int height){
     imagePixmap = new QGraphicsPixmapItem(QPixmap::fromImage(scaledImage));
 
     graphicsViewZoom->scene()->addItem(imagePixmap);
-    graphicsViewZoom->initCrop(new ResizableRubberBand(this));
-    graphicsViewZoom->centerOn(imagePixmap);
 }
 
 void Visionneuse::createDockWindows(){
@@ -160,21 +160,18 @@ void Visionneuse::rotationMinus(){
 }
 
 void Visionneuse::save(){
-    qDebug() << "SAVE MODS";
-    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubberR->geometry());
-    cropPixmap.save(imagePath);
+    qDebug() << "SAVE";
+    imagePixmap->pixmap().save(imagePath);
 }
 
 void Visionneuse::saveAs(){
-    qDebug() << "SAVE AS MODS";
-    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubberR->geometry());
-
+    qDebug() << "SAVE AS";
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Sauvegarder image"), "",
             tr("Images (*)"));
 
     qDebug() << "   save location: " << fileName;
-    cropPixmap.save(fileName);
+    imagePixmap->pixmap().save(fileName);
 }
 
 void Visionneuse::close(){
@@ -189,4 +186,16 @@ void Visionneuse::imagePrecedente(){
 void Visionneuse::imageSuivante(){
     graphicsViewZoom->resetTransform();
     afficherImage(imageSwitcher->imageSuivante().path);
+}
+
+void Visionneuse::setCrop(){
+    QPixmap cropPixmap = imagePixmap->pixmap().copy(graphicsViewZoom->rubberR->geometry());
+
+    graphicsViewZoom->scene()->removeItem(imagePixmap);
+
+    imagePixmap = new QGraphicsPixmapItem(cropPixmap);
+
+    graphicsViewZoom->scene()->addItem(imagePixmap);
+    crop();
+    ui->actionRogner->setChecked(false);
 }

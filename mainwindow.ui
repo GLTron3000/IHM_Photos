@@ -337,7 +337,7 @@
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/SAVE-01.png</normaloff>:/ressources/images/SAVE-01.png</iconset>
+     <normaloff>:/ressources/images/SAVEAS-01.png</normaloff>:/ressources/images/SAVEAS-01.png</iconset>
    </property>
    <property name="text">
     <string>Enregistrer sous...</string>
