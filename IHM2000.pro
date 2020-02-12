@@ -29,6 +29,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     models/image.cpp \
+    widgets/about.cpp \
     widgets/note.cpp \
     widgets/resizablerubberband.cpp \
     widgets/graphicsviewzoom.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     stardelegate.h \
     stareditor.h \
     starrating.h \
+    widgets/about.h \
     widgets/graphicsviewzoom.h \
     widgets/explorerimg.h \
     widgets/info.h \
@@ -65,6 +67,7 @@ FORMS += \
     explorer.ui \
     mainwindow.ui \
     slideshow.ui \
+    widgets/about.ui \
     widgets/explorerimg.ui \
     widgets/info.ui \
     widgets/note.ui \

@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "widgets/settings.h"
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -28,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionRetour, SIGNAL(triggered()), this, SLOT(showExplorer()));
     connect(ui->actionPr_f_rences, SIGNAL(triggered()), this, SLOT(showSettings()));
+    connect(ui->actionA_propos, SIGNAL(triggered()), this, SLOT(showAbout()));
 
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionPlein_cran, SIGNAL(triggered()), this, SLOT(fullscreen()));
@@ -36,6 +35,9 @@ MainWindow::MainWindow(QWidget *parent) :
     db->cleaner();
     delete db;
     db = nullptr;
+
+    about = NULL;
+    settings = NULL;
 
     showExplorer();
 }
@@ -95,9 +97,22 @@ void MainWindow::showExplorer(){
 
 void MainWindow::showSettings(){
     qDebug() << "SHOW SETTINGS";
-    Settings *settings = new Settings(this);
+    if(settings != NULL) settings->close();
+    settings = new Settings(this);
     settings->setWindowFlag(Qt::Dialog);
     settings->show();
+}
+
+void MainWindow::showAbout(){
+    qDebug() << "SHOW ABOUT";
+    if(about != NULL) about->close();
+    about = new About(this);
+    about->setWindowFlag(Qt::Dialog);
+    about->show();
+}
+
+void MainWindow::showHelp(){
+
 }
 
 void MainWindow::quit(){

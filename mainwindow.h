@@ -8,6 +8,8 @@
 #include "visionneuse.h"
 #include "models/imageswitcher.h"
 #include "widgets/info.h"
+#include "widgets/settings.h"
+#include "widgets/about.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +27,8 @@ private slots:
     void showVisio(ImageSwitcher *imageSwitcher);
     void showExplorer();
     void showSettings();
+    void showAbout();
+    void showHelp();
     void fullscreen();
     void quit();
 
@@ -33,6 +37,8 @@ private:
     Explorer *explorer;
     Visionneuse *visionneuse;
     Info *info;
+    About *about;
+    Settings *settings;
     void keyPressEvent(QKeyEvent *event);
 };
 
