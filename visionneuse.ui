@@ -28,9 +28,6 @@
    <property name="text">
     <string>Zoom+</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl++</string>
-   </property>
   </action>
   <action name="actionZoomOut">
    <property name="icon">
@@ -40,9 +37,6 @@
    <property name="text">
     <string>Zoom -</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+-</string>
-   </property>
   </action>
   <action name="actionRetablir">
    <property name="icon">
@@ -51,9 +45,6 @@
    </property>
    <property name="text">
     <string>Rétablir</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Y</string>
    </property>
   </action>
   <action name="actionInfos">
@@ -138,9 +129,6 @@
    </property>
    <property name="text">
     <string>Enregistrer sous...</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionImage_precedente">

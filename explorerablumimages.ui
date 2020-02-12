@@ -247,9 +247,6 @@
    <property name="text">
     <string>Retour</string>
    </property>
-   <property name="shortcut">
-    <string>Backspace</string>
-   </property>
   </action>
   <action name="actionOpenImages">
    <property name="icon">
@@ -262,9 +259,6 @@
    <property name="toolTip">
     <string>Ouvrir le repertoire d'images</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+I</string>
-   </property>
   </action>
   <action name="actionEditer_le_titre">
    <property name="icon">
@@ -273,9 +267,6 @@
    </property>
    <property name="text">
     <string>Editer le titre</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="actionRetirer_l_image">
@@ -286,9 +277,6 @@
    <property name="text">
     <string>Retirer l'image</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+D</string>
-   </property>
   </action>
   <action name="actionChangeImageOrder">
    <property name="icon">
@@ -298,16 +286,10 @@
    <property name="text">
     <string>Changer l'ordre des images</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+U</string>
-   </property>
   </action>
   <action name="actionMode_diaporama">
    <property name="text">
     <string>Mode diaporama</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+K</string>
    </property>
   </action>
  </widget>
