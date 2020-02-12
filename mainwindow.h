@@ -31,6 +31,7 @@ private slots:
     void showHelp();
     void fullscreen();
     void quit();
+    void switchExplorer(bool);
 
 private:
     Ui::MainWindow *ui;
@@ -40,6 +41,10 @@ private:
     About *about;
     Settings *settings;
     void keyPressEvent(QKeyEvent *event);
+
+    void setMenuAlbums();
+    void setMenuAlbumImages();
+    void setMenuVisionneuse();
 };
 
 #endif // MAINWINDOW_H

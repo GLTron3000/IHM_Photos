@@ -60,6 +60,59 @@ void ExplorerAblumImages::loadImages(int albumID){
     QtConcurrent::run(this, &ExplorerAblumImages::loadThumbs, albumImageModel);
 }
 
+
+//PUBLIC SLOTS
+void ExplorerAblumImages::reorderImage(){
+    reorderMode = reorderMode ? false : true;
+    if(reorderMode){
+        ui->listViewImages->setViewMode(QListView::ListMode);
+        ui->listViewImages->setDragDropMode(QAbstractItemView::InternalMove);
+        ui->listViewImages->setMovement(QListView::Snap);
+
+        ui->listViewImages->setSelectionMode(QAbstractItemView::SingleSelection);
+        ui->listViewImages->setDragEnabled(true);
+        ui->listViewImages->viewport()->setAcceptDrops(true);
+        ui->listViewImages->setDropIndicatorShown(true);
+    }else{
+        ui->listViewImages->setFlow(QListView::LeftToRight);
+        ui->listViewImages->setViewMode(QListView::IconMode);
+        ui->listViewImages->setDragDropMode(QAbstractItemView::NoDragDrop);
+        ui->listViewImages->setMovement(QListView::Static);
+
+        ui->listViewImages->setDragEnabled(false);
+        ui->listViewImages->viewport()->setAcceptDrops(false);
+        ui->listViewImages->setDropIndicatorShown(false);
+
+        for(int i=0; i < albumImageModel->rowCount(); i++){
+            qDebug() << " +" << i << " at " << albumImageModel->item(i)->text();
+            db->updateAlbumImage(i, albumID, albumImageModel->item(i)->data().value<Image>().id);
+        }
+    }
+}
+
+void ExplorerAblumImages::slideShow(){
+    ImageSwitcher *switcher = new ImageSwitcher(albumImageModel->item(0), albumImageModel);
+    Slideshow *slideshow = new Slideshow(NULL, switcher);
+    slideshow->show();
+}
+
+void ExplorerAblumImages::editTitle(){
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Modifier le titre de l'album"),
+                                         tr("Titre de l'album:"), QLineEdit::Normal,
+                                         albumTitle, &ok);
+    if (ok && !text.isEmpty()){
+        this->albumTitle = text;
+        ui->labelTitre->setText(albumTitle);
+        db->updateAlbum(albumID, albumTitle);
+    }
+}
+
+void ExplorerAblumImages::openImagesDrawer(){
+    imgDock->setVisible(imgDock->isVisible() ? false : true);
+}
+
+
 //PRIVATE
 void ExplorerAblumImages::loadThumbs(QStandardItemModel *model){
     for(int i=0; i < model->rowCount(); i++){
@@ -79,13 +132,10 @@ void ExplorerAblumImages::loadThumbs(QStandardItemModel *model){
     }
 }
 
+
 //PRIVATE SLOTS
 void ExplorerAblumImages::returnFrom(){
     emit returnFromAlbum();
-}
-
-void ExplorerAblumImages::openImagesDrawer(){
-    imgDock->setVisible(imgDock->isVisible() ? false : true);
 }
 
 void ExplorerAblumImages::imageDrawerChange(bool visible){
@@ -139,18 +189,6 @@ void ExplorerAblumImages::openImageFromDrawer(ImageSwitcher* switcher){
     emit openImage(switcher);
 }
 
-void ExplorerAblumImages::editTitle(){
-    bool ok;
-    QString text = QInputDialog::getText(this, tr("Modifier le titre de l'album"),
-                                         tr("Titre de l'album:"), QLineEdit::Normal,
-                                         albumTitle, &ok);
-    if (ok && !text.isEmpty()){
-        this->albumTitle = text;
-        ui->labelTitre->setText(albumTitle);
-        db->updateAlbum(albumID, albumTitle);
-    }
-}
-
 void ExplorerAblumImages::removeImage(){
     QModelIndexList indexes;
     qDebug() << "REMOVE SELECTION";
@@ -165,38 +203,4 @@ void ExplorerAblumImages::removeImage(){
         int imageID = albumImageModel->item(i)->data().value<Image>().id;
         db->updateAlbumImage(i, albumID, imageID);
     }
-}
-
-void ExplorerAblumImages::reorderImage(){
-    reorderMode = reorderMode ? false : true;
-    if(reorderMode){
-        ui->listViewImages->setViewMode(QListView::ListMode);
-        ui->listViewImages->setDragDropMode(QAbstractItemView::InternalMove);
-        ui->listViewImages->setMovement(QListView::Snap);
-
-        ui->listViewImages->setSelectionMode(QAbstractItemView::SingleSelection);
-        ui->listViewImages->setDragEnabled(true);
-        ui->listViewImages->viewport()->setAcceptDrops(true);
-        ui->listViewImages->setDropIndicatorShown(true);
-    }else{
-        ui->listViewImages->setFlow(QListView::LeftToRight);
-        ui->listViewImages->setViewMode(QListView::IconMode);
-        ui->listViewImages->setDragDropMode(QAbstractItemView::NoDragDrop);
-        ui->listViewImages->setMovement(QListView::Static);
-
-        ui->listViewImages->setDragEnabled(false);
-        ui->listViewImages->viewport()->setAcceptDrops(false);
-        ui->listViewImages->setDropIndicatorShown(false);
-
-        for(int i=0; i < albumImageModel->rowCount(); i++){
-            qDebug() << " +" << i << " at " << albumImageModel->item(i)->text();
-            db->updateAlbumImage(i, albumID, albumImageModel->item(i)->data().value<Image>().id);
-        }
-    }
-}
-
-void ExplorerAblumImages::slideShow(){
-    ImageSwitcher *switcher = new ImageSwitcher(albumImageModel->item(0), albumImageModel);
-    Slideshow *slideshow = new Slideshow(NULL, switcher);
-    slideshow->show();
 }

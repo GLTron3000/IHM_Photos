@@ -21,9 +21,16 @@ public:
 
 public slots:
     void reload();
+    void newAlbum();
+    void slideshow();
+    void changeOrder();
+    void back();
+    void imageDrawer();
+    void editTitle();
 
 signals:
     void openImageFromAlbum(ImageSwitcher *);
+    void switchMenuBar(bool);
 
 private slots:
     void showAlbums();

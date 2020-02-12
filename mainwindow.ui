@@ -13,7 +13,16 @@
   <property name="windowTitle">
    <string>UltraPhoto2000</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QWidget" name="page"/>
+      <widget class="QWidget" name="page_2"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -38,16 +47,16 @@
     <property name="title">
      <string>É&amp;dition</string>
     </property>
-    <addaction name="actionInfos"/>
+    <addaction name="separator"/>
+    <addaction name="actionEditer"/>
+    <addaction name="actionTiroirImages"/>
+    <addaction name="actionChangerOrder"/>
+    <addaction name="separator"/>
     <addaction name="actionRedimensionner"/>
     <addaction name="actionRogner"/>
+    <addaction name="separator"/>
     <addaction name="actionRotationM"/>
     <addaction name="actionRotationP"/>
-    <addaction name="separator"/>
-    <addaction name="actionAnnuler"/>
-    <addaction name="actionRetablir"/>
-    <addaction name="separator"/>
-    <addaction name="actionRetour"/>
     <addaction name="separator"/>
     <addaction name="actionPr_f_rences"/>
    </widget>
@@ -63,11 +72,19 @@
      <string>Aff&amp;ichage</string>
     </property>
     <addaction name="actionPlein_cran"/>
-    <addaction name="actionRecharger"/>
+    <addaction name="actionDiaporama"/>
+    <addaction name="actionActualiser"/>
+    <addaction name="separator"/>
+    <addaction name="actionRetour"/>
+    <addaction name="separator"/>
+    <addaction name="actionImageSuivante"/>
+    <addaction name="actionImagePrecedente"/>
     <addaction name="separator"/>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
-    <addaction name="actionRestaurer"/>
+    <addaction name="actionRetablir"/>
+    <addaction name="separator"/>
+    <addaction name="actionInfos"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEditition"/>
@@ -102,6 +119,9 @@
    </property>
   </action>
   <action name="actionNouvel_album">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/NEWALBUM-01.png</normaloff>:/ressources/images/NEWALBUM-01.png</iconset>
@@ -110,9 +130,15 @@
     <string>Nouvel album</string>
    </property>
   </action>
-  <action name="actionRecharger">
+  <action name="actionActualiser">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
-    <string>Recharger</string>
+    <string>Actualiser</string>
+   </property>
+   <property name="toolTip">
+    <string>Actualiser l'affichage</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
@@ -129,19 +155,14 @@
     <string>F11</string>
    </property>
   </action>
-  <action name="actionAnnuler">
+  <action name="actionRetablir">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/CANCEL-01.png</normaloff>:/ressources/images/CANCEL-01.png</iconset>
    </property>
-   <property name="text">
-    <string>Annuler</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Z</string>
-   </property>
-  </action>
-  <action name="actionRetablir">
    <property name="text">
     <string>Rétablir</string>
    </property>
@@ -158,6 +179,9 @@
    </property>
   </action>
   <action name="actionZoomIn">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/ZOOM+-01.png</normaloff>:/ressources/images/ZOOM+-01.png</iconset>
@@ -170,6 +194,9 @@
    </property>
   </action>
   <action name="actionZoomOut">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/ZOOM--01.png</normaloff>:/ressources/images/ZOOM--01.png</iconset>
@@ -181,24 +208,25 @@
     <string>Ctrl+-</string>
    </property>
   </action>
-  <action name="actionRestaurer">
-   <property name="text">
-    <string>Restaurer</string>
-   </property>
-  </action>
   <action name="actionEditer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/EDIT-01.png</normaloff>:/ressources/images/EDIT-01.png</iconset>
    </property>
    <property name="text">
-    <string>Editer ...</string>
+    <string>Editer titre</string>
    </property>
    <property name="toolTip">
-    <string>Editer l'image ...</string>
+    <string>Editer le titre de l'album</string>
    </property>
   </action>
   <action name="actionInfos">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/INFO-01.png</normaloff>:/ressources/images/INFO-01.png</iconset>
@@ -214,6 +242,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/TRIM-01.png</normaloff>:/ressources/images/TRIM-01.png</iconset>
@@ -221,10 +252,13 @@
    <property name="text">
     <string>Rogner</string>
    </property>
+   <property name="toolTip">
+    <string>Rogner l'image</string>
+   </property>
   </action>
   <action name="actionRedimensionner">
-   <property name="checkable">
-    <bool>true</bool>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
@@ -233,8 +267,14 @@
    <property name="text">
     <string>Redimensionner</string>
    </property>
+   <property name="toolTip">
+    <string>Changer la resolution de l'image</string>
+   </property>
   </action>
   <action name="actionRetour">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/BACK-01.png</normaloff>:/ressources/images/BACK-01.png</iconset>
@@ -242,8 +282,14 @@
    <property name="text">
     <string>Retour</string>
    </property>
+   <property name="toolTip">
+    <string>Revenir aux albums</string>
+   </property>
   </action>
   <action name="actionRotationP">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/ROTATE+-01.png</normaloff>:/ressources/images/ROTATE+-01.png</iconset>
@@ -251,14 +297,23 @@
    <property name="text">
     <string>Rotation +90</string>
    </property>
+   <property name="toolTip">
+    <string>Pivoter l'image dans le sens horraire</string>
+   </property>
   </action>
   <action name="actionRotationM">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/ressources/images/ROTATE--01.png</normaloff>:/ressources/images/ROTATE--01.png</iconset>
    </property>
    <property name="text">
     <string>Rotation -90</string>
+   </property>
+   <property name="toolTip">
+    <string>Pivoter l'image dans le sens anti-horraire</string>
    </property>
   </action>
   <action name="actionEnregistrer">
@@ -272,6 +327,9 @@
    <property name="text">
     <string>Enregistrer</string>
    </property>
+   <property name="toolTip">
+    <string>Enregistrer l'image</string>
+   </property>
   </action>
   <action name="actionEnregistrer_sous">
    <property name="enabled">
@@ -284,20 +342,82 @@
    <property name="text">
     <string>Enregistrer sous...</string>
    </property>
+   <property name="toolTip">
+    <string>Enregistrer l'image sous</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionNoter">
-   <property name="icon">
-    <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/ok.png</normaloff>:/ressources/images/ok.png</iconset>
+  <action name="actionDiaporama">
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="text">
-    <string>Noter votre photo...</string>
+    <string>Diaporama</string>
    </property>
    <property name="toolTip">
-    <string>Noter votre photo...</string>
+    <string>Lancer l'affichage diaporama</string>
+   </property>
+  </action>
+  <action name="actionImageSuivante">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/RIGHT_Plan de travail 1.png</normaloff>:/ressources/images/RIGHT_Plan de travail 1.png</iconset>
+   </property>
+   <property name="text">
+    <string>ImageSuivante</string>
+   </property>
+   <property name="toolTip">
+    <string>Afficher l'image suivante</string>
+   </property>
+  </action>
+  <action name="actionImagePrecedente">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/LEFT_Plan de travail 1.png</normaloff>:/ressources/images/LEFT_Plan de travail 1.png</iconset>
+   </property>
+   <property name="text">
+    <string>ImagePrecedente</string>
+   </property>
+   <property name="toolTip">
+    <string>Afficher l'image précédente</string>
+   </property>
+  </action>
+  <action name="actionTiroirImages">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/NEWALBUM-02.png</normaloff>:/ressources/images/NEWALBUM-02.png</iconset>
+   </property>
+   <property name="text">
+    <string>Tiroir a images</string>
+   </property>
+   <property name="toolTip">
+    <string>Ouvrir / fermer le tiroir d'images</string>
+   </property>
+  </action>
+  <action name="actionChangerOrder">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/ressources/images/MENU2_Plan de travail 1.png</normaloff>:/ressources/images/MENU2_Plan de travail 1.png</iconset>
+   </property>
+   <property name="text">
+    <string>Changer l'ordre des images</string>
+   </property>
+   <property name="toolTip">
+    <string>Changer l'ordre des images</string>
    </property>
   </action>
  </widget>

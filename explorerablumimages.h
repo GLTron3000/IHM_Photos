@@ -24,21 +24,24 @@ public:
     QFuture<void> thumbsLoader;
     void loadImages(int albumID);
 
+public slots:
+    void openImagesDrawer();
+    void editTitle();
+    void reorderImage();
+    void slideShow();
+
 signals:
     void returnFromAlbum();
     void openImage(ImageSwitcher*);
 
 private slots:
     void returnFrom();
-    void openImagesDrawer();
     void imageDrawerChange(bool visible);
     void onImageClick(QModelIndex item);
     void onAlbumImageModelChange(QStandardItem *item);
     void openImageFromDrawer(ImageSwitcher*);
-    void editTitle();
     void removeImage();
-    void reorderImage();
-    void slideShow();
+
 
 private:
     Ui::ExplorerAblumImages *ui;
