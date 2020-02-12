@@ -63,6 +63,7 @@ Info::Info(QWidget *parent, QString imagePath) :
     ui->note->horizontalHeader()->hide();
     ui->note->verticalHeader()->hide();
 
+
     int note = currentImage->score;
     struct {int rating;}
     Data[] = {{note}};
