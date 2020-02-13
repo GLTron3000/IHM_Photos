@@ -82,6 +82,9 @@ Info::Info(QWidget *parent, QString imagePath) :
     ui->valueNameLabel->setText(currentImgName);
     ui->valueWHLabel->setText(currentImgWxH);
 
+    /*set la couleur dominante
+     * inconvéniant: le résultat est soit rouge, soit vert, soit bleu
+    */
     QImage *qimage = new QImage(currentImgPath);
     QColor color;
     QPoint tl = qimage->rect().topLeft();
@@ -159,25 +162,4 @@ void Info::on_ButtonEdit_clicked()
 
     }
 
-}
-
-QColor dominantColour(const QImage& image,const QPoint& topLeft, const QSize& rectSize){
-    const int maxRight = qMin(image.width(),topLeft.x() + rectSize.width());
-    const int maxBottom = qMin(image.height(),topLeft.y() + rectSize.height());
-    qint64 sumRed = 0;
-    qint64 sumGreen = 0;
-    qint64 sumBlue = 0;
-    for(int x=topLeft.x();x<maxRight;++x){
-        for(int y=topLeft.y();y<maxBottom;++y){
-            const QColor tempColor=image.pixelColor(x,y);
-            sumRed += tempColor.red();
-            sumGreen += tempColor.green();
-            sumBlue += tempColor.blue();
-        }
-    }
-    if(sumRed >= sumGreen  && sumRed >= sumBlue)
-        return Qt::red;
-    if(sumGreen  >= sumBlue)
-        return Qt::green;
-    return Qt::blue;
 }
