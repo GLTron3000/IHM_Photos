@@ -20,9 +20,9 @@ Info::Info(QWidget *parent, QString imagePath) :
     currentImgPath = imagePath;
     modeEdition = false;
 
-    ui->textElements->setFrame(QFrame::StyledPanel);
-    ui->textFeelings->setFrame(QFrame::StyledPanel);
-    ui->textKeyWords->setFrame(QFrame::StyledPanel);
+    ui->textElements->setFrame(true);
+    ui->textFeelings->setFrame(true);
+    ui->textKeyWords->setFrame(true);
 
     QPalette p;
     p.setColor(QPalette::Base, QColor(240,240,240));
@@ -62,7 +62,6 @@ Info::Info(QWidget *parent, QString imagePath) :
     ui->note->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->note->horizontalHeader()->hide();
     ui->note->verticalHeader()->hide();
-
 
     int note = currentImage->score;
     struct {int rating;}
@@ -125,7 +124,6 @@ void Info::on_ButtonEdit_clicked()
         ui->textFeelings->setCursor(Qt::IBeamCursor);
         ui->textKeyWords->setCursor(Qt::IBeamCursor);
         ui->note->setCursor(Qt::PointingHandCursor);
-
 
         QPalette p;
         p.setColor(QPalette::Base, QColor(255,255,255));
