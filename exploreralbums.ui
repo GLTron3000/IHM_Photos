@@ -217,7 +217,7 @@
   <action name="actionNouvel_album">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/NEWALBUM-01.png</normaloff>:/ressources/images/NEWALBUM-01.png</iconset>
+     <normaloff>:/ressources/images/NEWALBUM-02.png</normaloff>:/ressources/images/NEWALBUM-02.png</iconset>
    </property>
    <property name="text">
     <string>Nouvel album</string>
