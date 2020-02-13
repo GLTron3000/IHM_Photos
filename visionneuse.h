@@ -49,8 +49,6 @@ private:
     QDockWidget *dock;
     bool visibleInfo=false;
 
-    Note *note;
-
     void createDockWindows();
 
 public slots:
