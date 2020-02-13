@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/ressources">
         <file>images/loader.gif</file>
-        <file>images/splash.png</file>
         <file>images/default.png</file>
         <file>images/BACK-01.png</file>
         <file>images/DELETE-01.png</file>
@@ -23,10 +22,13 @@
         <file>images/ROTATE--01.png</file>
         <file>images/ZOOM+-01.png</file>
         <file>images/ZOOM--01.png</file>
-        <file>images/LOGO.png</file>
         <file>images/MENU2_Plan de travail 1.png</file>
         <file>images/MENU3_Plan de travail 1.png</file>
         <file>images/MENU_Plan de travail 1.png</file>
         <file>images/SAVEAS-01.png</file>
+        <file>images/LOGO1.png</file>
+        <file>images/LOGO2.png</file>
+        <file>images/splash1.png</file>
+        <file>images/splash2.png</file>
     </qresource>
 </RCC>

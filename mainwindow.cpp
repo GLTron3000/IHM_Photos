@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowIcon(QIcon(":/ressources/images/LOGO.png"));
+    setWindowIcon(QIcon(":/ressources/images/LOGO2.png"));
 
     connect(ui->actionPr_f_rences, SIGNAL(triggered()), this, SLOT(showSettings()));
     connect(ui->actionA_propos, SIGNAL(triggered()), this, SLOT(showAbout()));
@@ -95,8 +95,7 @@ void MainWindow::showAbout(){
 }
 
 void MainWindow::showHelp(){
-    qDebug() << __FUNCTION__;
-    QString link = "https://doc.qt.io/";
+    QString link = "https://github.com/GLTron3000/IHM_Photos";
     QDesktopServices::openUrl(QUrl(link));
 }
 
