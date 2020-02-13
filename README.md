@@ -1,6 +1,9 @@
 # Memento
-![Logo de Memento](images/splash2.png)
 Projet Qt M1 - Gestion d'albums photo
+
+![Logo de Memento](images/splash2.png)
+
+
 
 ## Guide d'utilisation
 ### Ajouter des sources
