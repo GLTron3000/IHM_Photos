@@ -545,7 +545,7 @@
   <action name="actionImage_suivante">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/RIGHT_Plan de travail 1.png</normaloff>:/ressources/images/RIGHT_Plan de travail 1.png</iconset>
+     <normaloff>:/ressources/images/RIGHTw-01.png</normaloff>:/ressources/images/RIGHTw-01.png</iconset>
    </property>
    <property name="text">
     <string>Image suivante</string>
@@ -557,7 +557,7 @@
   <action name="actionImage_pr_c_dente">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/LEFT_Plan de travail 1.png</normaloff>:/ressources/images/LEFT_Plan de travail 1.png</iconset>
+     <normaloff>:/ressources/images/LEFTw-01.png</normaloff>:/ressources/images/LEFTw-01.png</iconset>
    </property>
    <property name="text">
     <string>Image précédente</string>
@@ -569,7 +569,7 @@
   <action name="actionQuitter">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/ressources/images/CANCEL-01.png</normaloff>:/ressources/images/CANCEL-01.png</iconset>
+     <normaloff>:/ressources/images/CANCELw-01.png</normaloff>:/ressources/images/CANCELw-01.png</iconset>
    </property>
    <property name="text">
     <string>Quitter</string>

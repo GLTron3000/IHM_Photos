@@ -417,7 +417,7 @@
      <normaloff>:/ressources/images/NEWALBUM-02.png</normaloff>:/ressources/images/NEWALBUM-02.png</iconset>
    </property>
    <property name="text">
-    <string>Tiroir a images</string>
+    <string>Tiroir d'images</string>
    </property>
    <property name="toolTip">
     <string>Ouvrir / fermer le tiroir d'images</string>

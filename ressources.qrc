@@ -30,5 +30,8 @@
         <file>images/LOGO2.png</file>
         <file>images/splash1.png</file>
         <file>images/splash2.png</file>
+        <file>images/CANCELw-01.png</file>
+        <file>images/LEFTw-01.png</file>
+        <file>images/RIGHTw-01.png</file>
     </qresource>
 </RCC>
