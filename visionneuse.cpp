@@ -183,11 +183,13 @@ void Visionneuse::close(){
 void Visionneuse::imagePrecedente(){
     graphicsViewZoom->resetTransform();
     afficherImage(imageSwitcher->imagePrecedente().path);
+    dock->hide();
 }
 
 void Visionneuse::imageSuivante(){
     graphicsViewZoom->resetTransform();
     afficherImage(imageSwitcher->imageSuivante().path);
+    dock->hide();
 }
 
 void Visionneuse::setCrop(){
