@@ -14,6 +14,7 @@
 #include <QGraphicsView>
 #include <QDebug>
 #include <QDockWidget>
+#include <QTransform>
 
 Visionneuse::Visionneuse(QWidget *parent, ImageSwitcher *imageSwitcher) :
     QMainWindow(parent),
@@ -171,7 +172,8 @@ void Visionneuse::saveAs(){
             tr("Images (*)"));
 
     qDebug() << "   save location: " << fileName;
-    imagePixmap->pixmap().save(fileName);
+
+    graphicsViewZoom->grab(graphicsViewZoom->sceneRect().toRect()).save(fileName);
 }
 
 void Visionneuse::close(){
@@ -189,7 +191,7 @@ void Visionneuse::imageSuivante(){
 }
 
 void Visionneuse::setCrop(){
-    QPixmap cropPixmap = imagePixmap->pixmap().copy(QRect(graphicsViewZoom->rubber->pos(), graphicsViewZoom->rubber->size()));
+    QPixmap cropPixmap = graphicsViewZoom->getRubberSelection();
 
     graphicsViewZoom->scene()->removeItem(imagePixmap);
 

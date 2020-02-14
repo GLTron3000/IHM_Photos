@@ -33,7 +33,7 @@ private:
 
 private slots:
     void searchList(QString);
-     void onImageClick(QModelIndex item);
+    void onImageClick(QModelIndex item);
 
 private:
     void loadPath(QString path);

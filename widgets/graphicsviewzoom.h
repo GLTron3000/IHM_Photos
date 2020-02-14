@@ -15,6 +15,7 @@ public:
     void initCrop();
     QRubberBand *rubber;
     ResizableRubberBand *rubberR;
+    QPixmap getRubberSelection();
 
 private:
     QPoint rubberOrigin;

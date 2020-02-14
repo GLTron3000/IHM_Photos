@@ -43,6 +43,19 @@ void GraphicsViewZoom::scaleAll(double factor){
     }
 }
 
+QPixmap GraphicsViewZoom::getRubberSelection(){
+    QPointF rubberPos = mapToScene(rubber->pos());
+    QSize rubberSize = rubber->size();
+
+    QRectF selection = QRectF(rubberPos, rubberSize);
+
+    QPixmap pixmap(selection.size().toSize());
+    QPainter painter(&pixmap);
+    this->scene()->render(&painter, QRectF(), selection);
+
+    return pixmap;
+}
+
 void GraphicsViewZoom::initCrop(){
     cropActive = false;
     this->rubber = new QRubberBand(QRubberBand::Rectangle, this);
